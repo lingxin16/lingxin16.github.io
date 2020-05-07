@@ -245,11 +245,10 @@
           <h2 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h2><a id="more"></a>
 
 <p>变量覆盖是指变量未被初始化，我们可以自定义参数值替换程序原有的变量值</p>
-<h2 id="extract-变量覆盖"><a href="#extract-变量覆盖" class="headerlink" title="extract()变量覆盖"></a>extract()变量覆盖</h2><pre><code class="和冲突的">int extract ( $array , extract_rules,prefix )
+<h2 id="extract-变量覆盖"><a href="#extract-变量覆盖" class="headerlink" title="extract()变量覆盖"></a>extract()变量覆盖</h2><pre><code>int extract ( $array , extract_rules,prefix )
 $array 关联的数组，受第二个和第三个参数的影响
 extract_rules 对待非法/ 数字和冲突的键名的方法将根据取出标记
-prefix 仅在第二个参数特殊时需要，添加前缀</code></pre>
-<h3 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h3><pre><code>EXTR_OVERWRITE-默认。如果有冲突，则覆盖已有的变量。
+prefix 仅在第二个参数特殊时需要，添加前缀</code></pre><h3 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h3><pre><code>EXTR_OVERWRITE-默认。如果有冲突，则覆盖已有的变量。
 EXTR_SKIP- 如果有冲突，不覆盖已有的变量。( 忽略数组中同名的元素)
 EXTR_PREFIX_SAME .如果有冲突，在变量名前加上前缀prefix。自PHP4.0.5起，这也包括了对数字索引的处理
 EXTR_PREFIX_ALL- 给所有变量名加上前缀prefx (第三个参数)
@@ -292,7 +291,7 @@ $prefix 变量名前缀</code></pre>
               Previous Post</span>
               <div class="info">
                 <h3>
-                hexo博客添加文章访问密码(密码123456)</h3>
+                hexo博客添加文章访问密码</h3>
                 <hr>
               </div>
             </a>
@@ -729,5 +728,5 @@ $prefix 变量名前缀</code></pre>
 </div>
 <button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-05-07T11:00:22.991Z</updated>
+  <updated>2020-05-07T11:53:43.117Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -17,17 +17,17 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>hexo博客添加文章访问密码(密码123456)</title>
+    <title>hexo博客添加文章访问密码</title>
     <link href="http://lingxin16.github.io/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/"/>
     <id>http://lingxin16.github.io/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/</id>
     <published>2020-05-07T10:16:42.000Z</published>
-    <updated>2020-05-07T11:00:22.991Z</updated>
+    <updated>2020-05-07T11:53:43.117Z</updated>
     
-    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">Hey, password is required here.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="c424235f0116965c045ec9272bd30cbaa99d71895d570e5710a3fa3a508a4b18">037923a29417dcb57ea278bc904620b7af2caafecbc18a8abcbcb385f4cdb2d9d3fe01425ed8362f1b3775e0f857e6058c4d5366f118747e1bfd1c8489f143eccd0c996f9a06c092b4508b2dc146418255243800bf0a1faded9760885d8a1568efbb32e59a42cf0ecb82c09a9e6f6866dc222a339ff7abdc9acbdc7082934e387c2304681a7210578c032eb4c7781fb4119094557060cb3de8230f6e96e96bd6551892c02329d3f90aa9d061ff25518d8be11dcc15deda07c0ad33a8e727962a339a56cddabb23472049594048036af94c3a75cfbb49b12a7567a2b752c90bd91a1628f4b635164b0b52366e47ac18441fb8bba5a9eaad776e7fae49f7d75b75ac85d84ab4a17edf97c146c862d329f17bfd6a22bbacecf0ee88964dd472bf0c55bd57e08919d719bfa4bac82a26fa056281b0fb429645b4f4f74a4ef9af2680</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">密码123456</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="c424235f0116965c045ec9272bd30cbaa99d71895d570e5710a3fa3a508a4b18">037923a29417dcb57ea278bc904620b7af2caafecbc18a8abcbcb385f4cdb2d9d3fe01425ed8362f1b3775e0f857e6058c4d5366f118747e1bfd1c8489f143eccd0c996f9a06c092b4508b2dc146418255243800bf0a1faded9760885d8a1568efbb32e59a42cf0ecb82c09a9e6f6866dc222a339ff7abdc9acbdc7082934e387c2304681a7210578c032eb4c7781fb4119094557060cb3de8230f6e96e96bd6551892c02329d3f90aa9d061ff25518d8be11dcc15deda07c0ad33a8e727962a339a56cddabb23472049594048036af94c3a75cfbb49b12a7567a2b752c90bd91a1628f4b635164b0b52366e47ac18441fb8bba5a9eaad776e7fae49f7d75b75ac85d84ab4a17edf97c146c862d329f17bfd6a22bbacecf0ee88964dd472bf0c55bd57e08919d719bfa4bac82a26fa056281b0fb429645b4f4f74a4ef9af2680</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
     
     <summary type="html">
     
-      Here&#39;s something encrypted, password is required to continue reading.
+      密码123456
     
     </summary>
     
@@ -42,9 +42,9 @@
     <link href="http://lingxin16.github.io/2020/03/26/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day10/"/>
     <id>http://lingxin16.github.io/2020/03/26/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day10/</id>
     <published>2020-03-26T13:36:59.000Z</published>
-    <updated>2020-03-26T14:54:54.259Z</updated>
+    <updated>2020-05-07T11:35:15.254Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h2><a id="more"></a><p>变量覆盖是指变量未被初始化，我们可以自定义参数值替换程序原有的变量值</p><h2 id="extract-变量覆盖"><a href="#extract-变量覆盖" class="headerlink" title="extract()变量覆盖"></a>extract()变量覆盖</h2><pre><code class="和冲突的">int extract ( $array , extract_rules,prefix )$array 关联的数组，受第二个和第三个参数的影响extract_rules 对待非法/ 数字和冲突的键名的方法将根据取出标记prefix 仅在第二个参数特殊时需要，添加前缀</code></pre><h3 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h3><pre><code>EXTR_OVERWRITE-默认。如果有冲突，则覆盖已有的变量。EXTR_SKIP- 如果有冲突，不覆盖已有的变量。( 忽略数组中同名的元素)EXTR_PREFIX_SAME .如果有冲突，在变量名前加上前缀prefix。自PHP4.0.5起，这也包括了对数字索引的处理EXTR_PREFIX_ALL- 给所有变量名加上前缀prefx (第三个参数)EXTR_PREFIX_INVALID -仅在非法或数字变量名前加上前缎prefix。本标记是PHP4.0.5新加的。EXTR_IF_EXISTS- 仅在当前符号表中已有同名变量时，覆盖它们的值。其它的都不处理。可以用在已经定义了一组合法的变量，然后要从一个数组例如$_REQUEST中提取值覆盖这些变量的场合。本标记是PHP4.2.0新加的。EXTR_PREFIX_IF_EXISTS-仅在当前符号表中已有同名变量时，建立附加了前缀的变量名，其它的都不处理。本标记是PHP4.2.0新加的。EXTR_REFS-将变量作为引用提取。这有力地表明了导入的变量仍然引用了var_array 参数的值。可以单独使用这个标志或者在extract_type中用OR与其它任何标志结合使用。本标记是PHP4.3.0新加的。</code></pre><h2 id="parse-str-变量覆盖"><a href="#parse-str-变量覆盖" class="headerlink" title="parse_str()变量覆盖"></a>parse_str()变量覆盖</h2><pre><code>void parse_str ( string $encoded_string [, array &amp;$result] )$encoded_string 输入的字符串&amp;$result 变量将会以数组元素的形式存入到这个数组，作为替代</code></pre><h2 id="import-request-variables"><a href="#import-request-variables" class="headerlink" title="import_request_variables()"></a>import_request_variables()</h2><pre><code>bool import_request_variables ( string $type [, string $prefix ] )$type 指定需要导入的变量。可以用字母‘G&#39;、‘P&#39;和 ‘C‘分别表示GET、POST和Cookie$prefix 变量名前缀</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h2><a id="more"></a><p>变量覆盖是指变量未被初始化，我们可以自定义参数值替换程序原有的变量值</p><h2 id="extract-变量覆盖"><a href="#extract-变量覆盖" class="headerlink" title="extract()变量覆盖"></a>extract()变量覆盖</h2><pre><code>int extract ( $array , extract_rules,prefix )$array 关联的数组，受第二个和第三个参数的影响extract_rules 对待非法/ 数字和冲突的键名的方法将根据取出标记prefix 仅在第二个参数特殊时需要，添加前缀</code></pre><h3 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h3><pre><code>EXTR_OVERWRITE-默认。如果有冲突，则覆盖已有的变量。EXTR_SKIP- 如果有冲突，不覆盖已有的变量。( 忽略数组中同名的元素)EXTR_PREFIX_SAME .如果有冲突，在变量名前加上前缀prefix。自PHP4.0.5起，这也包括了对数字索引的处理EXTR_PREFIX_ALL- 给所有变量名加上前缀prefx (第三个参数)EXTR_PREFIX_INVALID -仅在非法或数字变量名前加上前缎prefix。本标记是PHP4.0.5新加的。EXTR_IF_EXISTS- 仅在当前符号表中已有同名变量时，覆盖它们的值。其它的都不处理。可以用在已经定义了一组合法的变量，然后要从一个数组例如$_REQUEST中提取值覆盖这些变量的场合。本标记是PHP4.2.0新加的。EXTR_PREFIX_IF_EXISTS-仅在当前符号表中已有同名变量时，建立附加了前缀的变量名，其它的都不处理。本标记是PHP4.2.0新加的。EXTR_REFS-将变量作为引用提取。这有力地表明了导入的变量仍然引用了var_array 参数的值。可以单独使用这个标志或者在extract_type中用OR与其它任何标志结合使用。本标记是PHP4.3.0新加的。</code></pre><h2 id="parse-str-变量覆盖"><a href="#parse-str-变量覆盖" class="headerlink" title="parse_str()变量覆盖"></a>parse_str()变量覆盖</h2><pre><code>void parse_str ( string $encoded_string [, array &amp;$result] )$encoded_string 输入的字符串&amp;$result 变量将会以数组元素的形式存入到这个数组，作为替代</code></pre><h2 id="import-request-variables"><a href="#import-request-variables" class="headerlink" title="import_request_variables()"></a>import_request_variables()</h2><pre><code>bool import_request_variables ( string $type [, string $prefix ] )$type 指定需要导入的变量。可以用字母‘G&#39;、‘P&#39;和 ‘C‘分别表示GET、POST和Cookie$prefix 变量名前缀</code></pre>]]></content>
     
     <summary type="html">
     
