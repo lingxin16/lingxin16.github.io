@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-05-07T10:21:15.831Z</updated>
+  <updated>2020-05-07T10:42:20.442Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -21,21 +21,13 @@
     <link href="http://lingxin16.github.io/2020/05/07/sakura%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/"/>
     <id>http://lingxin16.github.io/2020/05/07/sakura%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/</id>
     <published>2020-05-07T10:16:42.000Z</published>
-    <updated>2020-05-07T10:21:15.831Z</updated>
+    <updated>2020-05-07T10:42:20.442Z</updated>
     
-    <content type="html"><![CDATA[<p>添加代码到themes\sakura\layout_partial中的head.ejs文件</p><p>推荐加在所有的<meta>标签之后</p><script>    (function(){        if(''){            if (prompt('请输入文章密码') !== ''){                alert('密码错误！');                history.back();            }        }    })();</script><p>然后在写文章的时候在文章头部加入</p><p>password: 访问密码</p>]]></content>
+    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">Hey, password is required here.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="d5bec8d6ea7e0cba3160f9499e11600662b9f5262d61a75e2e3c41fb7bd8d3cd">037923a29417dcb57ea278bc904620b7af2caafecbc18a8abcbcb385f4cdb2d9d3fe01425ed8362f1b3775e0f857e6058c4d5366f118747e1bfd1c8489f143eccd0c996f9a06c092b4508b2dc146418255243800bf0a1faded9760885d8a1568efbb32e59a42cf0ecb82c09a9e6f6866dc222a339ff7abdc9acbdc7082934e387c2304681a7210578c032eb4c7781fb4119094557060cb3de8230f6e96e96bd6551892c02329d3f90aa9d061ff25518d39063374d92f235b7cc2a99ef50461cd</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;添加代码到themes\sakura\layout_partial中的head.ejs文件&lt;/p&gt;
-&lt;p&gt;推荐加在所有的&lt;meta&gt;标签之后&lt;/p&gt;
-&lt;script&gt;
-    (function(){
-        if(&#39;&#39;){
-            if (prom
-      
+      Here&#39;s something encrypted, password is required to continue reading.
     
     </summary>
     
