@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-03-26T14:54:54.259Z</updated>
+  <updated>2020-05-07T10:21:15.831Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sakura主题添加文章访问密码</title>
+    <link href="http://lingxin16.github.io/2020/05/07/sakura%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/"/>
+    <id>http://lingxin16.github.io/2020/05/07/sakura%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/</id>
+    <published>2020-05-07T10:16:42.000Z</published>
+    <updated>2020-05-07T10:21:15.831Z</updated>
+    
+    <content type="html"><![CDATA[<p>添加代码到themes\sakura\layout_partial中的head.ejs文件</p><p>推荐加在所有的<meta>标签之后</p><script>    (function(){        if(''){            if (prompt('请输入文章密码') !== ''){                alert('密码错误！');                history.back();            }        }    })();</script><p>然后在写文章的时候在文章头部加入</p><p>password: 访问密码</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;添加代码到themes\sakura\layout_partial中的head.ejs文件&lt;/p&gt;
+&lt;p&gt;推荐加在所有的&lt;meta&gt;标签之后&lt;/p&gt;
+&lt;script&gt;
+    (function(){
+        if(&#39;&#39;){
+            if (prom
+      
+    
+    </summary>
+    
+    
+    
+      <category term="博客搭建" scheme="http://lingxin16.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>代码审计day10</title>
@@ -431,28 +460,6 @@
       <category term="攻防世界" scheme="http://lingxin16.github.io/tags/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/"/>
     
       <category term="ThinkPHP" scheme="http://lingxin16.github.io/tags/ThinkPHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ctfshow-萌新赛</title>
-    <link href="http://lingxin16.github.io/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/"/>
-    <id>http://lingxin16.github.io/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/</id>
-    <published>2020-03-08T05:16:08.000Z</published>
-    <updated>2020-03-08T08:13:34.624Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="萌新赛web-签到题"><a href="#萌新赛web-签到题" class="headerlink" title="萌新赛web_签到题"></a>萌新赛web_签到题</h2><p>源码：</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308132725.jpg" alt="QQ截图20200308132725"></p><a id="more"></a><p>这道题的预期解是命令执行</p><p>构造payload</p><pre><code>?url=;ls;</code></pre><p>发现flag index.php两个目录</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133544.jpg" alt="QQ截图20200308133544"></p><p>再构造payload</p><pre><code>?url=;cat flag;</code></pre><p>得到flag</p><p>然后我做的时候是直接访问/flag 下载flag文件得到flag</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133922.jpg" alt="QQ截图20200308133922"></p><p>不愧是我(萌新)</p><h2 id="萌新赛密码学-签到题"><a href="#萌新赛密码学-签到题" class="headerlink" title="萌新赛密码学_签到题"></a>萌新赛密码学_签到题</h2><p>Ao(mgHX^E)AN2PSBOu3qI0o</p><p>直接base85解码得到flag</p><h2 id="萌新赛密码学-抱我"><a href="#萌新赛密码学-抱我" class="headerlink" title="萌新赛密码学_抱我"></a>萌新赛密码学_抱我</h2><p>下载flag.py</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308134323.jpg" alt="QQ截图20200308134323"></p><p>完全不懂的py脚本，就交给呆头鹅林师傅了</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/1.jpg" alt="1"></p><p>最后林师傅解出来的随机数列</p><pre><code>d f l 3 3 { 6 { 6 g3 a f a 6 { 3 } a g{ } a a g d f } 6 f3 6 d { d f l { 6 a6 g a f d d f g } {3 f } } 6 l a { 3 }f d f 3 } g l a } 6} l g 6 g 6 d f l f{ d f g d 3 f d f g{ g 6 a } a 3 { 6 }f a { } f } f } } }</code></pre><p>结合群主的爱好，盲猜flag{36d}！！！</p><h2 id="萌新赛杂项-qrcode"><a href="#萌新赛杂项-qrcode" class="headerlink" title="萌新赛杂项_qrcode"></a>萌新赛杂项_qrcode</h2><p>题目下载下来打开是一段二进制，结合题目qrcode应该是二进制和二维码之间的转换</p><pre><code>1111111011100111101111111100000101011101000100000110111010010010010010111011011101010000110001011101101110101110110110101110110000010011011001010000011111111010101010101111111000000000011100110000000010000011010010111100110111010010110101100001001101100110100100111101111111111111100000000001101101110100101110100101101001011011011001000100100111111100111111111110110010000000010000011110111100110110010111111010110111111000100000000011101111000110101111111010101100101011011100000100011001110001011110111010010111101111101001011101000011101000110111101110100101000110000111010000010000100100100011101111111010110010101011111</code></pre><p>直接上脚本</p><pre><code>from PIL import ImageMAX = 25pic = Image.new(&quot;RGB&quot;,(MAX, MAX))str = &quot;得到的二进制数字&quot;i=0for y in range (0,MAX):    for x in range (0,MAX):        if(str[i] == &#39;1&#39;):            pic.putpixel([x,y],(0, 0, 0))        else:            pic.putpixel([x,y],(255,255,255))        i = i+1pic.show()pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/flag.png" alt="flag"></p><h2 id="萌新赛杂项-签到"><a href="#萌新赛杂项-签到" class="headerlink" title="萌新赛杂项_签到"></a>萌新赛杂项_签到</h2><p>查看源代码</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155004.jpg" alt="QQ截图20200308155004"></p><p>发现第十行代码意外的长</p><p>把下面下载下来用notepad打开 查看第十行</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155220.jpg" alt="QQ截图20200308155220"></p><p>把tab替换成1，空格替换成0</p><pre><code>00101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010110100101110001000000010110100101110001011100010111000101110001000000010111000101101001011010010110100101101001000000010110100101110001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011100010111000101110001011100010110100100000001011010010111000101110001011100010111000100000001011100010110100101101001011010010110100100000001011010010110100101110001011100010111000100000001011010010111000101110</code></pre><p>转换字符串</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155637.jpg" alt="QQ截图20200308155637"></p><p>得到</p><pre><code>-.... -.... -.... -.-. -.... .---- -.... --... --... -... ....- -.. -.... ..... -.... . -.... --... ....- -.. -.... ..... -.... . -.... --... ....- ....- -.... .---- --... -..</code></pre><p>摩斯解码处理</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155735.jpg" alt="QQ截图20200308155735"></p><p>得到十六进制</p><pre><code>666c61677b4d656e674d656e6744617d</code></pre><p>最后转换ASCII码得到flag{MengMengDa}</p><h2 id="萌新赛杂项-劝退警告"><a href="#萌新赛杂项-劝退警告" class="headerlink" title="萌新赛杂项_劝退警告"></a>萌新赛杂项_劝退警告</h2><p>下载下来是一张gif，直接改后缀.zip解压发现压缩包</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135432.jpg" alt="QQ截图20200308135432"></p><p>压缩包中两个文件flag2.zip和sudoku.png</p><p>右边的注释说明密码需要我们解数独 但是sudoku.png也显示是加密的</p><p>这里我用Ziperello来爆破发现导入压缩包的时候显示只有一个文件是加密的</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135730.jpg" alt="QQ截图20200308135730"></p><p>那么这个sudoku.png就可能是伪加密，通过修改二进制解压出sudoku.png</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/sudoku.png" alt="sudoku"></p><p>然后在线解数独，通过注释说明的方法得到flag2.zip的密码得到flag2.zip</p><p>结果flag2.zip还有密码，而且不是伪加密，只有注释:这道题很难，你现在离开还来得及。</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140057.jpg" alt="QQ截图20200308140057"></p><p>我可能会离开吗！必不可能啊。通过与群里的几位师傅商量，我们最终觉得这应该是明文爆破，但是怎么构造明文可就难倒大家了。</p><p>也不难发现，这个说明.txt大小只有1kb 48字节，我们通过把注释写到txt中惊奇的发现也是48字节！！！（有的师傅是36字节，原因是txt的编码方式不同，更改编码方式就行）</p><p>直接开始爆破，在爆破的过程中一半我们不用等爆破完直接停止就能得到恢复后的文件</p><p>，但是这个不能立即停止…..足足爆破了两个小时也没停</p><p>最后发现是停止的时间问题（明文爆破分两个阶段，第一个阶段我们就能得到恢复后的文件，第二阶段是寻找密码的过程。我们只需要解压后的文件，不需要密码，所以在第一阶段结束后就可以停止了，时间长的话就没有办法立即停止了。。。orz）</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140749.jpg" alt="QQ截图20200308140749"></p><p>得到的这个flag.zip就很好爆破了，这里我是根据注释，写出了字典爆破，大家也可以用掩码爆破，得到open your eye.jpg根据文件名，猜到用silenteye来提取隐藏信息</p><p>得到flag.txt</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141027.jpg" alt="QQ截图20200308141027"></p><p>不难发现是16进制 直接扔到winhex</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141229.jpg" alt="QQ截图20200308141229"></p><p>猜测是pyc文件   关于pyc文件是py文件运行时产生的，我们可以通过反编译得到py文件，反编译的话有在线反编译的</p><p>得到</p><pre><code>(lambda __print, __g, __y, __operator: [ [ [ [ [ [ (check(0), None)[1] for __g[&#39;check&#39;], check.__name__ in [ (  lambda x: (lambda __l: [ [ (lambda __sentinel, __after, __items: __y(lambda __this: lambda : (lambda __i: [ [ (lambda __sentinel, __after, __items: __y(lambda __this: lambda : (lambda __i: [ [ __this() for __l[&#39;n&#39;] in [__operator.iadd(__l[&#39;n&#39;], decode(arr[int(__l[&#39;i&#39;])] + decode(arr[11] + chr(61) * 2) * 2))] ][0] for __l[&#39;i&#39;] in [__i] ][0] if __i is not __sentinel else __after())(next(__items, __sentinel)))())([], lambda : [ __this() for __l[&#39;v&#39;] in [__operator.iadd(__l[&#39;v&#39;], chr(int(__l[&#39;n&#39;])))] ][0], iter(__l[&#39;c&#39;])) for __l[&#39;n&#39;] in [&#39;&#39;] ][0] for __l[&#39;c&#39;] in [__i] ][0] if __i is not __sentinel else __after())(next(__items, __sentinel)))())([], lambda : (lambda __after: (__print(__l[&#39;v&#39;]), __after())[1] if __l[&#39;x&#39;] == 1 else __after())(lambda : None), iter(flag.split(decode(arr[10] + decode(arr[11] + chr(61) * 2) * 2))))   for __l[&#39;v&#39;] in [&#39;&#39;] ][0]   for __l[&#39;x&#39;] in [x] ][0])({}), &#39;check&#39;)]          ][0] for __g[&#39;decode&#39;], decode.__name__ in [(lambda s: (lambda __l: [ base64.b64decode(__l[&#39;s&#39;].encode()).decode() for __l[&#39;s&#39;] in [s] ][0])({}), &#39;decode&#39;)] ][0] for __g[&#39;encode&#39;], encode.__name__ in [(lambda s: (lambda __l: [ base64.b64encode(__l[&#39;s&#39;].encode()).decode() for __l[&#39;s&#39;] in [s] ][0])({}), &#39;encode&#39;)] ][0] for __g[&#39;flag&#39;] in [&#39;136-139-78-132-162-89-49-117-70-161-49-118-70-02-01-01-70-137-01-160&#39;] ][0] for __g[&#39;arr&#39;] in [[&#39;NQ&#39;, &#39;MQ&#39;, &#39;Mw&#39;, &#39;MA&#39;, &#39;NA&#39;, &#39;Ng&#39;, &#39;Mg&#39;, &#39;OQ&#39;, &#39;Nw&#39;, &#39;OA&#39;, &#39;LQ&#39;, &#39;PQ&#39;]] ][0] for __g[&#39;base64&#39;] in [__import__(&#39;base64&#39;, __g, __g)] ][0])(__import__(&#39;__builtin__&#39;, level=0).__dict__[&#39;print&#39;], globals(), lambda f: (lambda x: x(x))(lambda y: f(lambda : y(y)())), __import__(&#39;operator&#39;, level=0))</code></pre><p>通过hint改check(0)为check(1)运行得到flag</p><h2 id="萌新赛杂项-萌新福利"><a href="#萌新赛杂项-萌新福利" class="headerlink" title="萌新赛杂项_萌新福利"></a>萌新赛杂项_萌新福利</h2><p>解压得到show.bin文件</p><p>根据提示求反</p><p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308160159.jpg" alt="QQ截图20200308160159"></p><p>输出音频文件，得到flag(小姐姐声音真好听……)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;萌新赛web-签到题&quot;&gt;&lt;a href=&quot;#萌新赛web-签到题&quot; class=&quot;headerlink&quot; title=&quot;萌新赛web_签到题&quot;&gt;&lt;/a&gt;萌新赛web_签到题&lt;/h2&gt;&lt;p&gt;源码：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308132725.jpg&quot; alt=&quot;QQ截图20200308132725&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctfshow" scheme="http://lingxin16.github.io/tags/ctfshow/"/>
     
   </entry>
   

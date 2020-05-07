@@ -22,6 +22,16 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
 <!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
 " type="text/css" media="all"> -->
+<script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('请输入文章密码') !== '{{ page.password }}'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <script>
   /*Initial Variables*/
   var mashiro_option = new Object();
@@ -247,6 +257,32 @@
               
                 
                 <h3 class="al_year">2020年</h3>
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      05月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2020/05/07/sakura%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/">
+                          <span style="color:#0bf;">
+                          07日18:16:42</span>
+                          sakura主题添加文章访问密码
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
               
               
                 
