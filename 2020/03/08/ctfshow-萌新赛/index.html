@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title>ctfshow-萌新赛 | 大周&#39;blog</title>
+  <meta name="description" content="ctf萌新" />
+  <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/googlefont.css" media="all">
+<!--  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">-->
+  <link rel="stylesheet" id="saukra_css-css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/font.css" media="all">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/insight.css" media="all">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "大周'blog奝";
+  mashiro_option.author_name = "奝";
+  mashiro_option.site_url = "https://www.d1a0.cn";
+  mashiro_option.v_appId = "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz";
+  mashiro_option.v_appKey = "uavnoTMwgQJ0F9RrFiIxxgID";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp,https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+<link rel="alternate" href="/atom.xml" title="大周'blog" type="application/atom+xml">
+</head>
+
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
+          <img src="/images/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>一个ctf萌新！</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="http://github.com/lingxin16" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/img/social/github.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="2823399539@qq.com" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  
+  <div id="video-container" style="display: none;">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu" >
+    </div>
+  </div>
+  
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+ 
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">大周&#39;blog</span>
+            <span class="shironeko">奝</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/about/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-meetup" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/sakura/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    樱花雨
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">ctfshow-萌新赛</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-3-8&nbsp;
+              
+                    
+        ·<span id="readcount"></span>次阅读
+      
+            </p>
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <h2 id="萌新赛web-签到题"><a href="#萌新赛web-签到题" class="headerlink" title="萌新赛web_签到题"></a>萌新赛web_签到题</h2><p>源码：</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308132725.jpg" alt="QQ截图20200308132725"></p>
+<a id="more"></a>
+
+<p>这道题的预期解是命令执行</p>
+<p>构造payload</p>
+<pre><code>?url=;ls;</code></pre><p>发现flag index.php两个目录</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133544.jpg" alt="QQ截图20200308133544"></p>
+<p>再构造payload</p>
+<pre><code>?url=;cat flag;</code></pre><p>得到flag</p>
+<p>然后我做的时候是直接访问/flag 下载flag文件得到flag</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133922.jpg" alt="QQ截图20200308133922"></p>
+<p>不愧是我(萌新)</p>
+<h2 id="萌新赛密码学-签到题"><a href="#萌新赛密码学-签到题" class="headerlink" title="萌新赛密码学_签到题"></a>萌新赛密码学_签到题</h2><p>Ao(mgHX^E)AN2PSBOu3qI0o</p>
+<p>直接base85解码得到flag</p>
+<h2 id="萌新赛密码学-抱我"><a href="#萌新赛密码学-抱我" class="headerlink" title="萌新赛密码学_抱我"></a>萌新赛密码学_抱我</h2><p>下载flag.py</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308134323.jpg" alt="QQ截图20200308134323"></p>
+<p>完全不懂的py脚本，就交给呆头鹅林师傅了</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/1.jpg" alt="1"></p>
+<p>最后林师傅解出来的随机数列</p>
+<pre><code>d f l 3 3 { 6 { 6 g
+3 a f a 6 { 3 } a g
+{ } a a g d f } 6 f
+3 6 d { d f l { 6 a
+6 g a f d d f g } {
+3 f } } 6 l a { 3 }
+f d f 3 } g l a } 6
+} l g 6 g 6 d f l f
+{ d f g d 3 f d f g
+{ g 6 a } a 3 { 6 }
+f a { } f } f } } }</code></pre><p>结合群主的爱好，盲猜flag{36d}！！！</p>
+<h2 id="萌新赛杂项-qrcode"><a href="#萌新赛杂项-qrcode" class="headerlink" title="萌新赛杂项_qrcode"></a>萌新赛杂项_qrcode</h2><p>题目下载下来打开是一段二进制，结合题目qrcode应该是二进制和二维码之间的转换</p>
+<pre><code>1111111011100111101111111100000101011101000100000110111010010010010010111011011101010000110001011101101110101110110110101110110000010011011001010000011111111010101010101111111000000000011100110000000010000011010010111100110111010010110101100001001101100110100100111101111111111111100000000001101101110100101110100101101001011011011001000100100111111100111111111110110010000000010000011110111100110110010111111010110111111000100000000011101111000110101111111010101100101011011100000100011001110001011110111010010111101111101001011101000011101000110111101110100101000110000111010000010000100100100011101111111010110010101011111</code></pre><p>直接上脚本</p>
+<pre><code>from PIL import Image
+MAX = 25
+pic = Image.new(&quot;RGB&quot;,(MAX, MAX))
+str = &quot;得到的二进制数字&quot;
+i=0
+for y in range (0,MAX):
+    for x in range (0,MAX):
+        if(str[i] == &#39;1&#39;):
+            pic.putpixel([x,y],(0, 0, 0))
+        else:
+            pic.putpixel([x,y],(255,255,255))
+        i = i+1
+pic.show()
+pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/flag.png" alt="flag"></p>
+<h2 id="萌新赛杂项-签到"><a href="#萌新赛杂项-签到" class="headerlink" title="萌新赛杂项_签到"></a>萌新赛杂项_签到</h2><p>查看源代码</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155004.jpg" alt="QQ截图20200308155004"></p>
+<p>发现第十行代码意外的长</p>
+<p>把下面下载下来用notepad打开 查看第十行</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155220.jpg" alt="QQ截图20200308155220"></p>
+<p>把tab替换成1，空格替换成0</p>
+<pre><code>00101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010110100101110001000000010110100101110001011100010111000101110001000000010111000101101001011010010110100101101001000000010110100101110001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011100010111000101110001011100010110100100000001011010010111000101110001011100010111000100000001011100010110100101101001011010010110100100000001011010010110100101110001011100010111000100000001011010010111000101110</code></pre><p>转换字符串</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155637.jpg" alt="QQ截图20200308155637"></p>
+<p>得到</p>
+<pre><code>-.... -.... -.... -.-. -.... .---- -.... --... --... -... ....- -.. -.... ..... -.... . -.... --... ....- -.. -.... ..... -.... . -.... --... ....- ....- -.... .---- --... -..</code></pre><p>摩斯解码处理</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155735.jpg" alt="QQ截图20200308155735"></p>
+<p>得到十六进制</p>
+<pre><code>666c61677b4d656e674d656e6744617d</code></pre><p>最后转换ASCII码得到flag{MengMengDa}</p>
+<h2 id="萌新赛杂项-劝退警告"><a href="#萌新赛杂项-劝退警告" class="headerlink" title="萌新赛杂项_劝退警告"></a>萌新赛杂项_劝退警告</h2><p>下载下来是一张gif，直接改后缀.zip解压发现压缩包</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135432.jpg" alt="QQ截图20200308135432"></p>
+<p>压缩包中两个文件flag2.zip和sudoku.png</p>
+<p>右边的注释说明密码需要我们解数独 但是sudoku.png也显示是加密的</p>
+<p>这里我用Ziperello来爆破发现导入压缩包的时候显示只有一个文件是加密的</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135730.jpg" alt="QQ截图20200308135730"></p>
+<p>那么这个sudoku.png就可能是伪加密，通过修改二进制解压出sudoku.png</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/sudoku.png" alt="sudoku"></p>
+<p>然后在线解数独，通过注释说明的方法得到flag2.zip的密码得到flag2.zip</p>
+<p>结果flag2.zip还有密码，而且不是伪加密，只有注释:这道题很难，你现在离开还来得及。</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140057.jpg" alt="QQ截图20200308140057"></p>
+<p>我可能会离开吗！必不可能啊。通过与群里的几位师傅商量，我们最终觉得这应该是明文爆破，但是怎么构造明文可就难倒大家了。</p>
+<p>也不难发现，这个说明.txt大小只有1kb 48字节，我们通过把注释写到txt中惊奇的发现也是48字节！！！（有的师傅是36字节，原因是txt的编码方式不同，更改编码方式就行）</p>
+<p>直接开始爆破，在爆破的过程中一半我们不用等爆破完直接停止就能得到恢复后的文件</p>
+<p>，但是这个不能立即停止…..足足爆破了两个小时也没停</p>
+<p>最后发现是停止的时间问题（明文爆破分两个阶段，第一个阶段我们就能得到恢复后的文件，第二阶段是寻找密码的过程。我们只需要解压后的文件，不需要密码，所以在第一阶段结束后就可以停止了，时间长的话就没有办法立即停止了。。。orz）</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140749.jpg" alt="QQ截图20200308140749"></p>
+<p>得到的这个flag.zip就很好爆破了，这里我是根据注释，写出了字典爆破，大家也可以用掩码爆破，得到open your eye.jpg根据文件名，猜到用silenteye来提取隐藏信息</p>
+<p>得到flag.txt</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141027.jpg" alt="QQ截图20200308141027"></p>
+<p>不难发现是16进制 直接扔到winhex</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141229.jpg" alt="QQ截图20200308141229"></p>
+<p>猜测是pyc文件   关于pyc文件是py文件运行时产生的，我们可以通过反编译得到py文件，反编译的话有在线反编译的</p>
+<p>得到</p>
+<pre><code>(lambda __print, __g, __y, __operator: [ [ [ [ [ [ (check(0), None)[1] for __g[&#39;check&#39;], check.__name__ in [
+ (
+  lambda x: (lambda __l: [ [ (lambda __sentinel, __after, __items: __y(lambda __this: lambda : (lambda __i: [ [ (lambda __sentinel, __after, __items: __y(lambda __this: lambda : (lambda __i: [ [ __this() for __l[&#39;n&#39;] in [__operator.iadd(__l[&#39;n&#39;], decode(arr[int(__l[&#39;i&#39;])] + decode(arr[11] + chr(61) * 2) * 2))] ][0] for __l[&#39;i&#39;] in [__i] ][0] if __i is not __sentinel else __after())(next(__items, __sentinel)))())([], lambda : [ __this() for __l[&#39;v&#39;] in [__operator.iadd(__l[&#39;v&#39;], chr(int(__l[&#39;n&#39;])))] ][0], iter(__l[&#39;c&#39;])) for __l[&#39;n&#39;] in [&#39;&#39;] ][0] for __l[&#39;c&#39;] in [__i] ][0] if __i is not __sentinel else __after())(next(__items, __sentinel)))())([], lambda : (lambda __after: (__print(__l[&#39;v&#39;]), __after())[1] if __l[&#39;x&#39;] == 1 else __after())(lambda : None), iter(flag.split(decode(arr[10] + decode(arr[11] + chr(61) * 2) * 2))))
+   for __l[&#39;v&#39;] in [&#39;&#39;] ][0]
+   for __l[&#39;x&#39;] in [x] ][0])({}), &#39;check&#39;)]
+          ][0]
+ for __g[&#39;decode&#39;], decode.__name__ in [(lambda s: (lambda __l: [ base64.b64decode(__l[&#39;s&#39;].encode()).decode() for __l[&#39;s&#39;] in [s] ][0])({}), &#39;decode&#39;)] ][0]
+ for __g[&#39;encode&#39;], encode.__name__ in [(lambda s: (lambda __l: [ base64.b64encode(__l[&#39;s&#39;].encode()).decode() for __l[&#39;s&#39;] in [s] ][0])({}), &#39;encode&#39;)] ][0]
+ for __g[&#39;flag&#39;] in [&#39;136-139-78-132-162-89-49-117-70-161-49-118-70-02-01-01-70-137-01-160&#39;] ][0]
+ for __g[&#39;arr&#39;] in [[&#39;NQ&#39;, &#39;MQ&#39;, &#39;Mw&#39;, &#39;MA&#39;, &#39;NA&#39;, &#39;Ng&#39;, &#39;Mg&#39;, &#39;OQ&#39;, &#39;Nw&#39;, &#39;OA&#39;, &#39;LQ&#39;, &#39;PQ&#39;]] ][0]
+ for __g[&#39;base64&#39;] in [__import__(&#39;base64&#39;, __g, __g)] ][0])(__import__(&#39;__builtin__&#39;, level=0).__dict__[&#39;print&#39;], globals(), lambda f: (lambda x: x(x))(lambda y: f(lambda : y(y)())), __import__(&#39;operator&#39;, level=0))</code></pre><p>通过hint改check(0)为check(1)运行得到flag</p>
+<h2 id="萌新赛杂项-萌新福利"><a href="#萌新赛杂项-萌新福利" class="headerlink" title="萌新赛杂项_萌新福利"></a>萌新赛杂项_萌新福利</h2><p>解压得到show.bin文件</p>
+<p>根据提示求反</p>
+<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308160159.jpg" alt="QQ截图20200308160159"></p>
+<p>输出音频文件，得到flag(小姐姐声音真好听……)</p>
+
+        </div>
+        <!-- .entry-content -->
+        
+        <p></p>
+          
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/" rel="prev">
+              <div class="background">
+<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
+                
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                攻防世界-php_rce</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/" rel="next">
+              <div class="background">
+                
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                2020年新春战疫—网络安全公益赛-套娃</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
+        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 奝<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info">
+        <div class="footertext">
+            <div class="img-preload">
+                <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+                <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+            </div>
+            
+                <p id="chakhsu"></p>
+            
+            <p>本站总访问量：<a id="allcount"></a></p>
+            <p style="color: #666666;"><a href="https://icp.gov.moe" target="_blank">萌ICP备 </a><a href="https://icp.gov.moe/?keyword=20201066" target="_blank"> 20201066号</a></p>
+            
+                <p id="momk" style="font-family: 'Ubuntu', sans-serif;color: #b9b9b9;"></p>
+            
+        </div>
+        <div class="footer-device">
+            <p style="font-family: 'Ubuntu', sans-serif;">
+ <span style="">Theme <a href="https://github.com/xbclub/Hexo-theme-sakura" target="_blank"
+                         style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+             class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+             href="https://2heng.xin/" target="_blank"
+             style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+             href="https://www.hojun.cn/" target="_blank"
+             style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>&<a
+             href="https://42cloud.cn/" target="_blank"
+             style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">42team, Powered by Hexo</a>
+        </span>
+            </p>
+        </div>
+    </div><!-- .site-info -->
+</footer>
+
+
+<!--<script src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.7/js/tocbot.min.js"></script>-->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/InsightSearch.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/zoom.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@1.2/js/sakura-app.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/Valine.min.js'></script>
+<script src="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.8/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+
+      
+       <script>
+  fetch('https://counts.42cloud.cn/api/counts.html')
+        .then(response => response.json())
+        .then(data => {
+              if (document.getElementById("readcount")) {
+                document.getElementById("readcount").innerHTML=data.Count;
+            }
+            if (document.getElementById("allcount")){
+                document.getElementById("allcount").innerHTML=data.Allcount;
+            }
+        })
+        .catch(err => console.error(err))
+</script>
+      
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+    /* <![CDATA[ */
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        var Poi = {
+            "pjax": "1",
+            "movies": {"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2", "name": "Unbroken.mp4", "live": "close"},
+            "windowheight": "fixed",
+            "codelamp": "close",
+            "ajaxurl": "",
+            "order": "asc",
+            "formpostion": "bottom"
+        };
+    } else {
+        var Poi = {
+            "pjax": "1",
+            "movies": {"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2", "name": "Unbroken.mp4", "live": "open"},
+            "windowheight": "auto",
+            "codelamp": "close",
+            "ajaxurl": "",
+            "order": "asc",
+            "formpostion": "bottom"
+        };
+    }
+    /* ]]> */
+
+</script>
+<script>
+    $(document).ready(function () {
+        if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+            if ($(".pattern-center").length > 0) { //有图的情况
+                tocbot.init({
+                    // Where to render the table of contents.
+                    tocSelector: '.toc', // 放置目录的容器
+                    // Where to grab the headings to build the table of contents.
+                    contentSelector: '.entry-content', // 正文内容所在
+                    // Which headings to grab inside of the contentSelector element.
+                    scrollSmooth: true,
+                    headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+                    headingsOffset: -400,
+                    scrollSmoothOffset: -85
+                });
+            } else {
+                tocbot.init({
+                    // Where to render the table of contents.
+                    tocSelector: '.toc', // 放置目录的容器
+                    // Where to grab the headings to build the table of contents.
+                    contentSelector: '.entry-content', // 正文内容所在
+                    // Which headings to grab inside of the contentSelector element.
+                    scrollSmooth: true,
+                    headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+                    headingsOffset: -85,
+                    scrollSmoothOffset: -85
+                });
+            }
+            var offsetTop = $('.toc').offset().top - 95;
+            window.onscroll = function () {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                if (scrollTop >= offsetTop) {
+                    $('.toc').addClass('toc-fixed');
+                } else {
+                    $('.toc').removeClass('toc-fixed');
+                }
+            }
+        }
+    });
+</script>
+
+    <script type="text/javascript">
+        function NewDate(str) {
+            str = str.split('-');
+            var date = new Date();
+            date.setUTCFullYear(str[0], str[1] - 1, str[2]);
+            date.setUTCHours(0, 0, 0, 0);
+            return date;
+        }
+
+        function momxc() {
+            var birthDay = NewDate("2019-12-4");
+            var today = new Date();
+            var timeold = today.getTime() - birthDay.getTime();
+            var sectimeold = timeold / 1000
+            var secondsold = Math.floor(sectimeold);
+            var msPerDay = 24 * 60 * 60 * 1000;
+            var e_daysold = timeold / msPerDay;
+            var daysold = Math.floor(e_daysold);
+            var e_hrsold = (daysold - e_daysold) * -24;
+            var hrsold = Math.floor(e_hrsold);
+            var e_minsold = (hrsold - e_hrsold) * -60;
+            var minsold = Math.floor((hrsold - e_hrsold) * -60);
+            var seconds = Math.floor((minsold - e_minsold) * -60).toString();
+            document.getElementById("momk").innerHTML = "本站已安全运行" + daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
+            setTimeout(momxc, 1000);
+        }
+
+        momxc();
+    </script>
+
+
+
+    <script type="text/javascript">
+        fetch('https://v1.hitokoto.cn')
+            .then(response => response.json())
+            .then(data => {
+                chakhsu(document.getElementById("chakhsu"), data.hitokoto);
+            })
+            .catch(err => console.error(err));
+
+
+        // 文字循环处理 两个参数，第一个是需要显示在哪个标签内append 以id为选择器，第二个参数是 要处理的文字
+        function chakhsu(r, text) {
+            function t() {
+                return b[Math.floor(Math.random() * b.length)];
+            }
+
+            function e() {
+                return String.fromCharCode(94 * Math.random() + 33);
+            }
+
+            function n(r) {
+                for (var n = document.createDocumentFragment(), i = 0; r > i; i++) {
+                    var l = document.createElement("span");
+                    (l.textContent = e()), (l.style.color = t()), n.appendChild(l);
+                }
+                return n;
+            }
+
+            function i() {
+                var t = o[c.skillI];
+                c.step
+                    ? c.step--
+                    : ((c.step = g),
+                        c.prefixP < l.length
+                            ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++)
+                            : "forward" === c.direction
+                            ? c.skillP < t.length
+                                ? ((c.text += t[c.skillP]), c.skillP++)
+                                : c.delay
+                                    ? c.delay--
+                                    : ((c.direction = "backward"), (c.delay = a))
+                            : c.skillP > 0
+                                ? ((c.text = c.text.slice(0, -1)), c.skillP--)
+                                : ((c.skillI = (c.skillI + 1) % o.length),
+                                    (c.direction = "forward"))),
+                    (r.textContent = c.text),
+                    r.appendChild(
+                        n(
+                            c.prefixP < l.length
+                                ? Math.min(s, s + c.prefixP)
+                                : Math.min(s, t.length - c.skillP)
+                        )
+                    ),
+                    setTimeout(i, d);
+            }
+
+            /*以下内容自定义修改*/
+            var l = "",
+                o = [text].map(function (r) {
+                    return r + "";
+                }),
+                a = 3,
+                g = 1,
+                s = 5,
+                d = 75,
+                b = [
+                    "rgb(110,64,170)",
+                    "rgb(150,61,179)",
+                    "rgb(191,60,175)",
+                    "rgb(228,65,157)",
+                    "rgb(254,75,131)",
+                    "rgb(255,94,99)",
+                    "rgb(255,120,71)",
+                    "rgb(251,150,51)",
+                    "rgb(226,183,47)",
+                    "rgb(198,214,60)",
+                    "rgb(175,240,91)",
+                    "rgb(127,246,88)",
+                    "rgb(82,246,103)",
+                    "rgb(48,239,130)",
+                    "rgb(29,223,163)",
+                    "rgb(26,199,194)",
+                    "rgb(35,171,216)",
+                    "rgb(54,140,225)",
+                    "rgb(76,110,219)",
+                    "rgb(96,84,200)"
+                ],
+                c = {
+                    text: "",
+                    prefixP: -s,
+                    skillI: 0,
+                    skillP: 0,
+                    direction: "forward",
+                    delay: a,
+                    step: g
+                };
+            i();
+        }
+    </script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="/images/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">大周'blog奝</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/lingxin16" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=2823399539&site=qq&menu=yes" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/about/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-meetup" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/sakura/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            樱花雨
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  
+</body>
+</html>
