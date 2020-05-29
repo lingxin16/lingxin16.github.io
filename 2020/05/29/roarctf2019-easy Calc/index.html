@@ -246,24 +246,24 @@
 <a id="more"></a>
 
 <p>打开题目是这样子的</p>
-<p>![QQ截图20200529130023](/roarctf2019-easy Calc/QQ截图20200529130023.jpg)</p>
+<p>![QQ截图20200529130023](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/QQ截图20200529130023.jpg)</p>
 <p>类似一个计算器</p>
 <p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p>
-<p>![QQ截图20200529130218](/roarctf2019-easy Calc/QQ截图20200529130218.jpg)</p>
+<p>![QQ截图20200529130218](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/QQ截图20200529130218.jpg)</p>
 <p>打开calc.php可以看到他设置了黑名单</p>
-<p>![QQ截图20200529130500](/roarctf2019-easy Calc/QQ截图20200529130500.jpg)</p>
+<p>![QQ截图20200529130500](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/QQ截图20200529130500.jpg)</p>
 <p>那么我们就是要想法绕过</p>
 <p>这里我们是选择用PHP的字符串解析来bypass</p>
 <p>构造payload:</p>
 <p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p>
-<p>![1](/roarctf2019-easy Calc/1.png)</p>
+<p>![1](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/1.png)</p>
 <p>这里我们发现一个文件f1agg</p>
 <p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p>
 <p>得到flag</p>
 <p>这里我们用HTTP走私漏洞同样也可以解这道题</p>
 <p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p>
-<p>![2](/roarctf2019-easy Calc/2.png)</p>
-<p>![3](/roarctf2019-easy Calc/3.png)</p>
+<p>![2](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/2.png)</p>
+<p>![3](<a href="https://www.d1a0.cn/2020/05/29//roarctf2019-easy" target="_blank" rel="noopener">https://www.d1a0.cn/2020/05/29//roarctf2019-easy</a> Calc/3.png)</p>
 
         </div>
         <!-- .entry-content -->
@@ -292,7 +292,7 @@
             <a href="/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
@@ -343,7 +343,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -355,10 +355,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
