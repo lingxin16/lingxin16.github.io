@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-05-29T06:48:21.286Z</updated>
+  <updated>2020-05-30T04:01:37.892Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-SecretFile</title>
+    <link href="http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/"/>
+    <id>http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/</id>
+    <published>2020-05-30T03:41:37.000Z</published>
+    <updated>2020-05-30T04:01:37.892Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/1.png" alt="1"></p><p>把一切都放在那里了 说明我们需要找到隐藏信息，查看源代码</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/2.png" alt="2"></p><p>发现./Archive_room.php</p><p>打开</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/3.png" alt="3"></p><p>点击secret</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/4.png" alt="4"></p><p>发现查阅结束，没看清么？回去再仔细看看吧。</p><p>多次尝试我们并没有发现有什么变化，那么使用burpsuit抓包</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/5.png" alt="5"></p><p>选择send to repeater</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/6.png" alt="6"></p><p>重放之后发现secr3t.php</p><p>访问</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/7.png" alt="7"></p><p>发现flag.php 访问</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/8.png" alt="8"></p><p>这次什么都没有，源代码中也没有任何发现，但是在secr3t.php中也有过滤，但是我们可以用filter协议，同样可以读取flag.php的内容</p><p>访问/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/9.png" alt="9"></p><p>下边的一串字符就是flag.php的内容的base64形式</p><p>然后base64解码得到</p><pre><code class="html">&lt;head&gt;    &lt;meta charset=&quot;utf-8&quot;&gt;    &lt;title&gt;FLAG&lt;/title&gt;&lt;/head&gt;&lt;body style=&quot;background-color:black;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;    &lt;h1 style=&quot;font-family:verdana;color:red;text-align:center;&quot;&gt;啊哈！你找到我了！可是你看不到我QAQ~~~&lt;/h1&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;    &lt;p style=&quot;font-family:arial;color:red;font-size:20px;text-align:center;&quot;&gt;        &lt;?php            echo &quot;我就在这里&quot;;            $flag = &#39;flag{99d1cd98-c137-49fd-b4fa-caa468d75d01}&#39;;            $secret = &#39;jiAng_Luyuan_w4nts_a_g1rIfri3nd&#39;        ?&gt;    &lt;/p&gt;&lt;/body&gt;</code></pre><p>提交flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>极客大挑战2019-Havefun</title>
+    <link href="http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/"/>
+    <id>http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/</id>
+    <published>2020-05-30T03:28:49.000Z</published>
+    <updated>2020-05-30T03:37:31.942Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/1.png" alt="1"></p><p>并没有发现什么有用的信息，查看源代码发现</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/2.png" alt="2"></p><p>当我们传入一个cat参数，就把这个参数的值打印出来，当传入cat=dog时我们发现返回的值是一串类似flag的字符串</p><p>那么我们尝试?cat=dog 得到flag</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/3.png" alt="3"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>roarctf2019-easy Calc</title>
@@ -395,55 +441,6 @@
     
     
       <category term="环境部署" scheme="http://lingxin16.github.io/tags/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>php学习day3</title>
-    <link href="http://lingxin16.github.io/2020/03/14/php%E5%AD%A6%E4%B9%A0day3/"/>
-    <id>http://lingxin16.github.io/2020/03/14/php%E5%AD%A6%E4%B9%A0day3/</id>
-    <published>2020-03-14T14:13:25.000Z</published>
-    <updated>2020-03-14T16:19:59.216Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h2><a id="more"></a><p>浮点型：小数类型以及超过整型所能存储范围的整数</p><p>浮点型定义：</p><pre><code>$f=1.23;$f=1.23e10;      //科学计数法，其中e表示低10   1.23×10^10</code></pre><p>浮点数不够精确</p><h2 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h2><p>两个值：true和false  通常用于判断</p><p>在进行某些数据判断的时候，需要特别注意类型转换</p><p>Empty()：判断数据的值是否为“空”，而不是NULL，如果为空返回true，不为空返回false</p><p>lsset()：判断数据存储的变量本身是否存在，存在变量返回true，不存在返回false</p><p><img src="/2020/03/14/php%E5%AD%A6%E4%B9%A0day3/QQ%E6%88%AA%E5%9B%BE20200314222620.jpg" alt="QQ截图20200314222620"></p><h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>运算符：operator，是一种将数据进行运算的特殊符号，在php中一共有十种运算符之多</p><h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><p>赋值运算：符号是“=”，表示将右边的结果(可以是变量、数据、常量和其他运算出来的结果)，保存到内存的某个位置，然后将位置的内存地址赋值给左侧的变量(常量)</p><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><p>+：执行数据累加<br>-：数据相减<br>*：两个数相乘<br>/：两个数相除<br>%：取余运算，两个数(整数)相除保留余数</p><p>在进行除法运算或取余运算时后边的数不能为零</p><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><p>比较运算：比较两个数据的大小，或者两个内容是否相同</p><pre><code>&gt;：左边大于右边，返回true&gt;=：左边大于等于右边，返回true&lt;：左边小于右边，返回true&lt;=：左边小于等于右边，返回true==：左边与右边的相同（大小相同），返回true!=：左边与右边的不同（大小不相同），返回true===：全等于 左边与右边的相同（大小以及数据的类型都要相同）!==：不全等于 左边与右边的不相同（大小或数据的类型不同）</code></pre><h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><pre><code>逻辑运算：针对不同的结果进行匹配&amp;&amp;：逻辑与  左边的条件与右边的条件同时成立（两边结果都为true）||：逻辑或 左边的条件嚯右边的条件只要有一个满足即可！：逻辑非 对已有条件进行取反</code></pre><p>逻辑与和逻辑或又称为短路运算：如果第-一个表达式结果已经满足条件了，那么就不会运行逻辑运算符后面的表达式  在书写代码的时候，尽量将出现概率最高的(能够直接判断出结果)的表达式放到第一位</p><h3 id="连接运算符"><a href="#连接运算符" class="headerlink" title="连接运算符"></a>连接运算符</h3><pre><code>连接运算:是PHP中将多个字符串拼接的一种符号.：将两个字符串连接到一起.=：复合运算，将左边的内容与右边的内容连接起来，然后重新赋值给左边变量</code></pre><h3 id="错误抑制符"><a href="#错误抑制符" class="headerlink" title="错误抑制符"></a>错误抑制符</h3><p>在PHP中有一些错误可以提前预知，但是这些错误可能无法避免，但是又不希望报错给用户看，可以使用错误抑制符处理</p><pre><code>@：在可能出错的表达式前面使用@符号即可@(可能出错的代码);</code></pre><h3 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h3><p>三目运算:有三个表达式参与的运算(简单的的分支结构缩写)。</p><p>语法格式:</p><p>表达式1 ? 表达式2 :  表达式3;（如果表达式1成立，那么执行表达式2，否则执行表达式3）</p><h3 id="自操作运算符"><a href="#自操作运算符" class="headerlink" title="自操作运算符"></a>自操作运算符</h3><pre><code>++--</code></pre><p>后置自操作运算符$a++</p><p>前置自操作运算符++$a</p><p>b=$a++   先赋值再运算</p><p>b=++$a   先运算再赋值</p><p>衍生符号：类似自操作</p><p>+=：左边的结果与右边的结果相加，然后赋值给左边<br>-=：左边的减去右边的结果，然后赋值给左边<br>*=：乘法操作<br>/=：除法操作<br>%=：模操作</p><p>注意：右边是一个整体！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;浮点类型&quot;&gt;&lt;a href=&quot;#浮点类型&quot; class=&quot;headerlink&quot; title=&quot;浮点类型&quot;&gt;&lt;/a&gt;浮点类型&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="php" scheme="http://lingxin16.github.io/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ctfhub-信息泄露-Git泄露</title>
-    <link href="http://lingxin16.github.io/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/"/>
-    <id>http://lingxin16.github.io/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/</id>
-    <published>2020-03-14T07:32:37.000Z</published>
-    <updated>2020-03-17T09:24:09.824Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h2><p>启动环境</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200314153525.jpg" alt="QQ截图20200314153525"></p><a id="more"></a><p>在/.git/config中有内容，直接githack</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317164838.jpg" alt="QQ截图20200317164838"></p><p>在文件夹中并没有找到flag文件</p><p>使用<code>git log</code>查看记录</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317164910.jpg" alt="QQ截图20200317164910"></p><p>可以看到在第二条记录中能看到add flag</p><p>使用<code>git reset --hard 59218d2bc0dc24072e15f3bd2dc8a89692f90ac2</code>恢复记录</p><p>得到一个txt文件，打开得到flag</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317164924.jpg" alt="QQ截图20200317164924"></p><p>或者使用<code>git diff 59218d2bc0dc24072e15f3bd2dc8a89692f90ac2</code>查看当前记录和add flag的区别</p><p>得到flag</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317165038.jpg" alt="QQ截图20200317165038"></p><h2 id="Stash"><a href="#Stash" class="headerlink" title="Stash"></a>Stash</h2><p>启动环境</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317170252.jpg" alt="QQ截图20200317170252"></p><p>用githack处理得到</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317170456.jpg" alt="QQ截图20200317170456"></p><p>再查看日志找到查看add flag目录发现并没有flag</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317171711.jpg" alt="QQ截图20200317171711"></p><p>在.git/refs/stash文件中发现<code>5a1c50dc9be3bb089c2f9a1e737cea77f0e0c32f</code></p><p><code>git diff 5a1c50dc9be3bb089c2f9a1e737cea77f0e0c32f</code>得到flag</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317171907.jpg" alt="QQ截图20200317171907"></p><h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>同样用githack处理文件</p><p>在txt文件中发现flag</p><p><img src="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200317172256.jpg" alt="QQ截图20200317172256"></p><p>相关说明：</p><pre><code>当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当,可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Log&quot;&gt;&lt;a href=&quot;#Log&quot; class=&quot;headerlink&quot; title=&quot;Log&quot;&gt;&lt;/a&gt;Log&lt;/h2&gt;&lt;p&gt;启动环境&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/QQ%E6%88%AA%E5%9B%BE20200314153525.jpg&quot; alt=&quot;QQ截图20200314153525&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctfhub" scheme="http://lingxin16.github.io/tags/ctfhub/"/>
-    
-      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-      <category term="信息泄露" scheme="http://lingxin16.github.io/tags/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/"/>
-    
-      <category term="Git泄露" scheme="http://lingxin16.github.io/tags/Git%E6%B3%84%E9%9C%B2/"/>
     
   </entry>
   
