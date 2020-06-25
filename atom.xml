@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-22T02:11:50.928Z</updated>
+  <updated>2020-06-25T14:02:51.670Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS配置docker和docker-compose</title>
+    <link href="http://lingxin16.github.io/2020/06/25/CentOS%E9%85%8D%E7%BD%AEdocker%E5%92%8Cdocker-compose/"/>
+    <id>http://lingxin16.github.io/2020/06/25/CentOS%E9%85%8D%E7%BD%AEdocker%E5%92%8Cdocker-compose/</id>
+    <published>2020-06-25T13:48:42.000Z</published>
+    <updated>2020-06-25T14:02:51.670Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在部署一个web服务，需要docker和docker-compose，遇到了许多问题，记录一下。</p><a id="more"></a><p>CentOS版本是7.6</p><p>先安装docker</p><pre><code>yum -y install docker</code></pre><p>然后安装docker-compose(可能会出现错误，建议先看完整篇博客再安装)</p><pre><code># yum-util 提供 yum-config-manager 功能， 另外两个是 devicemapper 驱动依赖yum install -y yum-utils device-mapper-persistent-data lvm2# 设置 yum 源yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo# 安装依赖yum install epel-release#安装python——pipyum install -y python-pip# 使用pip安装docker-composepip install docker-compose# 升级python包sudo yum upgrade python*</code></pre><p>这是正常的流程，会出现这样的错误</p><p><img src="/2020/06/25/CentOS%E9%85%8D%E7%BD%AEdocker%E5%92%8Cdocker-compose/1.png" alt="1"></p><p>那么需要先安装安装python-devel</p><pre><code>yum install python-devel -y </code></pre><p>然后再安装上边的使用pip安装docker-compose</p><p>安装成功之后测试</p><pre><code>docker -vdocker-compose -v</code></pre><p>正常之后就没问题了</p><p>但是我的docker-compose出现了这样的错误</p><p><img src="/2020/06/25/CentOS%E9%85%8D%E7%BD%AEdocker%E5%92%8Cdocker-compose/2.png" alt="2"></p><p>这个问题我也没什么解决办法，就换一种方法安装docker-compose</p><p>安装docker-compose</p><pre><code>sudo curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</code></pre><p>对二进制文件应用可执行权限：</p><pre><code>chmod +x /usr/local/bin/docker-compose</code></pre><p>然后再<code>docker-compose -v</code>测试是否正常</p><p>如果提示找不到docker-compose，那就配置一下全局环境变量，具体操作在下边</p><pre><code>vi /etc/profile</code></pre><p>然后在末尾添加</p><pre><code>export PATH=/usr/local/bin:$PATH</code></pre><p>最后退出vim</p><p>执行<code>source/etc/profile</code></p><p>这时候测试应该就正常了</p><p>但是在用docker-compose启动docker集群时报错Couldn’t connect to Docker daemon at http+docker://localunixsocket - is it running?</p><p>执行<code>systemctl start docker</code></p><p>然后再启动docker集群解决问题</p><p>参考文章:</p><p><a href="https://blog.csdn.net/btqszl/article/details/78528726" target="_blank" rel="noopener">https://blog.csdn.net/btqszl/article/details/78528726</a></p><p><a href="https://www.cnblogs.com/caidingyu/p/11320021.html" target="_blank" rel="noopener">https://www.cnblogs.com/caidingyu/p/11320021.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在部署一个web服务，需要docker和docker-compose，遇到了许多问题，记录一下。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="服务器配置" scheme="http://lingxin16.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>ACTF2020新生赛-Exec</title>
@@ -441,27 +462,6 @@
     
     
       <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo博客添加文章访问密码</title>
-    <link href="http://lingxin16.github.io/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/"/>
-    <id>http://lingxin16.github.io/2020/05/07/hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%AE%BF%E9%97%AE%E5%AF%86%E7%A0%81/</id>
-    <published>2020-05-07T10:16:42.000Z</published>
-    <updated>2020-05-07T11:53:43.117Z</updated>
-    
-    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">密码123456</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="c424235f0116965c045ec9272bd30cbaa99d71895d570e5710a3fa3a508a4b18">037923a29417dcb57ea278bc904620b7af2caafecbc18a8abcbcb385f4cdb2d9d3fe01425ed8362f1b3775e0f857e6058c4d5366f118747e1bfd1c8489f143eccd0c996f9a06c092b4508b2dc146418255243800bf0a1faded9760885d8a1568efbb32e59a42cf0ecb82c09a9e6f6866dc222a339ff7abdc9acbdc7082934e387c2304681a7210578c032eb4c7781fb4119094557060cb3de8230f6e96e96bd6551892c02329d3f90aa9d061ff25518d8be11dcc15deda07c0ad33a8e727962a339a56cddabb23472049594048036af94c3a75cfbb49b12a7567a2b752c90bd91a1628f4b635164b0b52366e47ac18441fb8bba5a9eaad776e7fae49f7d75b75ac85d84ab4a17edf97c146c862d329f17bfd6a22bbacecf0ee88964dd472bf0c55bd57e08919d719bfa4bac82a26fa056281b0fb429645b4f4f74a4ef9af2680</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
-    
-    <summary type="html">
-    
-      密码123456
-    
-    </summary>
-    
-    
-    
-      <category term="博客搭建" scheme="http://lingxin16.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
