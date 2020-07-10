@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>2020年新春战疫—网络安全公益赛-套娃 | 大周&#39;blog</title>
+  <title>ACTF2020新生赛-BackupFile | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -231,8 +231,8 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">2020年新春战疫—网络安全公益赛-套娃</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-3-3&nbsp;
+            <h1 class="entry-title">ACTF2020新生赛-BackupFile</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-7-10&nbsp;
               
                     
         ·<span id="readcount"></span>次阅读
@@ -242,49 +242,30 @@
           </header>
         
         <div class="entry-content">
-          <p>1.zip 解压后得到下列文件</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556671-780069-image.png" alt="1582556671-780069-image"></p>
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<pre><code>对Brainfuck在下面网站进行解密，得到 dcaf03aa88d038686c5e8067a7a45ff8  </code></pre><p><a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a><br>二进制编辑1.连环画.png 得到 part1:068c<br>使用上面的解密值，解压2.zip<br>2.zip 解压后得到下列文件</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556693-353542-image.png" alt="1582556693-353542-image"></p>
-<pre><code>二进制编辑2.连环画.jpeg，得到 part2:555b</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582557252-699162-image.png" alt="1582556724-854471-image"></p>
-<pre><code>爆破3.zip 得到压缩包密码 3302</code></pre><p>3.zip 解压后得到下列文件</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556724-854471-image.png" alt="1582556724-854471-image"></p>
-<pre><code>修改伪加密位解压4.zip</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556739-668302-image.png" alt="1582556739-668302-image"></p>
-<pre><code>LSB隐写查看得到part3:578b</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556752-15476-image.png" alt="1582556752-15476-image"></p>
-<p>4.zip 解压后得到文件</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556764-249372-image.png" alt="1582556764-249372-image"></p>
-<pre><code>根据提示使用明文攻击，解压5.zip</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556774-688544-image.png" alt="1582556774-688544-image"></p>
-<pre><code>这里可以不用等全部结束，点击停止，可释放已解密部分文件
+<p><img src="/2020/07/10/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-BackupFile/1.png" alt="1"></p>
+<p>让我们尝试找源文件，在index.php.bak得到源文件</p>
+<pre><code>&lt;?php
+include_once &quot;flag.php&quot;;
 
-爆破4.png的高度，可获得part4:0eae</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582557176-568780-image.png" alt="1582557176-568780-image"></p>
-<p>5.zip解压后获得下面文件：</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556800-808334-image.png" alt="1582556800-808334-image"></p>
-<pre><code>使用猪圈密码得到压缩包密码：fojiajielv
-对5.连环画进行拼接得到part5:9d4b</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582557291-574981-image.png" alt="1582557291-574981-image"></p>
-<p>6.zip解压后得到下面文件</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556819-887870-image.png" alt="1582556819-887870-image"></p>
-<pre><code>使用佛经解密得到压缩包密码</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582557311-560572-image.png" alt="1582557311-560572-image"></p>
-<pre><code>对6.jpg进行binwalk，可以看到莫斯密码，对莫斯密码进行解密得到part6:e52bd67</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582557327-475780-image.png" alt="1582557327-475780-image"></p>
-<p>7.zip解压后得到文件如下：</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556862-403350-image.png" alt="1582556920-783498-image"></p>
-<pre><code>使用identify查看帧率隐写</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556873-841246-image.png" alt="1582556873-841246-image"></p>
-<p>得到</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556882-170934-image.png" alt="1582556882-170934-image"></p>
-<pre><code>使用二进制符号进行替换，得到part7:61562</code></pre><p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556890-119730-image.png" alt="1582556890-119730-image"></p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556901-253914-image.png" alt="1582556901-253914-image"></p>
-<p>通过银河字母表得到压缩包密码：yinhezm</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556910-414802-image.png" alt="1582556910-414802-image"></p>
-<p>8.zip解压后得到文件：</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556920-783498-image.png" alt="1582556920-783498-image"></p>
-<pre><code>提交32位人事：</code></pre><p>part1:068c<br>part2:555b<br>part3:578b<br>part4:0eae<br>part5:9d4b<br>part6:e52bd67<br>part7:61562<br>合并得到 ：068c555b578b0eae9d4be52bd6761562<br>9.rar解压后得到</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556939-954073-image.png" alt="1582556939-954073-image"></p>
-<p>使用AltermateStreamView工具提取数据流</p>
-<p><img src="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/1582556989-822273-image.png" alt="1582556989-822273-image"></p>
-<p>拿到falg</p>
-<p>FLAG值：<br>flag{8739459c-8d4e-4a34-92ee-5d75ae56ac4f}</p>
-<p>wp来自<a href="https://wp.ctf.show/d/4-2020-2" target="_blank" rel="noopener">wp.ctf.show</a></p>
+if(isset($_GET[&#39;key&#39;])) {
+    $key = $_GET[&#39;key&#39;];
+    if(!is_numeric($key)) {
+        exit(&quot;Just num!&quot;);
+    }
+    $key = intval($key);
+    $str = &quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;;
+    if($key == $str) {
+        echo $flag;
+    }
+}
+else {
+    echo &quot;Try to find out source file!&quot;;
+}</code></pre><p>要求我们传入key值，key值只能是数字，并且key值等于123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3才能得到flag</p>
+<p>PHP作为弱类型语言，当字符串与整型值比较时，字符串先转换成整型，然后再比较，也就是说只要key=123就能满足。</p>
+<p>index.php?key=123得到flag</p>
 
         </div>
         <!-- .entry-content -->
@@ -306,39 +287,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                ctfshow-萌新赛</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/03/03/ctfshow%E6%B8%B8%E6%88%8F%E9%A2%98/" rel="next">
+            <a href="/2020/07/09/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-upload/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                ctfshow游戏题</h3>
+                极客大挑战2019-upload</h3>
                 <hr>
               </div>
             </a>

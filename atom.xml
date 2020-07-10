@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-07-09T03:01:33.737Z</updated>
+  <updated>2020-07-10T03:03:22.561Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ACTF2020新生赛-BackupFile</title>
+    <link href="http://lingxin16.github.io/2020/07/10/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-BackupFile/"/>
+    <id>http://lingxin16.github.io/2020/07/10/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-BackupFile/</id>
+    <published>2020-07-10T02:49:27.000Z</published>
+    <updated>2020-07-10T03:03:22.561Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/10/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-BackupFile/1.png" alt="1"></p><p>让我们尝试找源文件，在index.php.bak得到源文件</p><pre><code>&lt;?phpinclude_once &quot;flag.php&quot;;if(isset($_GET[&#39;key&#39;])) {    $key = $_GET[&#39;key&#39;];    if(!is_numeric($key)) {        exit(&quot;Just num!&quot;);    }    $key = intval($key);    $str = &quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;;    if($key == $str) {        echo $flag;    }}else {    echo &quot;Try to find out source file!&quot;;}</code></pre><p>要求我们传入key值，key值只能是数字，并且key值等于123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3才能得到flag</p><p>PHP作为弱类型语言，当字符串与整型值比较时，字符串先转换成整型，然后再比较，也就是说只要key=123就能满足。</p><p>index.php?key=123得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>极客大挑战2019-upload</title>
@@ -433,29 +456,6 @@
     <updated>2020-05-30T04:01:37.892Z</updated>
     
     <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/1.png" alt="1"></p><p>把一切都放在那里了 说明我们需要找到隐藏信息，查看源代码</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/2.png" alt="2"></p><p>发现./Archive_room.php</p><p>打开</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/3.png" alt="3"></p><p>点击secret</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/4.png" alt="4"></p><p>发现查阅结束，没看清么？回去再仔细看看吧。</p><p>多次尝试我们并没有发现有什么变化，那么使用burpsuit抓包</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/5.png" alt="5"></p><p>选择send to repeater</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/6.png" alt="6"></p><p>重放之后发现secr3t.php</p><p>访问</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/7.png" alt="7"></p><p>发现flag.php 访问</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/8.png" alt="8"></p><p>这次什么都没有，源代码中也没有任何发现，但是在secr3t.php中也有过滤，但是我们可以用filter协议，同样可以读取flag.php的内容</p><p>访问/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/9.png" alt="9"></p><p>下边的一串字符就是flag.php的内容的base64形式</p><p>然后base64解码得到</p><pre><code class="html">&lt;head&gt;    &lt;meta charset=&quot;utf-8&quot;&gt;    &lt;title&gt;FLAG&lt;/title&gt;&lt;/head&gt;&lt;body style=&quot;background-color:black;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;    &lt;h1 style=&quot;font-family:verdana;color:red;text-align:center;&quot;&gt;啊哈！你找到我了！可是你看不到我QAQ~~~&lt;/h1&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;    &lt;p style=&quot;font-family:arial;color:red;font-size:20px;text-align:center;&quot;&gt;        &lt;?php            echo &quot;我就在这里&quot;;            $flag = &#39;flag{99d1cd98-c137-49fd-b4fa-caa468d75d01}&#39;;            $secret = &#39;jiAng_Luyuan_w4nts_a_g1rIfri3nd&#39;        ?&gt;    &lt;/p&gt;&lt;/body&gt;</code></pre><p>提交flag</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
-    
-      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>极客大挑战2019-Havefun</title>
-    <link href="http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/"/>
-    <id>http://lingxin16.github.io/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/</id>
-    <published>2020-05-30T03:28:49.000Z</published>
-    <updated>2020-05-30T03:37:31.942Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/1.png" alt="1"></p><p>并没有发现什么有用的信息，查看源代码发现</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/2.png" alt="2"></p><p>当我们传入一个cat参数，就把这个参数的值打印出来，当传入cat=dog时我们发现返回的值是一串类似flag的字符串</p><p>那么我们尝试?cat=dog 得到flag</p><p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/3.png" alt="3"></p>]]></content>
     
     <summary type="html">
     
