@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>计算机网络原理学习 | 大周&#39;blog</title>
+  <title>ACTF2020新生赛-Upload | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -231,8 +231,8 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">计算机网络原理学习</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-6-7&nbsp;
+            <h1 class="entry-title">ACTF2020新生赛-Upload</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-7-11&nbsp;
               
                     
         ·<span id="readcount"></span>次阅读
@@ -242,33 +242,17 @@
           </header>
         
         <div class="entry-content">
-          <a id="more"></a>
+          <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
+<a id="more"></a>
 
-<h3 id="OSI和TCP-IP网络模型"><a href="#OSI和TCP-IP网络模型" class="headerlink" title="OSI和TCP.IP网络模型"></a>OSI和TCP.IP网络模型</h3><p>OSI网络模型(参考模型) 分为七层</p>
-<p>应用层                         用户接口                                                                                                                    HTTP Telnet</p>
-<p>表示层                         数据的表现形式、特定功能的实现例如加密                                                          ASCll、ENCDIC 、JPEG   </p>
-<p>会话层                         对应用会话的管理、同步                                                                                         操作系统、应用读取</p>
-<p>传输层                         可靠与不可靠的传输、传输前的错误检测、流控                                                  TCP(可靠)/UDP(不可靠)</p>
-<p>网络层                         提供逻辑地址、选路                                                                                                 IP</p>
-<p>数据链路层                 成帧、用Mac地址访问媒介、错误检测与修正                                                       802.3/802.2       HDLC/FR/PPP</p>
-<p>物理层                         设备之间的比特流传输、物理接口、电气特性等                                                   EIA/TIA-232            V.35/RJ45</p>
-<p>TCP/IP协议栈</p>
-<p>应用层</p>
-<p>传输层</p>
-<p>网络层</p>
-<p>网络接口层</p>
-<p>对比</p>
-<p><img src="/2020/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/1.png" alt="1"></p>
-<h3 id="网络设备"><a href="#网络设备" class="headerlink" title="网络设备"></a>网络设备</h3><p>路由器 、交换机、防火墙(硬件)等</p>
-<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><p>双绞线制作的两种标准以及线序</p>
-<p>EIA/TIA 568A             绿白   绿  橙白   蓝   蓝白   橙   棕白   棕</p>
-<p>EIA/TIA 568B             橙白   橙  绿白   蓝   蓝白   绿   棕白   棕</p>
-<p>标准以太网(10Mbit/s)  由IEEE802.3定义   通常只定位在网络的接入层</p>
-<p>快速以太网(100Mbit/s)   IEEE802.3u标准</p>
-<p>千兆以太网   对IEEE802.3以太网标准的扩展   两个标准(IEEE802.3z光纤羽铜缆、IEEE82.3AB双绞线)</p>
-<h3 id="以太网设备工作原理"><a href="#以太网设备工作原理" class="headerlink" title="以太网设备工作原理"></a>以太网设备工作原理</h3><p>当交换机的Mac地址表中没有目标地址，就会引起泛洪</p>
-<p>Mac地址表条目占满，可以引起Mac地址表泛洪攻击</p>
-<h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>LAN（局域网）是有限区域内相对距离较近的计算机和其他组件的网络</p>
+<p><img src="/2020/07/11/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Upload/1.png" alt="1"></p>
+<p>鼠标移动到中间发现上传，尝试上传</p>
+<p><img src="/2020/07/11/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Upload/2.png" alt="2"></p>
+<p>上传成功后左上角有提示，可以打开</p>
+<p>在尝试上传PHP马的时候提示</p>
+<p><img src="/2020/07/11/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-Upload/3.png" alt="3"></p>
+<p>在尝试抓包的时候发现，文件后缀的检测是本地前端检测，后缀改为png，利用burp抓包改phtml后缀，上传成功。</p>
+<p>蚁剑连接，在根目录找到flag</p>
 
         </div>
         <!-- .entry-content -->
@@ -290,39 +274,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+        
           
-            <div class="post-nepre half previous">
+            <div class="post-nepre full next">
           
-            <a href="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/" rel="prev">
+            <a href="/2020/07/10/ACTF2020%E6%96%B0%E7%94%9F%E8%B5%9B-BackupFile/" rel="next">
               <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                CVE-2020-0796复现</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2020/06/01/SUCTF2019-CheckIn/" rel="next">
-              <div class="background">
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                SUCTF2019-CheckIn</h3>
+                ACTF2020新生赛-BackupFile</h3>
                 <hr>
               </div>
             </a>
