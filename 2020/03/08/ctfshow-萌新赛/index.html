@@ -243,24 +243,24 @@
         
         <div class="entry-content">
           <h2 id="萌新赛web-签到题"><a href="#萌新赛web-签到题" class="headerlink" title="萌新赛web_签到题"></a>萌新赛web_签到题</h2><p>源码：</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308132725.jpg" alt="QQ截图20200308132725"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308132725.jpg" alt="QQ截图20200308132725"></p>
 <a id="more"></a>
 
 <p>这道题的预期解是命令执行</p>
 <p>构造payload</p>
 <pre><code>?url=;ls;</code></pre><p>发现flag index.php两个目录</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133544.jpg" alt="QQ截图20200308133544"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308133544.jpg" alt="QQ截图20200308133544"></p>
 <p>再构造payload</p>
 <pre><code>?url=;cat flag;</code></pre><p>得到flag</p>
 <p>然后我做的时候是直接访问/flag 下载flag文件得到flag</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308133922.jpg" alt="QQ截图20200308133922"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308133922.jpg" alt="QQ截图20200308133922"></p>
 <p>不愧是我(萌新)</p>
 <h2 id="萌新赛密码学-签到题"><a href="#萌新赛密码学-签到题" class="headerlink" title="萌新赛密码学_签到题"></a>萌新赛密码学_签到题</h2><p>Ao(mgHX^E)AN2PSBOu3qI0o</p>
 <p>直接base85解码得到flag</p>
 <h2 id="萌新赛密码学-抱我"><a href="#萌新赛密码学-抱我" class="headerlink" title="萌新赛密码学_抱我"></a>萌新赛密码学_抱我</h2><p>下载flag.py</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308134323.jpg" alt="QQ截图20200308134323"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308134323.jpg" alt="QQ截图20200308134323"></p>
 <p>完全不懂的py脚本，就交给呆头鹅林师傅了</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/1.jpg" alt="1"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/1.jpg" alt="1"></p>
 <p>最后林师傅解出来的随机数列</p>
 <pre><code>d f l 3 3 { 6 { 6 g
 3 a f a 6 { 3 } a g
@@ -289,42 +289,42 @@ for y in range (0,MAX):
         i = i+1
 pic.show()
 pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/flag.png" alt="flag"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/flag.png" alt="flag"></p>
 <h2 id="萌新赛杂项-签到"><a href="#萌新赛杂项-签到" class="headerlink" title="萌新赛杂项_签到"></a>萌新赛杂项_签到</h2><p>查看源代码</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155004.jpg" alt="QQ截图20200308155004"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308155004.jpg" alt="QQ截图20200308155004"></p>
 <p>发现第十行代码意外的长</p>
 <p>把下面下载下来用notepad打开 查看第十行</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155220.jpg" alt="QQ截图20200308155220"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308155220.jpg" alt="QQ截图20200308155220"></p>
 <p>把tab替换成1，空格替换成0</p>
 <pre><code>00101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010111000101110001011100010000000101101001011100010110100101110001000000010110100101110001011100010111000101110001000000010111000101101001011010010110100101101001000000010110100101110001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101101001011100010111000101110001000000010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011010010111000101110001000000010110100101110001011100010111000101110001000000010111000101110001011100010111000101110001000000010110100101110001011100010111000101110001000000010111000100000001011010010111000101110001011100010111000100000001011010010110100101110001011100010111000100000001011100010111000101110001011100010110100100000001011100010111000101110001011100010110100100000001011010010111000101110001011100010111000100000001011100010110100101101001011010010110100100000001011010010110100101110001011100010111000100000001011010010111000101110</code></pre><p>转换字符串</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155637.jpg" alt="QQ截图20200308155637"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308155637.jpg" alt="QQ截图20200308155637"></p>
 <p>得到</p>
 <pre><code>-.... -.... -.... -.-. -.... .---- -.... --... --... -... ....- -.. -.... ..... -.... . -.... --... ....- -.. -.... ..... -.... . -.... --... ....- ....- -.... .---- --... -..</code></pre><p>摩斯解码处理</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308155735.jpg" alt="QQ截图20200308155735"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308155735.jpg" alt="QQ截图20200308155735"></p>
 <p>得到十六进制</p>
 <pre><code>666c61677b4d656e674d656e6744617d</code></pre><p>最后转换ASCII码得到flag{MengMengDa}</p>
 <h2 id="萌新赛杂项-劝退警告"><a href="#萌新赛杂项-劝退警告" class="headerlink" title="萌新赛杂项_劝退警告"></a>萌新赛杂项_劝退警告</h2><p>下载下来是一张gif，直接改后缀.zip解压发现压缩包</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135432.jpg" alt="QQ截图20200308135432"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308135432.jpg" alt="QQ截图20200308135432"></p>
 <p>压缩包中两个文件flag2.zip和sudoku.png</p>
 <p>右边的注释说明密码需要我们解数独 但是sudoku.png也显示是加密的</p>
 <p>这里我用Ziperello来爆破发现导入压缩包的时候显示只有一个文件是加密的</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308135730.jpg" alt="QQ截图20200308135730"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308135730.jpg" alt="QQ截图20200308135730"></p>
 <p>那么这个sudoku.png就可能是伪加密，通过修改二进制解压出sudoku.png</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/sudoku.png" alt="sudoku"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/sudoku.png" alt="sudoku"></p>
 <p>然后在线解数独，通过注释说明的方法得到flag2.zip的密码得到flag2.zip</p>
 <p>结果flag2.zip还有密码，而且不是伪加密，只有注释:这道题很难，你现在离开还来得及。</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140057.jpg" alt="QQ截图20200308140057"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308140057.jpg" alt="QQ截图20200308140057"></p>
 <p>我可能会离开吗！必不可能啊。通过与群里的几位师傅商量，我们最终觉得这应该是明文爆破，但是怎么构造明文可就难倒大家了。</p>
 <p>也不难发现，这个说明.txt大小只有1kb 48字节，我们通过把注释写到txt中惊奇的发现也是48字节！！！（有的师傅是36字节，原因是txt的编码方式不同，更改编码方式就行）</p>
 <p>直接开始爆破，在爆破的过程中一半我们不用等爆破完直接停止就能得到恢复后的文件</p>
 <p>，但是这个不能立即停止…..足足爆破了两个小时也没停</p>
 <p>最后发现是停止的时间问题（明文爆破分两个阶段，第一个阶段我们就能得到恢复后的文件，第二阶段是寻找密码的过程。我们只需要解压后的文件，不需要密码，所以在第一阶段结束后就可以停止了，时间长的话就没有办法立即停止了。。。orz）</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308140749.jpg" alt="QQ截图20200308140749"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308140749.jpg" alt="QQ截图20200308140749"></p>
 <p>得到的这个flag.zip就很好爆破了，这里我是根据注释，写出了字典爆破，大家也可以用掩码爆破，得到open your eye.jpg根据文件名，猜到用silenteye来提取隐藏信息</p>
 <p>得到flag.txt</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141027.jpg" alt="QQ截图20200308141027"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308141027.jpg" alt="QQ截图20200308141027"></p>
 <p>不难发现是16进制 直接扔到winhex</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308141229.jpg" alt="QQ截图20200308141229"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308141229.jpg" alt="QQ截图20200308141229"></p>
 <p>猜测是pyc文件   关于pyc文件是py文件运行时产生的，我们可以通过反编译得到py文件，反编译的话有在线反编译的</p>
 <p>得到</p>
 <pre><code>(lambda __print, __g, __y, __operator: [ [ [ [ [ [ (check(0), None)[1] for __g[&#39;check&#39;], check.__name__ in [
@@ -340,7 +340,7 @@ pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p
  for __g[&#39;base64&#39;] in [__import__(&#39;base64&#39;, __g, __g)] ][0])(__import__(&#39;__builtin__&#39;, level=0).__dict__[&#39;print&#39;], globals(), lambda f: (lambda x: x(x))(lambda y: f(lambda : y(y)())), __import__(&#39;operator&#39;, level=0))</code></pre><p>通过hint改check(0)为check(1)运行得到flag</p>
 <h2 id="萌新赛杂项-萌新福利"><a href="#萌新赛杂项-萌新福利" class="headerlink" title="萌新赛杂项_萌新福利"></a>萌新赛杂项_萌新福利</h2><p>解压得到show.bin文件</p>
 <p>根据提示求反</p>
-<p><img src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ%E6%88%AA%E5%9B%BE20200308160159.jpg" alt="QQ截图20200308160159"></p>
+<p><img data-action="zoom" src="/2020/03/08/ctfshow-%E8%90%8C%E6%96%B0%E8%B5%9B/QQ截图20200308160159.jpg" alt="QQ截图20200308160159"></p>
 <p>输出音频文件，得到flag(小姐姐声音真好听……)</p>
 
         </div>
@@ -370,7 +370,7 @@ pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -389,7 +389,7 @@ pic.save(&quot;flag.png&quot;)</code></pre><p>得到二维码，扫描得flag</p
             <a href="/2020/03/03/2020%E5%B9%B4%E6%96%B0%E6%98%A5%E6%88%98%E7%96%AB%E2%80%94%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%85%AC%E7%9B%8A%E8%B5%9B-%E5%A5%97%E5%A8%83/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

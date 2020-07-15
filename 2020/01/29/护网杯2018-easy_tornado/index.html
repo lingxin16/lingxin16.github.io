@@ -242,11 +242,11 @@
           </header>
         
         <div class="entry-content">
-          <p>首先看题<img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129160301.png" alt="QQ截图20200129160301"></p>
+          <p>首先看题<img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129160301.png" alt="QQ截图20200129160301"></p>
 <a id="more"></a>
 
 <p>里边的内容分别是</p>
-<p><img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129160448.png" alt="QQ截图20200129160448">)<img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129160441.png" alt="QQ截图20200129160441">)<img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129160434.png" alt="QQ截图20200129160434"></p>
+<p><img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129160448.png" alt="QQ截图20200129160448">)<img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129160441.png" alt="QQ截图20200129160441">)<img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129160434.png" alt="QQ截图20200129160434"></p>
 <p>我们可以直接得出flag所在的文件夹是/fllllllllllllag</p>
 <p>分析这三个的url</p>
 <blockquote>
@@ -263,7 +263,7 @@
 <p>filename我们已经知道是fllllllllllllag，那么我们接下来只需要找到cookie_secret</p>
 <p>利用burp抓包我们并没有找到cookie，只能上百度了……（那咋办嘛）</p>
 <p>通过百度得知在error页面存在SSTI模板注入（又是一个看不懂的东西……）</p>
-<p><img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/%E6%86%A8%E6%86%A8%E8%90%BD%E6%B3%AA.jpg" alt="憨憨落泪"></p>
+<p><img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/憨憨落泪.jpg" alt="憨憨落泪"></p>
 <p>附上关于SSTI模板注入的博客：<a href="https://blog.csdn.net/zz_Caleb/article/details/96480967" target="_blank" rel="noopener">SSTI完全学习</a></p>
 <p>注入方式大概就是error?msg=0</p>
 <p>……？？？？？？至于注入啥玩意儿，大佬说的是用handler.settings对象(这又是啥玩意儿，咱也不知道，咱也不敢问)</p>
@@ -272,15 +272,15 @@
 <p><a href="http://de0ee060-7c62-4c47-9155-96c35ec001fe.node3.buuoj.cn/error?msg=" target="_blank" rel="noopener">http://de0ee060-7c62-4c47-9155-96c35ec001fe.node3.buuoj.cn/error?msg=</a></p>
 </blockquote>
 <p>得到这个回显</p>
-<p><img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129162705.png" alt="QQ截图20200129162705"></p>
+<p><img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129162705.png" alt="QQ截图20200129162705"></p>
 <p>‘cookie_secret’: ‘66015e24-a274-4abf-bd65-6776ae208dc4’}</p>
 <p>接下来构造</p>
 <blockquote>
 <p><a href="http://de0ee060-7c62-4c47-9155-96c35ec001fe.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=ee31ce84bedac7c8242d99b3047d4ad1" target="_blank" rel="noopener">http://de0ee060-7c62-4c47-9155-96c35ec001fe.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=ee31ce84bedac7c8242d99b3047d4ad1</a></p>
 </blockquote>
 <p>访问得到</p>
-<p><img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ%E6%88%AA%E5%9B%BE20200129163253.png" alt="QQ截图20200129163253"></p>
-<p>我太难了….<img src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/1.jpg" alt="1"></p>
+<p><img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/QQ截图20200129163253.png" alt="QQ截图20200129163253"></p>
+<p>我太难了….<img data-action="zoom" src="/2020/01/29/%E6%8A%A4%E7%BD%91%E6%9D%AF2018-easy_tornado/1.jpg" alt="1"></p>
 
         </div>
         <!-- .entry-content -->
@@ -328,7 +328,7 @@
             <a href="/2020/01/12/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

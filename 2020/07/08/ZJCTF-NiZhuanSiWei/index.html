@@ -245,10 +245,10 @@
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/08/ZJCTF-NiZhuanSiWei/1.png" alt="1"></p>
 <p>首先要满足传入一个text文件，使文件内容为welcome to the zjctf，可以用php://input伪协议</p>
 <pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</code></pre><p>接下来过滤了flag，并且提示有个useless.php文件，使用php://filter协议读取</p>
-<pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php</code></pre><p><img src="/2020/07/08/ZJCTF-NiZhuanSiWei/2.png" alt="2"></p>
+<pre><code>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php</code></pre><p><img data-action="zoom" src="/2020/07/08/ZJCTF-NiZhuanSiWei/2.png" alt="2"></p>
 <p>base64解码得道useless.php的内容</p>
 <pre><code>&lt;?php  
 
@@ -308,7 +308,7 @@ echo $password;
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/19313b0d62b27c8ba022f60fbfedd5ee.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -327,7 +327,7 @@ echo $password;
             <a href="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/512a1fded4940ba8d5f215809ff8c153.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

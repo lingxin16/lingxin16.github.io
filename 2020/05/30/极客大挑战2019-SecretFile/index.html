@@ -246,27 +246,27 @@
 <a id="more"></a>
 
 <p>打开题目</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/1.png" alt="1"></p>
 <p>把一切都放在那里了 说明我们需要找到隐藏信息，查看源代码</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/2.png" alt="2"></p>
 <p>发现./Archive_room.php</p>
 <p>打开</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/3.png" alt="3"></p>
 <p>点击secret</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/4.png" alt="4"></p>
 <p>发现查阅结束，没看清么？回去再仔细看看吧。</p>
 <p>多次尝试我们并没有发现有什么变化，那么使用burpsuit抓包</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/5.png" alt="5"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/5.png" alt="5"></p>
 <p>选择send to repeater</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/6.png" alt="6"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/6.png" alt="6"></p>
 <p>重放之后发现secr3t.php</p>
 <p>访问</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/7.png" alt="7"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/7.png" alt="7"></p>
 <p>发现flag.php 访问</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/8.png" alt="8"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/8.png" alt="8"></p>
 <p>这次什么都没有，源代码中也没有任何发现，但是在secr3t.php中也有过滤，但是我们可以用filter协议，同样可以读取flag.php的内容</p>
 <p>访问/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php</p>
-<p><img src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/9.png" alt="9"></p>
+<p><img data-action="zoom" src="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-SecretFile/9.png" alt="9"></p>
 <p>下边的一串字符就是flag.php的内容的base64形式</p>
 <p>然后base64解码得到</p>
 <pre><code class="html">&lt;head&gt;
@@ -315,7 +315,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -334,7 +334,7 @@
             <a href="/2020/05/30/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

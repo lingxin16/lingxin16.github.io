@@ -245,12 +245,12 @@
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/13/BJDCTF2nd-EasyMd5/1.png" alt="1"></p>
 <p>在HTTP头里发现Hint: select * from ‘admin’ where password=md5($pass,true)</p>
 <p>关于md5($pass,true)</p>
 <p>参考：<a href="https://blog.csdn.net/March97/article/details/81222922" target="_blank" rel="noopener">https://blog.csdn.net/March97/article/details/81222922</a></p>
 <p>输入ffifdyop</p>
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/07/13/BJDCTF2nd-EasyMd5/2.png" alt="2"></p>
 <p>查看源文件，发现</p>
 <pre><code>&lt;!--
 $a = $GET[&#39;a&#39;];
@@ -261,7 +261,7 @@ if($a != $b &amp;&amp; md5($a) == md5($b)){
 --&gt;
 </code></pre><p>md5 bypass</p>
 <p>因为<code>md5()</code>或者<code>sha1()</code>之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果<code>$a</code>和<code>$b</code>都是数组则双双返回FALSE, 两个FALSE相等得以绕过。payload:<code>?a[]=1&amp;b[]=2</code></p>
-<p><img src="/2020/07/13/BJDCTF2nd-EasyMd5/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/07/13/BJDCTF2nd-EasyMd5/3.png" alt="3"></p>
 <p>POST方式传<code>?param1[]=1&amp;param2[]=2</code></p>
 
         </div>
@@ -310,7 +310,7 @@ if($a != $b &amp;&amp; md5($a) == md5($b)){
             <a href="/2020/07/13/BJDCTF2nd-fakegoogle/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

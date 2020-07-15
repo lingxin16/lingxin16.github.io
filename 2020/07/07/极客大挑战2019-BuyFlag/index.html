@@ -245,9 +245,9 @@
           <p>地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/1.png" alt="1"></p>
+<p><img data-action="zoom" src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/1.png" alt="1"></p>
 <p>随便翻一翻，右边menu菜单有个PayFlag指向pay.php</p>
-<p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/2.png" alt="2"></p>
+<p><img data-action="zoom" src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/2.png" alt="2"></p>
 <p>这里说我们只能用多少钱买flag并且必须是哪里的学生，并且要回答正确的密码</p>
 <p>查看源代码发现提示</p>
 <pre><code>&lt;!--
@@ -271,15 +271,15 @@ if (isset($_POST[&#39;password&#39;])) {
 <p>这里我们让password=404%</p>
 <p>在控制台中还能看到一项cookie：user=0</p>
 <p>修改为user=1</p>
-<p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/3.png" alt="3"></p>
+<p><img data-action="zoom" src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/3.png" alt="3"></p>
 <p>已经提示我们<br>you are Cuiter<br>Password Right!<br>Pay for the flag!!!hacker!!!</p>
 <p>但是Pay for the flag一直没找到在哪里，那就也直接传一个money吧</p>
 <p>但是在这个题中PHP版本是5.3.5，输入字符不能超过八位，否则会提示我们Nember lenth is too long</p>
 <p>关于这个我们可以了解一下strcmp()函数</p>
-<p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/4.png" alt="4"></p>
+<p><img data-action="zoom" src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/4.png" alt="4"></p>
 <p>这个函数在PHP5.3版本之前有个漏洞，当我们传入非字符串类型的数据的时候，这个函数将发生错误，在PHP5.3版本之前显示了报错的警告信息后会return 0，也就是虽然报了错，但却判定其相等。</p>
 <p>所以我们传money[]=admin</p>
-<p><img src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/5.png" alt="5"></p>
+<p><img data-action="zoom" src="/2020/07/07/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BuyFlag/5.png" alt="5"></p>
 
         </div>
         <!-- .entry-content -->
@@ -308,7 +308,7 @@ if (isset($_POST[&#39;password&#39;])) {
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
@@ -327,7 +327,7 @@ if (isset($_POST[&#39;password&#39;])) {
             <a href="/2020/07/06/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-BabySQL/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>

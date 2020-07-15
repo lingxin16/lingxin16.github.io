@@ -243,7 +243,7 @@
         
         <div class="entry-content">
           <h2 id="web1-Cosmos-的博客"><a href="#web1-Cosmos-的博客" class="headerlink" title="web1-Cosmos 的博客"></a>web1-Cosmos 的博客</h2><p>打开网站</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201004038.png" alt="QQ截图20200201004038"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201004038.png" alt="QQ截图20200201004038"></p>
 <a id="more"></a>
 
 <p>发现提及到博客、github、版本管理工具，可以联想到git泄露（hexo博客能是白搭建的吗！！！）</p>
@@ -251,40 +251,40 @@
 <blockquote>
 <p><a href="http://cosmos.hgame.n3ko.co/.git/config" target="_blank" rel="noopener">http://cosmos.hgame.n3ko.co/.git/config</a></p>
 </blockquote>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201004006.png" alt="QQ截图20200201004006"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201004006.png" alt="QQ截图20200201004006"></p>
 <p>发现目标仓库</p>
 <blockquote>
 <p><a href="https://github.com/FeYcYodhrPDJSru/8LTUKCL83VLhXbc" target="_blank" rel="noopener">https://github.com/FeYcYodhrPDJSru/8LTUKCL83VLhXbc</a></p>
 </blockquote>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201004657.png" alt="QQ截图20200201004657"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201004657.png" alt="QQ截图20200201004657"></p>
 <p>根据提示解码</p>
-<h2 id="web2-接头霸王"><a href="#web2-接头霸王" class="headerlink" title="web2-接头霸王"></a>web2-接头霸王</h2><p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201004847.png" alt="QQ截图20200201004847">根据提示利用burpsuit修改HTTP请求头 如图</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201005415.png" alt="QQ截图20200201005415"></p>
+<h2 id="web2-接头霸王"><a href="#web2-接头霸王" class="headerlink" title="web2-接头霸王"></a>web2-接头霸王</h2><p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201004847.png" alt="QQ截图20200201004847">根据提示利用burpsuit修改HTTP请求头 如图</p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201005415.png" alt="QQ截图20200201005415"></p>
 <p>得到flag</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201005327.png" alt="QQ截图20200201005327"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201005327.png" alt="QQ截图20200201005327"></p>
 <h2 id="web3-Code-World"><a href="#web3-Code-World" class="headerlink" title="web3-Code World"></a>web3-Code World</h2><p>打开之后发现报错403 Forbidden</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201005544.png" alt="QQ截图20200201005544"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201005544.png" alt="QQ截图20200201005544"></p>
 <p>查看源代码发现</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201005552.png" alt="QQ截图20200201005552"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201005552.png" alt="QQ截图20200201005552"></p>
 <p>很显然是被人刻意改动了，然后跳转到了/new.php</p>
 <p>我们用burpsuit抓包发现其实报错是405 Not Allowed</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201005935.png" alt="QQ截图20200201005935"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201005935.png" alt="QQ截图20200201005935"></p>
 <p>百度一下405 Not Allowed这个报错</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201010056.png" alt="QQ截图20200201010056"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201010056.png" alt="QQ截图20200201010056"></p>
 <p>就是两种请求方式之间出错  然后我们修改请求方式即可正常打开</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201010301.png" alt="QQ截图20200201010301"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201010301.png" alt="QQ截图20200201010301"></p>
 <p>根据提示利用url传参?a=4+6</p>
 <p>这里+需要url编码%2b    即?a=4%2b6</p>
 <p>然后利用POST请求得到flag</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201010542.png" alt="QQ截图20200201010542"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201010542.png" alt="QQ截图20200201010542"></p>
 <h2 id="web4-🐔尼泰玫"><a href="#web4-🐔尼泰玫" class="headerlink" title="web4-🐔尼泰玫"></a>web4-🐔尼泰玫</h2><p>打开是个小游戏  cxk打篮球(手动滑稽)</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201010909.png" alt="QQ截图20200201010909"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201010909.png" alt="QQ截图20200201010909"></p>
 <p>提示我们需要30000分才能拿到flag</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201011655.png" alt="QQ截图20200201011655"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201011655.png" alt="QQ截图20200201011655"></p>
 <p>然后我们在网络状态中发现了submit这个文件</p>
 <p>查看之后发现是把分数数据发送给后台然后判断，我们直接抓包编辑重发</p>
 <p>得到flag</p>
-<p><img src="/2020/02/01/Hgame-Week1-web/QQ%E6%88%AA%E5%9B%BE20200201011949.png" alt="QQ截图20200201011949"></p>
+<p><img data-action="zoom" src="/2020/02/01/Hgame-Week1-web/QQ截图20200201011949.png" alt="QQ截图20200201011949"></p>
 
         </div>
         <!-- .entry-content -->
@@ -313,7 +313,7 @@
               <div class="background">
 <!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/1ac3fa3ef82c93a8d46384e256342711.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
