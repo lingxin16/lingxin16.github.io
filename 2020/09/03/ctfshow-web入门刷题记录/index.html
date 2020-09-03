@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>burp爆破 | 大周&#39;blog</title>
+  <title>ctfshow-web入门刷题记录 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -269,6 +269,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      ctfshow-web入门刷题记录</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
+            <img src="https://www.d1a0.cn/images/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">d1a0</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-9-3
+        
+      
+        ·<span id="readcount"></span>次阅读
+      
+      </p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -276,41 +304,62 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">burp爆破</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2019-12-19&nbsp;
-              
-                    
-        ·<span id="readcount"></span>次阅读
-      
-            </p>
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          <p>用burpsuit对网页上的一些用户名密码之类的爆破</p>
-<p>这里就用墨者学院文件包含那道题的那个登录页面吧…</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191219235640.png" alt="QQ截图20191219235640"></p>
- <a id="more"></a>
-
-<p>设置代理 先用burp抓取</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191219235847.png" alt="QQ截图20191219235847"></p>
-<p>黑色圈住的就是用户名和密码的函数(应该是叫函数吧…..)  红色圈住的就是之前自己输入的账号和密码</p>
-<p>能看到是明文密码 然后send to intruder</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000053.png" alt="QQ截图20191220000053"></p>
-<p>这里他实现标记了要爆破的位置 不是我们要爆破的位置 我们先用上边的clear把标记清除</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000358.png" alt="QQ截图20191220000358"></p>
-<p>然后选中要爆破的地址 这里都是admin前边那个是我输入的账号后边的是密码  然后点击add分别添加</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220002421.png" alt="QQ截图20191220000524"></p>
-<p>在attack type那里选择cluster bomb</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000929.png" alt="QQ截图20191220000929"></p>
-<p>转到payloads那边</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220001013.png" alt="QQ截图20191220001013"></p>
-<p>看到payload set 右边下拉发现有1,2分别是我们刚刚添加的两个地址</p>
-<p>下边方框右边的add是手动添加账号密码 有字典的话点load载入字典</p>
-<p>添加完成后选择intruder→start attack</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220001248.png" alt="QQ截图20191220001248"></p>
-<p>然后找到length里边那个长度不一样的就是我们要的账号密码</p>
+          <h3 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903112401.png" alt="web1.1"></p>
+<p>提示开发注释未及时删除，f12查看源代码</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903112530.png" alt="web1.2"></p>
+<p>得到flag</p>
+<h3 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903113028.png" alt="web2.1"></p>
+<p>提示js前台拦截 === 无效操作</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903113122.png" alt="web2.2"></p>
+<p>打开后发现无法右键查看源代码，f12也不管用，在url前加上view-source: 查看源代码</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/asdf.png" alt="web2.3"></p>
+<h3 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903113802.png" alt="web3.1"></p>
+<p>提示没思路的时候抓个包看看，可能会有意外收获</p>
+<p>发现题目页面确实没什么东西，查看文件头，发现flag</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903113903.png" alt="web3.2"></p>
+<h3 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903114014.png" alt="web4.1"></p>
+<p>提示总有人把后台地址写入robots，帮黑阔大佬们引路。</p>
+<p>查看/robots.txt</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903114101.png" alt="web4.2"></p>
+<p>发现/flagishere.txt，访问得到flag</p>
+<h3 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h3><p><img data-action="zoom" src="/2020/09/03/ctfshow-web%E5%85%A5%E9%97%A8%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200903114217082.png" alt="web5.1"></p>
+<p>提示phps源码泄露有时候能帮上忙，表示我刚开始并不知道phps源码泄露是什么，在大佬们的提示下才知道了phps这个东西。</p>
+<pre><code>关于phps，phps其实就是php的源代码文件，通常用于提供给用户查看php代码，因为用户无法直接通过Web浏览器看到php文件的内容，所以需要用phps文件代替。其实，只要不用php等已经在服务器中注册过的MIME类型为文件即可，但为了国际通用，所以才用了phps文件类型。</code></pre><p>访问index.phps，下载下来查看源代码，即可得到flag</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903115756.png" alt="web5.2"></p>
+<h3 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903115917.png" alt="web6.1"></p>
+<p>提示解压源码到当前目录，测试正常，收工</p>
+<p>说明存在源码的压缩包，并且没有删除，访问/<a href="http://www.zip，下载压缩包，解压得到fl000g.txt文件和index.php文件，fl000g.txt内容为flag{flag_here}，提交发现不对，访问/fl000g.txt，得到flag" target="_blank" rel="noopener">www.zip，下载压缩包，解压得到fl000g.txt文件和index.php文件，fl000g.txt内容为flag{flag_here}，提交发现不对，访问/fl000g.txt，得到flag</a></p>
+<h3 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903120303.png" alt="web7.1"></p>
+<p>提示版本控制很重要，但不要部署到生产环境更重要。</p>
+<p>关于版本控制，首先想到的是git泄露，访问/.git，得到flag</p>
+<h3 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903120441.png" alt="web8.1"></p>
+<p>提示内容和web7一样，除了git泄露以外，还存在svn泄露，访问/.svn得到flag</p>
+<h3 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903120654.png" alt="web9.1"></p>
+<p>提示发现网页有个错别字？赶紧在生产环境vim改下，不好，死机了</p>
+<p>当我们在使用vim编辑的时候，vim会在被编辑文件同一目录下，创建一个名为filename.swp的文件，记录我们的动作，比如在编辑index.php的时候会存在一个index.php.swp的文件，访问/index.php.swp下载文件得到flag</p>
+<h3 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903122036.png" alt="web10.1"></p>
+<p>提示cookie 只是一块饼干，不能存放任何隐私数据</p>
+<p>查看请求头</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903122144.png" alt="web10.2"></p>
+<p>发现flag</p>
+<h3 id="web11"><a href="#web11" class="headerlink" title="web11"></a>web11</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903125130.png" alt="web11.1"></p>
+<p>提示域名其实也可以隐藏信息，比如ctfshow.com 就隐藏了一条信息</p>
+<p>在域名解析记录中TXT记录查到了flag</p>
+<h3 id="web12"><a href="#web12" class="headerlink" title="web12"></a>web12</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903125600.png" alt="web12.1"></p>
+<p>提示有时候网站上的公开信息，就是管理员常用密码</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903125833.png" alt="web12.2"></p>
+<p>访问/admin，需要账号和密码，账号填admin，密码根据提示在页面上找到了一串数字，应该就是密码了，尝试登陆得到flag</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903125957.png" alt="web12.3"></p>
+<h3 id="web13"><a href="#web13" class="headerlink" title="web13"></a>web13</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903141526.png" alt="web13.1"></p>
+<p>摸索了好久，发现了git泄露，上githack一把嗦</p>
+<h3 id="web14"><a href="#web14" class="headerlink" title="web14"></a>web14</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903135945.png" alt="web14.1"></p>
+<p>提示有时候源码里面就能不经意间泄露重要(editor)的信息,默认配置害死人</p>
+<p>访问/editor</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903140039.png" alt="web14.2"></p>
+<p>点击插入文件（第二排倒数第十个）选择文件空间</p>
+<p>在tmp/html/nothinghere文件夹中找到fl000g.txt，插入文件后会显示路径<a href="http://67a7ed1b-34c7-426b-8a90-3014478908e1.chall.ctf.show/editor/attached/file/tmp/html/nothinghere/fl000g.txt" target="_blank" rel="noopener">/editor/attached/file/tmp/html/nothinghere/fl000g.txt</a></p>
+<p>访问nothinghere/fl000g.txt得到flag</p>
 
         </div>
         <!-- .entry-content -->
@@ -332,39 +381,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/01/01/%E7%AE%A1%E9%81%93%E7%AC%A6%E6%BC%8F%E6%B4%9E/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                管道符漏洞</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2019/12/06/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2/" rel="next">
+            <a href="/2020/08/11/xxe%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200811110729.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                墨者学院</h3>
+                xxe漏洞学习</h3>
                 <hr>
               </div>
             </a>
@@ -388,11 +418,11 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener" class="profile gravatar"><img src="https://www.d1a0.cn/images/avatar.jpg" itemprop="image" alt="d1a0" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="https://www.d1a0.cn" target="_blank" itemprop="url" rel="author noopener">d1a0</a>
             </h3>
           </div>
         </div>

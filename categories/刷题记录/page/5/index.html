@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>burp爆破 | 大周&#39;blog</title>
+  <title>Category: 刷题记录 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -265,145 +265,109 @@
   </div>
 </header>
 
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
+      
 <div class="pattern-center-blank"></div>
-
+<div class="pattern-center ">
+  <div class="pattern-attachment-img">
+    <img data-src="https://www.d1a0.cn/images/cover/2.png" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+  </div>
+  <header class="pattern-header ">
+    <h1 class="cat-title">刷题记录</h1>
+    <span class="cat-des">
+      <p id="en">practice</p>
+    </span>
+  </header>
+</div>
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
-        
-          <header class="entry-header">
-            <h1 class="entry-title">burp爆破</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2019-12-19&nbsp;
-              
-                    
-        ·<span id="readcount"></span>次阅读
       
-            </p>
-            <hr>
-          </header>
-        
-        <div class="entry-content">
-          <p>用burpsuit对网页上的一些用户名密码之类的爆破</p>
-<p>这里就用墨者学院文件包含那道题的那个登录页面吧…</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191219235640.png" alt="QQ截图20191219235640"></p>
- <a id="more"></a>
-
-<p>设置代理 先用burp抓取</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191219235847.png" alt="QQ截图20191219235847"></p>
-<p>黑色圈住的就是用户名和密码的函数(应该是叫函数吧…..)  红色圈住的就是之前自己输入的账号和密码</p>
-<p>能看到是明文密码 然后send to intruder</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000053.png" alt="QQ截图20191220000053"></p>
-<p>这里他实现标记了要爆破的位置 不是我们要爆破的位置 我们先用上边的clear把标记清除</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000358.png" alt="QQ截图20191220000358"></p>
-<p>然后选中要爆破的地址 这里都是admin前边那个是我输入的账号后边的是密码  然后点击add分别添加</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220002421.png" alt="QQ截图20191220000524"></p>
-<p>在attack type那里选择cluster bomb</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220000929.png" alt="QQ截图20191220000929"></p>
-<p>转到payloads那边</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220001013.png" alt="QQ截图20191220001013"></p>
-<p>看到payload set 右边下拉发现有1,2分别是我们刚刚添加的两个地址</p>
-<p>下边方框右边的add是手动添加账号密码 有字典的话点load载入字典</p>
-<p>添加完成后选择intruder→start attack</p>
-<p><img data-action="zoom" src="/2019/12/19/burp%E7%88%86%E7%A0%B4/QQ截图20191220001248.png" alt="QQ截图20191220001248"></p>
-<p>然后找到length里边那个长度不一样的就是我们要的账号密码</p>
-
+  <!-- 首页默认取最最新文章集 -->
+  
+    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
+  <div class="post-entry">
+    <div class="feature">
+      <a href="/2019/12/05/write-up/">
+        <div class="overlay">
+          <i class="iconfont icon-text">
+          </i>
         </div>
-        <!-- .entry-content -->
-        
-        <p></p>
-          
-        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
-        <footer class="post-footer">
-          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
-          <div class="post-tags">
-          </div>
-          <div class="post-share">
-            <div class="social-share sharehidden share-component"></div>
-            <i class="iconfont show-share icon-forward"></i>
-          </div>
-        </footer><!-- .entry-footer -->
-      </article>
-      <!-- #post-## -->
-      <div class="toc" style="background: none;"></div>
-      <section class="post-squares nextprev">
-        
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/01/01/%E7%AE%A1%E9%81%93%E7%AC%A6%E6%BC%8F%E6%B4%9E/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/6f005cbc1865ff1b706aba57347988ab.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                管道符漏洞</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2019/12/06/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2/" rel="next">
-              <div class="background">
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/e9f33c2c502ab43804964ce7edd431f9.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Next Post</span>
-              <div class="info">
-                <h3>
-                墨者学院</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-      </section>
-      
-<div id="vcomments"></div>
-<script>
-  window.onload = function(){
-      var valine = new Valine();
-      valine.init({
-        el: '#vcomments',
-        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
-        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
-        path: window.location.pathname,
-        placeholder: "你是我一生只会遇见一次的惊喜 ..."
-      })
-  }
-</script>
+        <img width="150" height="150" src="" onerror="imgError(this,3)" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
+      </a>
+    </div>
+    <h1 class="entry-title">
+    <a href="/2019/12/05/write-up/">
+    write up</a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time">
+      </i>
+    2019-12-5</div>
+    <p>
+    </p>
+    <footer class="entry-footer">
+      <div class="post-more">
+        <a href="/2019/12/05/write-up/">
+          <i class="iconfont icon-caidan">
+          </i>
+        </a>
+      </div>
+    </footer>
+  </div>
+  <hr>
+</article>
+  
 
-      <section class="author-profile">
-        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
-          <div class="meta">
-            <span class="title">Author</span>
-            <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
-            </h3>
-          </div>
-        </div>
-        <hr>
-        <p><i class="iconfont icon-write"></i></p>
-      </section>
-    </main><!-- #main -->
-  </div><!-- #primary -->
+
+      <div class="clearer">
+      </div>
+    </main>
+    <!-- 
+      <nav class="navigator">
+        
+        <a class="extend prev" rel="prev" href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/page/4/">Prev</a><a class="page-number" href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/page/3/">3</a><a class="page-number" href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/page/4/">4</a><span class="page-number current">5</span>
+      </nav>
+     -->
+    
+  </div>
 </div>
+<!-- 
+  
+    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
+  <div class="post-entry">
+    <div class="feature">
+      <a href="/2019/12/05/write-up/">
+        <div class="overlay">
+          <i class="iconfont icon-text">
+          </i>
+        </div>
+        <img width="150" height="150" src="" onerror="imgError(this,3)" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
+      </a>
+    </div>
+    <h1 class="entry-title">
+    <a href="/2019/12/05/write-up/">
+    write up</a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time">
+      </i>
+    2019-12-5</div>
+    <p>
+    </p>
+    <footer class="entry-footer">
+      <div class="post-more">
+        <a href="/2019/12/05/write-up/">
+          <i class="iconfont icon-caidan">
+          </i>
+        </a>
+      </div>
+    </footer>
+  </div>
+  <hr>
+</article>
+  
 
-
+ -->
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
