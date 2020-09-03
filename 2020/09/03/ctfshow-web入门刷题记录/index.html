@@ -352,7 +352,9 @@
 <p>访问/admin，需要账号和密码，账号填admin，密码根据提示在页面上找到了一串数字，应该就是密码了，尝试登陆得到flag</p>
 <p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903125957.png" alt="web12.3"></p>
 <h3 id="web13"><a href="#web13" class="headerlink" title="web13"></a>web13</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903141526.png" alt="web13.1"></p>
-<p>摸索了好久，发现了git泄露，上githack一把嗦</p>
+<p>摸索了好久，发现了git泄露，上githack一把嗦，结果啥都嗦不出来，githack还总是报错，在大佬们的提示下，找到了个pdf</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903201121.png" alt="web13.2"></p>
+<p>下载下来发现是个系统使用手册里面有默认后台地址和默认用户名密码，利用这些登录后台得到flag</p>
 <h3 id="web14"><a href="#web14" class="headerlink" title="web14"></a>web14</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903135945.png" alt="web14.1"></p>
 <p>提示有时候源码里面就能不经意间泄露重要(editor)的信息,默认配置害死人</p>
 <p>访问/editor</p>
@@ -360,6 +362,28 @@
 <p>点击插入文件（第二排倒数第十个）选择文件空间</p>
 <p>在tmp/html/nothinghere文件夹中找到fl000g.txt，插入文件后会显示路径<a href="http://67a7ed1b-34c7-426b-8a90-3014478908e1.chall.ctf.show/editor/attached/file/tmp/html/nothinghere/fl000g.txt" target="_blank" rel="noopener">/editor/attached/file/tmp/html/nothinghere/fl000g.txt</a></p>
 <p>访问nothinghere/fl000g.txt得到flag</p>
+<h3 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903201705.png" alt="web15.1"></p>
+<p>提示公开的信息比如邮箱，可能造成信息泄露，产生严重后果</p>
+<p>访问/admin发现后台</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903230136.png" alt="web15.2"></p>
+<p>有个忘记密码选项，就是它，点进去！问：我的所在地是哪个城市？</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903230501.png" alt="web15.3"></p>
+<p>根据题目提示，在首页找到一个QQ邮箱，查看QQ资料发现所在城市，提交</p>
+<p>然后提示您的密码已重置为***，这不就OK了！！！登录 flag！</p>
+<h3 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224458.png" alt="web27.1"></p>
+<p>题目是个正方的教务管理系统，有录取名单和学生学籍信息查询系统两个功能</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224628.png" alt="web27.2"></p>
+<p>录取名单下载下来是一份表格，学生学籍信息查询系统要求输入姓名和身份证号码</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903225120.png" alt="web27.3">这里就用表格里第一个人的信息</p>
+<p>高先伊 身份证号码621022<strong>****</strong>5237</p>
+<p>中年的出生年月日居然不给要自己爆破，这里可以通过检验身份证号码是否合理，筛选符合条件的身份证，可惜我的代码写的太烂，写出来的我自己都不敢看，这里就不贴了，放一个不用检验身份证号码合理性的代码吧（希望服务器没事……）</p>
+<pre><code>for year in range(1990,1993):
+    for month in range(1,13):
+        for day in range(1,32):
+            card = &quot;621022&quot; + str(year) + str(&quot;%02d&quot;%(month)) + str(&quot;%02d&quot;%(day)) + &quot;5237&quot;
+            print(card)</code></pre><p>然后拿着姓名+身份证去学籍信息查询系统爆破，得到正确的身份证号码，然后会弹窗提示学号和默认密码（身份证号）</p>
+<p>登录得到flag</p>
+<p>（还有师傅说去在线生成身份证的网站上输入姓名能直接找到，这比我还狠啊…）</p>
 
         </div>
         <!-- .entry-content -->
