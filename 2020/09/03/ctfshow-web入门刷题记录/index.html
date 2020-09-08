@@ -370,6 +370,23 @@
 <p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903230501.png" alt="web15.3"></p>
 <p>根据题目提示，在首页找到一个QQ邮箱，查看QQ资料发现所在城市，提交</p>
 <p>然后提示您的密码已重置为***，这不就OK了！！！登录 flag！</p>
+<h3 id="web16"><a href="#web16" class="headerlink" title="web16"></a>web16</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904141648.png" alt="web16.1"></p>
+<p>又学到一个新东西，/tz.php，找到phpinfo 点进去搜索flag</p>
+<h3 id="web17"><a href="#web17" class="headerlink" title="web17"></a>web17</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904142149.png" alt="web17.1"></p>
+<p>真实ip就是flag，不多说什么了</p>
+<h3 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904144704.png" alt="web18.1"></p>
+<p>是一个游戏，题目说玩到101分就给flag，…，有一个Flappy_js.js文件，查看内容发现</p>
+<pre><code>if(score&gt;100)
+{
+var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b&quot;);
+}</code></pre><p>翻译过来就是如果分数大于100，提示你赢了，去幺幺零点皮爱吃皮看看，根据提示访问110.php得到flag</p>
+<h3 id="web19"><a href="#web19" class="headerlink" title="web19"></a>web19</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904150123.png" alt="web19.1"></p>
+<p>源文件中有加密代码，注释提示了</p>
+<pre><code>if($u===&#39;admin&#39; &amp;&amp; $p ===&#39;a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04&#39;){              echo $flag;          }</code></pre><p>那我们提交就行了，但是我们在网页上提交的pazzword是经过了前端加密后的，所以抓包修改重发就行了</p>
+<h3 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904152136.png" alt="web20.1"></p>
+<p>这个题是归到爆破了我记得，但是这种类型的年代久远了，用御剑和sqlmap都爆破不出来，刚好平台web题故障了，那就咕几天（美汁汁）</p>
+<h3 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904153146.png" alt="web22.1"></p>
+<p>说是子域名爆破，但是我觉得就是flag.ctfer.com，你觉得呢…</p>
 <h3 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224458.png" alt="web27.1"></p>
 <p>题目是个正方的教务管理系统，有录取名单和学生学籍信息查询系统两个功能</p>
 <p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224628.png" alt="web27.2"></p>
@@ -463,7 +480,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -475,10 +492,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
-            // PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
